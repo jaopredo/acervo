@@ -17,3 +17,11 @@ Esse projeto é feito para a nossa escola (EEEP Walquer Cavalcante Maia) e consi
 - Adição, Edição e Remoção de Salas
 - Gráficos de Desempenho de cada sala
 - Pesquisa de Livros com base no Título, ID, Categoria e Agrupamento
+
+
+## ATENÇÃO, DEVS
+
+Para rodar o projeto, por favor rodem os seguintes comandos:
+- php artisan migrate
+- php artisan serve ( Em um terminal )
+- npm run dev (ou "yarn dev") (Em outro terminal)
