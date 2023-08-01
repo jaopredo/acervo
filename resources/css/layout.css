@@ -26,7 +26,15 @@
 }
 
 /* ICONS */
-.notification-container {
+.icons-containers-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+}
+
+
+.notification-icon-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,7 +48,7 @@
     transition: background-color 500ms;
     transform: scale(1.2);
 }
-.notification-container:hover {
+.notification-icon-container:hover {
     background-color: var(--darker-green);
     cursor: pointer;
 }
@@ -49,7 +57,7 @@
 }
 
 
-.profile-container {
+.profile-icon-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,7 +71,7 @@
     background: #ededed;
     transition: background-color 500ms;
 }
-.profile-container:hover {
+.profile-icon-container:hover {
     background: var(--general-green);
     cursor: pointer;
 }
@@ -74,4 +82,50 @@
 
 .gear-icon {
     color: var(--general-orange);
+}
+
+
+.floating-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    position: fixed;
+    opacity: 0;
+    transform: scale(0);
+    transition: transform 600ms, opacity 600ms;
+    transform-origin: top right;
+
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.435);
+
+    text-align: center;
+}
+
+.profile-container {
+    height: 70vh;
+    right: 20px;
+    top: 70px;
+}
+
+.notification-container {
+    height: 60vh;
+    right: 100px;
+    top: 70px
+}
+
+
+@keyframes showProfileAnimation {
+    from {
+        opacity: 0;
+        transform: scale(0.001);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
