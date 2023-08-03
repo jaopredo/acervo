@@ -1,0 +1,15 @@
+
+.book-card {
+    position: relative;
+}
+
+.delete-selector-container {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    transform: scale(2) translate(-10%, -10%);
+
+    accent-color: #81ff6e;
+}
