@@ -32,7 +32,7 @@
                         <input type="checkbox" name="booksDelete[]" name="'. $book->id .'" >
                     </div>
                     <div class="card-header">
-                        <h2 class="card-title">{{ $book->name }}</h2>
+                        <h2 class="card-title"><a href="/books/{{ $book->id }}">{{ $book->name }}</a></h2>
                     </div>
                     <div class="card-body">
                         <p class="card-text">Registro: {{$book->register}}</p>

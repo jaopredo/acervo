@@ -24,7 +24,7 @@ Route::get('/books', [BookController::class, 'index']);
 
 Route::get('/books/create', [BookController::class, 'create']);
 
-Route::get('/books/search', [BookController::class, 'search']);
+Route::get('/books/{id}', [BookController::class, 'show']);
 
 /* Rotas de Registro */
 Route::post('/books/create', [BookController::class, 'store']);
