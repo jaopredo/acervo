@@ -7,13 +7,12 @@
     <title>Acervo</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous" defer></script>
-    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous" defer></script>
 
     @vite([
         'resources/css/layout.css',
         'resources/js/layout.js'
     ])
+    @stack('styles')
 </head>
 <body>
     <div class="interface card">
@@ -28,8 +27,8 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <form class="form-inline" method="GET" action="">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Buscar Livro" aria-label="Search">
+                    <form class="form-inline" method="GET" action="/books">
+                        <input class="form-control mr-sm-2" name="search" type="search" placeholder="Buscar Livro" aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Procurar</button>
                     </form>
 
@@ -91,11 +90,22 @@
                 </div>
             </nav>
         </header>
-        <main class="card-body">
-            @yield('content')
+        <main id="content-container" class="card-body">
+            <div class="upper-menu">
+                @yield('upper-menu')
+            </div>
+            <div class="content-container">
+                @yield('content')
+            </div>
         </main>
         <footer class="card-footer">
         </footer>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.min.js" integrity="sha512-hIdLfMv+eH9Ntu96uoHW9t0bMyiHRyKM8yQHZ09+th6TWagWlFonarbJfHrJb+me8wzaNnk1DVhqfOMwNKRq/w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.js" integrity="sha512-OyVk2res2p8ZxK6Jf0Z6a9LhiQVn97RqQOF/G5p9rHm7W09tVg6wqbFG6TnDbLxyeEJb39PXXNsGQMmw1wlouQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    @stack('scripts')
 </body>
 </html>
