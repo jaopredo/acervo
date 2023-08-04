@@ -85,7 +85,7 @@ class BookController extends Controller
 
         $book->save();
 
-        return redirect('books');
+        return redirect('books')->with('msg', 'LIVRO CRIADO COM SUCESSO!');
     }
 
     public function update(Request $request) {
@@ -99,6 +99,6 @@ class BookController extends Controller
     public function destroy($id) {
         Book::findOrFail($id)->delete();
 
-        return redirect('/books');
+        return redirect('/books')->with('msg', 'LIVRO DELETADO COM SUCESSO');
     }
 }

@@ -138,3 +138,33 @@
 
     gap: 10px;
 }
+
+.msg {
+    border: var(--general-orange) 3px solid;
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px;
+
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+
+    bottom: 20px;
+
+    font-size: 1.3rem;
+}
+
+.quit-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    padding: 2px;
+    transform: translate(10px, -15px);
+}
+
+

@@ -16,3 +16,7 @@ $('.floating-toggler').on('click', function() {
         container.css({ opacity: 1, transform: 'scale(1)' })
     }
 })
+
+$('.quit-container').on('click', function() {
+    $('.msg').hide()
+})
