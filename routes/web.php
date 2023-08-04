@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\BookController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,5 +16,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/books');
 });
+
+/* Rotas de Página */
+Route::get('/books', [BookController::class, 'index']);
+
+Route::get('/books/create', [BookController::class, 'create']);
+
+Route::get('/books/{id}', [BookController::class, 'show']);
+
+Route::get('/books/edit/{id}', [BookController::class, 'edit']);
+
+/* Rotas de Registro */
+Route::post('/books/create', [BookController::class, 'store']);
+
+Route::patch('/books/{id}', [BookController::class, 'update']);
+
+Route::delete('/books/{id}', [BookController::class, 'destroy']);

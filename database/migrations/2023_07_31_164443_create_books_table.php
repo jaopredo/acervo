@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('book', function (Blueprint $table) {
+        Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string("register");                 // Registro do Livro
             $table->foreignId("group_id")->nullable();  // ID do grupo que ele está
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->integer("aquisition_year");         // Ano de Aquisição
             $table->string("aquisition", 80);           // Método de Aquisição
             $table->string("local", 100);               // Local de Aquisição
-            $table->boolean("available");               // Disponível
+            $table->boolean("available")->default(1);               // Disponível
 
             $table->timestamps("");
             $table->unique(["register"]);
@@ -41,6 +41,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('book');
+        Schema::dropIfExists('books');
     }
 };
