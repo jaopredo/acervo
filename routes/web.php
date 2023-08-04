@@ -26,5 +26,11 @@ Route::get('/books/create', [BookController::class, 'create']);
 
 Route::get('/books/{id}', [BookController::class, 'show']);
 
+Route::get('/books/edit/{id}', [BookController::class, 'edit']);
+
 /* Rotas de Registro */
 Route::post('/books/create', [BookController::class, 'store']);
+
+Route::patch('/books/{id}', [BookController::class, 'update']);
+
+Route::delete('/books/{id}', [BookController::class, 'destroy']);

@@ -1,12 +1,15 @@
 
-infinteLoadMore();
+// infinteLoadMore();
+if ($('#data-wrapper').hasClass('search')) {
+    $('.auto-load').hide()
+} else {
+    infinteLoadMore()
+}
 
 $('#content-container').on('scroll', function () {
-    if ($('#content-container').scrollTop() > this.scrollHeight - 600 && !this.classList.includes('search')) {
+    if (($('#content-container').scrollTop() > this.scrollHeight - 600) && !($('#data-wrapper').hasClass('search')) ){
         infinteLoadMore();
     }
-    // console.log($('#content-container').scrollTop())
-    // console.log(this.scrollHeight)
 });
 function infinteLoadMore() {
     $.ajax({

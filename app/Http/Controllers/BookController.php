@@ -23,11 +23,11 @@ class BookController extends Controller
 
         if ($request->ajax()) {
             $books = Book::orderBy('id')->paginate(10);
+            // <div class="delete-selector-container">
+            //             <input type="checkbox" name="booksDelete[]" name="'. $book->id .'" >
+            //         </div>
             foreach ($books as $book) {
                 $items = $items.'<div class="card item book-card">
-                    <div class="delete-selector-container">
-                        <input type="checkbox" name="booksDelete[]" name="'. $book->id .'" >
-                    </div>
                     <div class="card-header">
                         <h2 class="card-title"><a href="/books/'.$book->id.'">'.$book->name.'</a></h2>
                     </div>
@@ -56,6 +56,12 @@ class BookController extends Controller
         return view('books/show', ['book'=>$book]);
     }
 
+    public function edit($id) {
+        $book = Book::findOrFail($id);
+
+        return view('books/edit', ['book'=>$book]);
+    }
+
     /* ROTAS DE INTERAÇÃO COM O BANCO DE DADOS */
     public function store(Request $request) {
 
@@ -80,5 +86,19 @@ class BookController extends Controller
         $book->save();
 
         return redirect('books');
+    }
+
+    public function update(Request $request) {
+        $data = $request->all();
+
+        Book::findOrFail($request->id)->update($data);
+
+        return redirect('books/'.$request->id);
+    }
+
+    public function destroy($id) {
+        Book::findOrFail($id)->delete();
+
+        return redirect('/books');
     }
 }

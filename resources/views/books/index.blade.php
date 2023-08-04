@@ -25,12 +25,12 @@
 @section ('content')
 <div class="books-container">
     @if ($search)
-        <div class="search">
+        <div id="data-wrapper" class="search">
             @foreach ($books as $book)
                 <div class="card item book-card">
-                    <div class="delete-selector-container">
+                    {{-- <div class="delete-selector-container">
                         <input type="checkbox" name="booksDelete[]" name="'. $book->id .'" >
-                    </div>
+                    </div> --}}
                     <div class="card-header">
                         <h2 class="card-title"><a href="/books/{{ $book->id }}">{{ $book->name }}</a></h2>
                     </div>

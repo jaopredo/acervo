@@ -11,7 +11,11 @@
 
     <div class="buttons-books-container">
         <a href="/books/edit/{{ $book->id }}" class="btn btn-primary">EDITAR LIVRO</a>
-        <a href="/books/remove/{{ $book->id }}" class="btn btn-primary btn-danger">DELETAR LIVRO</a>
+        <form style="display: inline-block" action="/books/{{$book->id}}" method="post">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-primary btn-danger">DELETAR LIVRO</a>
+        </form>
     </div>
 @endsection
 
@@ -75,6 +79,9 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div class="row">
+            NESTA SEÇÃO IRÁ FICAR A LISTA DOS TOMBAMENTOS
         </div>
     </div>
 @endsection
