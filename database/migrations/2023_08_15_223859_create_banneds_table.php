@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reserve', function (Blueprint $table) {
+        Schema::create('banneds', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+
+            $table->foreignId('student_id')->nullable();
+            $table->string('student_name')->nullable();
+            $table->date('expire_date');
         });
     }
 
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reserve');
+        Schema::dropIfExists('banneds');
     }
 };
