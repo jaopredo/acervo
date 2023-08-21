@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('banned', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->string("name", 100);
             $table->timestamps();
-
-            $table->foreignId('student_id')->nullable();
-            $table->string('student_name')->nullable();
-            $table->date('expire_date');
         });
     }
 
@@ -26,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('banned');
+        Schema::dropIfExists('categories');
     }
 };
