@@ -22,7 +22,8 @@ class BookFactory extends Factory
     public function definition(): array
     {
         return [
-            'register' => Str::random(9),
+            'register' => fake()->uuid(),
+            'description' => fake()->sentence(),
             'cdd' => '1232123',
             'isbn' => '123123',
             'name' => fake()->name(),

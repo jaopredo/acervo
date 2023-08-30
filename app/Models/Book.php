@@ -5,23 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Group;
+use App\Models\Category;
+
 class Book extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'register',
-        'cdd',
-        'isbn',
-        'name',
-        'author',
-        'publication',
-        'editor',
-        'pages',
-        'volume',
-        'example',
-        'aquisition_year',
-        'aquisition',
-        'local'
-    ];
+    protected $guarded = [];
+
+    public function group() {
+        $this->belongsTo(Group::class);
+    }
+
+    public function category() {
+        $this->belongsToMany(Category::class);
+    }
 }

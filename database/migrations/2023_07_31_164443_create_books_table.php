@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string("name", 65);                 // Nome do Livro
             $table->string("author", 70);               // Autor do Livro
             $table->integer("publication");             // Ano de Publicação
+            $table->longText("description");
             $table->string("editor", 45);               // Editora do Livro
             $table->integer("pages");                   // Quantidade de Páginas
             $table->integer("volume");                  // Volume
