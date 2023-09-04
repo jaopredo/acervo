@@ -13,7 +13,7 @@
 @section ('content')
     <form action="/books/{{$book->id}}" method="POST">
         @csrf
-        @method('PATCH')
+        @method('PUT')
         <div class="mb-3">
             <label for="register">REGISTRO DO LIVRO</label>
             <input value="{{ $book->register }}" type="text" id="register" name="register" class="form-control">
