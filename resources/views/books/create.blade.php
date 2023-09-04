@@ -15,7 +15,7 @@
 
 @section ('content')
 <div class="books-container">
-    <form action="/books/create" method="POST" enctype="multipart/form-data">
+    <form action="/books" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="register">REGISTRO DO LIVRO</label>

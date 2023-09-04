@@ -7,12 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Group;
 use App\Models\Category;
+use App\Traits\FileValidator;
 
 class Book extends Model
 {
-    use HasFactory;
+    use HasFactory, FileValidator;
 
     protected $guarded = [];
+
+    const HAS_FILE = true;
+    public $file_field = 'image';
 
     public function group() {
         $this->belongsTo(Group::class);
