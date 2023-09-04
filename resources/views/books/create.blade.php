@@ -48,6 +48,10 @@
             <input type="number" name="pages" id="pages" class="form-control">
         </div>
         <div class="mb-3">
+            <label for="description">DESCRIÇÃO</label>
+            <textarea name="description" id="description" class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
             <label for="volume">VOLUME</label>
             <input type="number"name="volume" id="volume" class="form-control">
         </div>

@@ -80,6 +80,7 @@ class BookController extends Controller
         $book->aquisition_year = $request->aquisition_year;
         $book->aquisition = $request->aquisition;
         $book->local = $request->local;
+        $book->description = $request->description;
 
         /* FALTA COLOCAR O ID DO GRUPO E O PATH DA IMAGEM (NÃO FAZ UPLOAD) */
 

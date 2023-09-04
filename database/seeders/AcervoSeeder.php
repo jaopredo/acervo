@@ -16,12 +16,6 @@ class AcervoSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 0; $i < 5; $i++) {
-            $category = Category::factory()->create();
-            Book::factory()
-            ->count(10)
-            ->for($category)
-            ->create();
-        }
+        Category::factory()->has(Book::factory()->count(6))->create();
     }
 }
