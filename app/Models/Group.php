@@ -12,6 +12,6 @@ class Group extends Model
     use HasFactory;
 
     public function books() {
-        $this->hasMany(Book::class);
+        return $this->hasMany(Book::class);
     }
 }

@@ -19,10 +19,10 @@ class Book extends Model
     public $file_field = 'image';
 
     public function group() {
-        $this->belongsTo(Group::class);
+        return $this->belongsTo(Group::class);
     }
 
     public function category() {
-        $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class);
     }
 }

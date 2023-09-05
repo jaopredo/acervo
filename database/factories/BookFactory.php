@@ -35,7 +35,8 @@ class BookFactory extends Factory
             'example' => 3,
             'aquisition_year' => 2019,
             'aquisition' => "aaaaaaaa",
-            'local' => 'bbbbbbbb'
+            'local' => 'bbbbbbbb',
+            'image' => fake()->word() . '.' . fake()->fileExtension()
         ];
     }
 }
