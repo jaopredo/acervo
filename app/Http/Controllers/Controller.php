@@ -7,7 +7,8 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
 use Illuminate\Http\Request;
-use App\Http\Resources\PaginationResource;
+// use App\Http\Resources\PaginationResource;
+// use App\Http\Resources\BookResource;
 use App\Filters\Filter;
 
 class Controller extends BaseController
@@ -22,7 +23,7 @@ class Controller extends BaseController
     public $validator;
     public $inputs;
     public $page;
-
+    public $resource;
 
     /*-------------------------- API METHODS --------------------------*/
     public function getAll(Request $request) {
@@ -31,14 +32,15 @@ class Controller extends BaseController
 
         if ($request->filters) {
             $filter = new Filter($request, $this->model);
-            return PaginationResource::collection($filter->sort()->filter());
+            return $this->resource::collection($filter->sort()->filter());
         }
-        return PaginationResource::collection($this->model::paginate($limit));
+
+        return $this->resource::collection($this->model::paginate($limit));
     }
 
     public function get($id) {
-        $publication_type = $this->model::findOrFail($id);
-        return $publication_type;
+        $instance = $this->model::findOrFail($id);
+        return new $this->resource($instance);
     }
 
     public function store(Request $request) {
@@ -90,44 +92,15 @@ class Controller extends BaseController
 
     /*-------------------------- WEB METHODS --------------------------*/
     public function index(Request $request) {
-        // $search = request('search');
-        // $items = '';
-
-        // if ($search) {
-        //     $books = Book::where([
-        //         ['name', 'like', '%'.$search.'%']
-        //     ])->get();
-
-        //     return view('books/index', ['books' => $books, 'search' => $search]);
-        // }
-
-        // if ($request->ajax()) {
-        //     $books = Book::orderBy('id')->paginate(10);
-        //     // <div class="delete-selector-container">
-        //     //             <input type="checkbox" name="booksDelete[]" name="'. $book->id .'" >
-        //     //         </div>
-        //     foreach ($books as $book) {
-        //         $items = $items.'<div class="card item book-card">
-        //             <div class="card-header">
-        //                 <h2 class="card-title"><a href="/books/'.$book->id.'">'.$book->name.'</a></h2>
-        //             </div>
-        //             <div class="card-body">
-        //                 <p class="card-text">Registro:'.$book->register.'</p>
-        //                 <p class="card-text">Autor: '.$book->author.'</p>
-        //                 <p class="card-text">Páginas:'.$book->pages.'</p>
-        //             </div>
-        //         </div>
-        //         ';
-        //     }
-        //     return $items;
-        // }
         $books = $this->getAll($request);
 
         return view('books/index', ['books'=>$books, 'search' => false]);
     }
 
     public function create() {
-        return view('books/create');
+        $relationships = $this->relationships();
+
+        return view('books/create', ['relationships' => $relationships]);
     }
 
     public function show($id) {

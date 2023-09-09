@@ -24,23 +24,21 @@
 
 @section ('content')
 <div class="books-container">
-    <div id="data-wrapper" class="search">
-        @foreach ($books as $book)
-            <div class="card item book-card">
-                {{-- <div class="delete-selector-container">
-                    <input type="checkbox" name="booksDelete[]" name="'. $book->id .'" >
-                </div> --}}
-                <div class="card-header">
-                    <h2 class="card-title"><a href="/books/{{ $book->id }}">{{ $book->name }}</a></h2>
-                </div>
-                <div class="card-body">
-                    <p class="card-text">Registro: {{$book->register}}</p>
-                    <p class="card-text">Autor: {{$book->author}}</p>
-                    <p class="card-text">Páginas: {{$book->pages}}</p>
-                </div>
+    @foreach ($books as $book)
+        <div class="card item book-card">
+            {{-- <div class="delete-selector-container">
+                <input type="checkbox" name="booksDelete[]" name="'. $book->id .'" >
+            </div> --}}
+            <div class="card-header">
+                <h2 class="card-title"><a href="/books/{{ $book->id }}">{{ $book->name }}</a></h2>
             </div>
-        @endforeach
-    </div>
+            <div class="card-body">
+                <p class="card-text">Registro: {{$book->register}}</p>
+                <p class="card-text">Autor: {{$book->author}}</p>
+                <p class="card-text">Páginas: {{$book->pages}}</p>
+            </div>
+        </div>
+    @endforeach
     {{-- <div class="auto-load text-center">
         <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
             x="0px" y="0px" height="60" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">

@@ -1,6 +1,8 @@
 
 .book-card {
     position: relative;
+    width: 90%;
+    margin: auto;
 }
 
 .delete-selector-container {
@@ -16,14 +18,15 @@
 
 
 /* SHOWING A BOOK */
-.book-ciontainer {
+.books-container {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
     justify-content: center;
 
-    width: 100%;
+    overflow-y: auto;
     height: 100%;
-    background-color: blue;
+    /* background-color: blue; */
 }
 
 .image-container {

@@ -32,6 +32,24 @@
                             <th scope="row">Registro</th>
                             <td>{{ $book->register }} </td>
                         </tr>
+                        @if ($book->group)
+                            <tr>
+                                <th scope="row">Agrupamento</th>
+                                <td>
+                                    {{ $book->group->name }}
+                                </td>
+                            </tr>
+                        @endif
+                        @if ($book->categories)
+                            <tr>
+                                <th scope="row">Categorias</th>
+                                <td>
+                                    @foreach ($book->categories as $category)
+                                        {{ $category->name }},
+                                    @endforeach
+                                </td>
+                            </tr>
+                        @endif
                         <tr>
                             <th scope="row">CDD</th>
                             <td>{{ $book->cdd }} </td>
@@ -68,7 +86,7 @@
                             <th scope="row">Ano de Aquisição</th>
                             <td>{{ $book->aquisition_year }} </td>
                         </tr>
-                        <tr>
+                        <tr>terminal
                             <th scope="row">Método de Aquisição</th>
                             <td>{{ $book->aquisition }} </td>
                         </tr>
