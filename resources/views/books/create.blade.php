@@ -9,13 +9,9 @@
     @endpush
 @endonce
 
-@section ('upper-menu')
-    <h1>CRIANDO LIVRO</h1>
-@endsection
-
 @section ('content')
 <div class="books-container">
-    <form action="/books" method="POST" enctype="multipart/form-data">
+    <form class="mt-4" action="/books" method="POST" enctype="multipart/form-data">
         @csrf
         @if ($relationships)
             <div class="row">

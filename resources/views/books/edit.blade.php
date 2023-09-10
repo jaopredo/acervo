@@ -6,10 +6,6 @@
     @endpush
 @endonce
 
-@section ('upper-menu')
-    <h1>Editando Livro: {{ $book->name }}</h1>
-@endsection
-
 @section ('content')
     <form action="/books/{{$book->id}}" method="POST">
         @csrf

@@ -87,24 +87,30 @@
         </aside>
         <main id="content-container">
             <div class="upper-menu">
+                <div class="links-container">
+                    @foreach ($path as $item)
+                        <span class="links-separator">&gt;</span>
+                        <a class="link-path" href="{{$item['path']}}">{{$item['name']}}</a>
+                    @endforeach
+                </div>
                 @yield('upper-menu')
             </div>
             <div class="content-container">
                 @yield('content')
             </div>
-            @if (session('msg'))
-                <div class="msg">
-                    <button class="btn btn-primary btn-danger quit-container">
-                        <svg class="quit-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-                            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
-                        </svg>
-                    </button>
-                    {{ session('msg') }}
-                </div>
-            @endif
         </main>
         <footer class="card-footer">
         </footer>
+        @if (session('msg'))
+            <div class="msg alert alert-success" role="alert">
+                <button class="btn btn-primary btn-danger quit-container">
+                    <svg class="quit-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                    </svg>
+                </button>
+                {{ session('msg') }}
+            </div>
+        @endif
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>

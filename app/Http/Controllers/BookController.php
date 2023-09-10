@@ -13,7 +13,7 @@ use App\Models\Group;
 class BookController extends Controller
 {
     public $model = Book::class;
-    public $page = "books";
+    public $page = 'books';
     public $inputs = [
         'register',
         'cdd',
@@ -32,6 +32,7 @@ class BookController extends Controller
         'image'
     ];
     public $resource = BookResource::class;
+    public $root_path = ['name' => 'Livros', 'path' => '/books'];
 
     public function relationships() {
         return [

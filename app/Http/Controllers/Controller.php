@@ -21,9 +21,10 @@ class Controller extends BaseController
 
     public $model;
     public $validator;
-    public $inputs;
     public $page;
+    public $inputs;
     public $resource;
+    public $root_path;
 
     /*-------------------------- API METHODS --------------------------*/
     public function getAll(Request $request) {
@@ -32,10 +33,10 @@ class Controller extends BaseController
 
         if ($request->filters) {
             $filter = new Filter($request, $this->model);
-            return $this->resource::collection($filter->sort()->filter());
+            return $filter->sort()->filter();
         }
 
-        return $this->resource::collection($this->model::paginate($limit));
+        return $this->resource::collection($this->model::paginate($limit))->response()->getData();
     }
 
     public function get($id) {
@@ -92,26 +93,54 @@ class Controller extends BaseController
 
     /*-------------------------- WEB METHODS --------------------------*/
     public function index(Request $request) {
-        $books = $this->getAll($request);
+        $int = $this->getAll($request);
 
-        return view('books/index', ['books'=>$books, 'search' => false]);
+        return view(
+            $this->page . '/index',
+            [
+                'data'=> $int->data,
+                'meta' => $int->meta,
+                'path' => [ $this->root_path ]
+            ]
+        );
     }
 
     public function create() {
         $relationships = $this->relationships();
 
-        return view('books/create', ['relationships' => $relationships]);
+        return view(
+            'books/create', [
+                'relationships' => $relationships,
+                'path' => [
+                    $this->root_path,
+                    [ 'name' => 'Criar Livro', 'path' => 'create' ]
+                ]
+            ]);
     }
 
     public function show($id) {
         $book = $this->get($id);
 
-        return view('books/show', ['book'=>$book]);
+        return view(
+            'books/show', [
+                'book'=>$book,
+                'path' => [
+                    $this->root_path,
+                    [ 'path' => $book->id, 'name' => $book->name ]
+                ]
+            ]);
     }
 
     public function edit($id) {
         $book = $this->model::findOrFail($id);
 
-        return view('books/edit', ['book'=>$book]);
+        return view('books/edit', [
+            'book'=>$book,
+            'path' => [
+                $this->root_path,
+                [ 'name' => 'Editar', 'path' => '#' ],
+                [ 'name' => $book->name, 'path' => $book->id ]
+            ]
+        ]);
     }
 }
