@@ -87,7 +87,7 @@
         </aside>
         <main id="content-container">
             <div class="upper-menu">
-                <div class="links-container">
+                <div class="links-container d-flex flex-row align-items-center justify-content-start">
                     @foreach ($path as $item)
                         <span class="links-separator">&gt;</span>
                         <a class="link-path" href="{{$item['path']}}">{{$item['name']}}</a>

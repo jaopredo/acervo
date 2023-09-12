@@ -10,7 +10,6 @@
 @endonce
 
 @section ('content')
-<div class="books-container">
     <form class="mt-4" action="/books" method="POST" enctype="multipart/form-data">
         @csrf
         @if ($relationships)

@@ -237,35 +237,53 @@
 /* PATH */
 .links-container {
     font-size: 1.3rem;
+    gap: 3px;
 }
 .link-path {
     color: black;
     text-decoration: none;
+    font-size: 20pt;
+    font-weight: bold;
 }
 .link-path:hover {
     color: var(--general-green);
 }
 
 /* PAGINATION */
-.p-links-container {
-    gap: 2px;
+.p-links-container-container {
+    /* gap: 2px; */
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.107);
+}
+
+.pagination-link-separator {
+    text-align: center;
+
+    background-color: #ffffff;
+    padding: 4px 15px;
+    color: black;
+    text-decoration: none;
+    min-width: 25px;
+    border-right: rgb(223, 223, 223) solid 1px;
 }
 
 .pagination-link {
-    background-color: #dbdbdb;
-    padding: 5px;
+    text-align: center;
+
+    background-color: #ffffff;
+    padding: 4px;
     color: black;
     text-decoration: none;
-    border-radius: 5px;
+    min-width: 25px;
+
+    border-right: rgb(223, 223, 223) solid 1px;
 }
 .pagination-link:hover {
-    background-color: var(--general-green);
+    background-color: #f0f0f0;
 }
 .pagination-link:active {
-    background-color: #0f7e00;
+    background-color: #adadad;
 }
 
 .pagination-link-active {
-    background-color: var(--darker-green);
-    color: white;
+    background-color: #cecece;
 }
