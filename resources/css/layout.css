@@ -287,3 +287,25 @@
 .pagination-link-active {
     background-color: #cecece;
 }
+
+.item-link {
+    color: black;
+    text-decoration: none;
+}
+.item-link:hover {
+    color: var(--general-green);
+}
+
+/* REGISTROOS NÃO ENCONTRADOS */
+.no-data-error {
+    height: 60vh;
+    gap: 4px;
+}
+
+.no-data-error-text {
+    font-size: 16pt;
+    display: block;
+    width: 50%;
+    word-wrap: break-word;
+    padding: 10px;
+}

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 trait FileValidator {
     public function validateFile(Request $request) {
-        return $request->file($this->file_field)->isValid() && $request->hasFile($this->file_field);
+        return $request->file($this->file_field)->isValid();
     }
 
     public function saveFile(Request $request) {

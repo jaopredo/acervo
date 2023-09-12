@@ -79,7 +79,7 @@ class Controller extends BaseController
 
         $inst = $this->model::findOrFail($request->id);
 
-        if ($this->model::HAS_FILE && $request->hasFile($inst->file_field)) {
+        if (($this->model::HAS_FILE) && ($request->hasFile($inst->file_field))) {
             $data = $inst->updateFile($request, $data);
         } else {
             $data[$inst->file_field] = $inst[$inst->file_field];
@@ -87,7 +87,7 @@ class Controller extends BaseController
 
         $inst->update($data);
 
-        return redirect("$this->page/edit/$inst->id")->with('msg', 'Editado com Sucesso!');
+        return redirect("$this->page/$inst->id")->with('msg', 'Editado com Sucesso!');
     }
 
 
@@ -109,37 +109,39 @@ class Controller extends BaseController
         $relationships = $this->relationships();
 
         return view(
-            'books/create', [
+            $this->page . '/create', [
                 'relationships' => $relationships,
                 'path' => [
                     $this->root_path,
                     [ 'name' => 'Criar Livro', 'path' => 'create' ]
-                ]
+                ],
+                'inputs' => $this->inputs
             ]);
     }
 
     public function show($id) {
-        $book = $this->get($id);
+        $data = $this->get($id);
 
         return view(
-            'books/show', [
-                'book'=>$book,
+            $this->page . '/show', [
+                'data'=>$data,
                 'path' => [
                     $this->root_path,
-                    [ 'path' => $book->id, 'name' => $book->name ]
+                    [ 'path' => $data->id, 'name' => $data->name ]
                 ]
             ]);
     }
 
     public function edit($id) {
-        $book = $this->model::findOrFail($id);
+        $data = $this->model::findOrFail($id);
 
-        return view('books/edit', [
-            'book'=>$book,
+        return view('books/create', [
+            'data'=>$data,
+            'relationships' => $this->relationships(),
             'path' => [
                 $this->root_path,
                 [ 'name' => 'Editar', 'path' => '#' ],
-                [ 'name' => $book->name, 'path' => $book->id ]
+                [ 'name' => $data->name, 'path' => $data->id ]
             ]
         ]);
     }

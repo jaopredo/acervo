@@ -8,8 +8,8 @@
 
 @section ('upper-menu')
     <div class="buttons-books-container">
-        <a href="/books/edit/{{ $book->id }}" class="btn btn-primary">EDITAR LIVRO</a>
-        <form style="display: inline-block" action="/books/{{$book->id}}" method="post">
+        <a href="/books/edit/{{ $data->id }}" class="btn btn-primary">EDITAR LIVRO</a>
+        <form style="display: inline-block" action="/books/{{$data->id}}" method="post">
             @csrf
             @method('DELETE')
             <button class="btn btn-primary btn-danger">DELETAR LIVRO</a>
@@ -28,21 +28,21 @@
                     <tbody>
                         <tr>
                             <th scope="row">Registro</th>
-                            <td>{{ $book->register }} </td>
+                            <td>{{ $data->register }} </td>
                         </tr>
-                        @if ($book->group)
+                        @if ($data->group)
                             <tr>
                                 <th scope="row">Agrupamento</th>
                                 <td>
-                                    {{ $book->group->name }}
+                                    {{ $data->group->name }}
                                 </td>
                             </tr>
                         @endif
-                        @if ($book->categories)
+                        @if ($data->categories)
                             <tr>
                                 <th scope="row">Categorias</th>
                                 <td>
-                                    @foreach ($book->categories as $category)
+                                    @foreach ($data->categories as $category)
                                         {{ $category->name }},
                                     @endforeach
                                 </td>
@@ -50,47 +50,47 @@
                         @endif
                         <tr>
                             <th scope="row">CDD</th>
-                            <td>{{ $book->cdd }} </td>
+                            <td>{{ $data->cdd }} </td>
                         </tr>
                         <tr>
                             <th scope="row">ISBN</th>
-                            <td>{{ $book->isbn }} </td>
+                            <td>{{ $data->isbn }} </td>
                         </tr>
                         <tr>
                             <th scope="row">Autor</th>
-                            <td>{{ $book->author }} </td>
+                            <td>{{ $data->author }} </td>
                         </tr>
                         <tr>
                             <th scope="row">Ano de Publicação</th>
-                            <td>{{ $book->publication }} </td>
+                            <td>{{ $data->publication }} </td>
                         </tr>
                         <tr>
                             <th scope="row">Editora</th>
-                            <td>{{ $book->editor }} </td>
+                            <td>{{ $data->editor }} </td>
                         </tr>
                         <tr>
                             <th scope="row">Número de Páginas</th>
-                            <td>{{ $book->pages }} </td>
+                            <td>{{ $data->pages }} </td>
                         </tr>
                         <tr>
                             <th scope="row">Volume</th>
-                            <td>{{ $book->volume }} </td>
+                            <td>{{ $data->volume }} </td>
                         </tr>
                         <tr>
                             <th scope="row">Exemplar</th>
-                            <td>{{ $book->example }} </td>
+                            <td>{{ $data->example }} </td>
                         </tr>
                         <tr>
                             <th scope="row">Ano de Aquisição</th>
-                            <td>{{ $book->aquisition_year }} </td>
+                            <td>{{ $data->aquisition_year }} </td>
                         </tr>
                         <tr>
                             <th scope="row">Método de Aquisição</th>
-                            <td>{{ $book->aquisition }} </td>
+                            <td>{{ $data->aquisition }} </td>
                         </tr>
                         <tr>
                             <th scope="row">Local de Fabricação</th>
-                            <td>{{ $book->local }} </td>
+                            <td>{{ $data->local }} </td>
                         </tr>
                     </tbody>
                 </table>
