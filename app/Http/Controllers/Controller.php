@@ -33,7 +33,7 @@ class Controller extends BaseController
 
         if ($request->filters) {
             $filter = new Filter($request, $this->model);
-            return $filter->sort()->filter();
+            return $this->resource::collection($filter->sort()->filter())->response()->getData();
         }
 
         return $this->resource::collection($this->model::paginate($limit))->response()->getData();

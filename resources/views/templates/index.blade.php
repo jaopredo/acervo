@@ -5,19 +5,23 @@
         @vite(['resources/css/books.css'])
     @endpush
     @push ('scripts')
-        @vite(['resources/js/contentLoader.js'])
+        @vite(['resources/js/search.js'])
     @endpush
 @endonce
 
 @section ('upper-menu')
-    <div class="buttons-container">
-        <button class="btn btn-primary btn-dark">FILTRO</button>
+    <form id="search-form" class="form-inline" method="GET" action="/books">
+        <input id="search-input" class="form-control mr-sm-2" name="search" type="search" placeholder="Buscar">
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">PROCURAR</button>
+    </form>
+
+    <div>
         <a href="/books/create" class="btn btn-primary btn-success">CRIAR</a>
     </div>
 @endsection
 
 @section ('content')
-    <div class="pt-1 mt-4 rounded-2 bg-white d-flex align-items-center justify-content-center">
+    <div class="pt-1 mt-4 rounded-2 bg-white d-flex flex-column align-items-center justify-content-end">
         @if (count($data) > 0)
             <table class="table" style="table-layout: fixed">
                 @yield('content-table')

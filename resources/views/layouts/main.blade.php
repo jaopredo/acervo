@@ -21,11 +21,6 @@
                 <img src="{{ asset('img/logo-ceara.png') }}" alt="LOGO" class="logo">
             </a>
 
-            <form class="form-inline" method="GET" action="/books">
-                <input class="form-control mr-sm-2" name="search" type="search" placeholder="Buscar" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Procurar</button>
-            </form>
-
             <div class="icons-containers-container">
                 <div id="notification-icon-container" class="notification-icon-container btn btn-primary btn-success floating-toggler">
                     <svg xmlns="http://www.w3.org/2000/svg" class="notification-icon" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
@@ -93,6 +88,7 @@
                         <a class="link-path" href="{{$item['path']}}">{{$item['name']}}</a>
                     @endforeach
                 </div>
+
                 @yield('upper-menu')
             </div>
             <div class="content-container">
