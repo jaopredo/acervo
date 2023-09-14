@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 // use App\Http\Resources\BookResource;
 use App\Filters\Filter;
 
+use Illuminate\Support\Facades\Route;
+
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
@@ -25,6 +27,8 @@ class Controller extends BaseController
     public $inputs;
     public $resource;
     public $root_path;
+
+    public $meta;  // Funções que são executadas antes de enviar o formulário
 
     /*-------------------------- API METHODS --------------------------*/
     public function getAll(Request $request) {
@@ -59,19 +63,29 @@ class Controller extends BaseController
         }
         $inst->save();
 
-        return redirect("$this->page")->with('msg', 'Criado com Sucesso!');
+        return back()->with('msg', 'Criado com Sucesso!');
+        // return response(['foi']);
     }
 
     public function destroy($id) {
-        $inst = $this->model::findOrFail($id);
+        $inst = $this->model::findOrFail($id);  // Pego a Instância
 
-        if ($this->model::HAS_FILE) {
-            $inst->deleteFile();
+        if ($this->model::HAS_FILE) {  // Se o Modelo tiver um Arquivo
+            $inst->deleteFile();  // Deleto o Arquivo
         }
 
-        $this->model::destroy($id);
+        $this->model::destroy($id);  // Deleto o registro da database
 
-        return redirect("$this->page")->with('msg', 'Deletado com Sucesso!');
+        // return response([
+        //     'exists' => Route::has($this->page . '.show') ? 'existe' : 'não existe',
+        //     'msg' => $this->page . '.show'
+        // ]);
+
+        if (Route::has("$this->page" . ".show")) {  // Se existir a rota que mostra os registros específicos
+            return redirect("$this->page")->with('msg', 'Deletado com Sucesso!');
+        } else {  // Se não, por exemplo os tombamentos
+            return back()->with('msg', 'Deletado com Sucesso!');
+        }
     }
 
     public function update(Request $request) {
@@ -79,15 +93,21 @@ class Controller extends BaseController
 
         $inst = $this->model::findOrFail($request->id);
 
+        // return response($inst);
+
         if (($this->model::HAS_FILE) && ($request->hasFile($inst->file_field))) {
             $data = $inst->updateFile($request, $data);
-        } else {
+        } else if ($this->model::HAS_FILE && !($request->hasFile($inst->file_field))) {
             $data[$inst->file_field] = $inst[$inst->file_field];
         }
 
         $inst->update($data);
 
-        return redirect("$this->page/$inst->id")->with('msg', 'Editado com Sucesso!');
+        if (Route::has("$this->page" . ".show")) {  // Se existir a rota que mostra os registros específicos
+            return redirect("$this->page/$inst->id")->with('msg', 'Deletado com Sucesso!');
+        } else {  // Se não, por exemplo os tombamentos
+            return back()->with('msg', 'Editado com Sucesso!');
+        }
     }
 
 

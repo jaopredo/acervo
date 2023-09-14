@@ -80,11 +80,15 @@
                 </menu>
             </nav>
         </aside>
-        <main id="content-container">
+        <main id="content-container" class="position-relative">
             <div class="upper-menu">
                 <div class="links-container d-flex flex-row align-items-center justify-content-start">
                     @foreach ($path as $item)
-                        <span class="links-separator">&gt;</span>
+                        <span class="links-separator">
+                            <svg width="25" height="25" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                            </svg>
+                        </span>
                         <a class="link-path" href="{{$item['path']}}">{{$item['name']}}</a>
                     @endforeach
                 </div>
@@ -95,8 +99,6 @@
                 @yield('content')
             </div>
         </main>
-        <footer class="card-footer">
-        </footer>
         @if (session('msg'))
             <div class="msg alert alert-success" role="alert">
                 <button class="btn btn-primary btn-danger quit-container">

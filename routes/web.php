@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\TombController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,12 +22,17 @@ Route::get('/', function () {
 
 /*------------------------------- LIVROS -------------------------------*/
 /* Rotas de Página */
-Route::get('/books', [BookController::class, 'index']);
-Route::get('/books/create', [BookController::class, 'create']);
-Route::get('/books/{id}', [BookController::class, 'show']);
-Route::get('/books/edit/{id}', [BookController::class, 'edit']);
+Route::get('/books', [BookController::class, 'index'])->name('books.all');
+Route::get('/books/create', [BookController::class, 'create'])->name('books.create');
+Route::get('/books/{id}', [BookController::class, 'show'])->name('books.show');
+Route::get('/books/edit/{id}', [BookController::class, 'edit'])->name('books.edit');
 
 /* Rotas de Registro */
 Route::post('/books', [BookController::class, 'store']);
 Route::put('/books/{id}', [BookController::class, 'update']);
 Route::delete('/books/{id}', [BookController::class, 'destroy']);
+
+/*------------------------------- TOMBAMENTOS -------------------------------*/
+Route::post('/tombs', [TombController::class, 'store']);
+Route::put('/tombs/{id}', [TombController::class, 'update']);
+Route::delete('/tombs/{id}', [TombController::class, 'destroy']);
