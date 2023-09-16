@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 use Illuminate\Database\Eloquent\Collection;
+// use Illuminate\Database\Eloquent\Model;
 
 class MultipleSelect extends Component
 {
@@ -16,6 +17,7 @@ class MultipleSelect extends Component
         public string $label,
         public string $id,
         public Collection $options,
+        public $values,
     ){}
 
     /**

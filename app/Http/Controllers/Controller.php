@@ -27,6 +27,11 @@ class Controller extends BaseController
     public $inputs;
     public $resource;
     public $root_path;
+    public $foreing_keys;
+
+    public function relationships() {
+
+    }
 
     public $meta;  // Funções que são executadas antes de enviar o formulário
 
@@ -52,9 +57,16 @@ class Controller extends BaseController
         // $request->validate($this->validator['rules'], $this->validator['messages']);
 
         $inst = new $this->model;
+        $relationships = $this->relationships();
 
         foreach ($this->inputs as $attr) {
-            $inst[$attr] = $request[$attr];
+            if ($relationships) {
+                if (!in_array($attr, $this->foreing_keys)) {
+                    $inst[$attr] = $request[$attr];
+                }
+            } else {
+                $inst[$attr] = $request[$attr];
+            }
         }
 
         /* VOU TENTAR SALVAR UM ARQUIVO, MAS PODE SER QUE O DOCUMENTO NÃO POSSIBILITE */
@@ -63,7 +75,15 @@ class Controller extends BaseController
         }
         $inst->save();
 
-        return back()->with('msg', 'Criado com Sucesso!');
+        if ($relationships) {
+            $relationships['save']($inst->id, $request, 'save');
+        }
+
+        if (Route::has("$this->page" . ".show")) {  // Se existir a rota que mostra os registros específicos
+            return redirect("$this->page/$inst->id")->with('msg', 'Criado com Sucesso!');
+        } else {  // Se não, por exemplo os tombamentos
+            return back()->with('msg', 'Criado com Sucesso!');
+        }
         // return response(['foi']);
     }
 
@@ -92,8 +112,17 @@ class Controller extends BaseController
         $data = $request->all();
 
         $inst = $this->model::findOrFail($request->id);
+        $relationships = $this->relationships();
 
-        // return response($inst);
+        // Tirando as Relationships
+        foreach ($this->foreing_keys as $rls) {
+            if (in_array($rls, $request->keys())) {
+                unset($data[$rls]);
+            }
+        }
+        if ($relationships) {
+            $relationships['save']($inst->id, $request, 'update');
+        }
 
         if (($this->model::HAS_FILE) && ($request->hasFile($inst->file_field))) {
             $data = $inst->updateFile($request, $data);
@@ -104,7 +133,7 @@ class Controller extends BaseController
         $inst->update($data);
 
         if (Route::has("$this->page" . ".show")) {  // Se existir a rota que mostra os registros específicos
-            return redirect("$this->page/$inst->id")->with('msg', 'Deletado com Sucesso!');
+            return redirect("$this->page/$inst->id")->with('msg', 'Editado com Sucesso!');
         } else {  // Se não, por exemplo os tombamentos
             return back()->with('msg', 'Editado com Sucesso!');
         }

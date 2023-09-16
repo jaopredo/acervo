@@ -10,4 +10,6 @@ class BookCategory extends Model
     use HasFactory;
 
     protected $table = 'book_category';
+
+    protected $guarded = [];
 }
