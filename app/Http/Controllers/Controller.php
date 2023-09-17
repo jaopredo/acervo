@@ -54,7 +54,7 @@ class Controller extends BaseController
     }
 
     public function store(Request $request) {
-        // $request->validate($this->validator['rules'], $this->validator['messages']);
+        $request->validate($this->validator);
 
         $inst = new $this->model;
         $data = $request->except($inst->foreign_keys);
@@ -67,6 +67,7 @@ class Controller extends BaseController
         if ($this->model::HAS_FILE) {
             $inst->storeFile($request);
         }
+
         $inst->save();
 
         // Salvo as Chaves Estrangeiras

@@ -104,6 +104,7 @@
                         <div class="mb-3 col">
                             <label for="tomb">DATA DE TOMBAMENTO</label>
                             <input class="form-control" name="tomb" id="tomb" type="date">
+                            <p class="form-error">{{$errors->first('tomb')}}</p>
                         </div>
                         <input type="hidden" name="book_id" id="book_id" value="{{$data->id}}">
                         <button class="btn btn-primary">CRIAR</button>

@@ -28,8 +28,28 @@ class BookController extends Controller
         'aquisition',
         'local',
         'description',
-        'image'
+        'image',
+        'group_id'
     ];
+
+    public $validator = [
+        'register' => 'required',
+        'cdd' => 'required',
+        'isbn' => 'required',
+        'name' => 'required',
+        'author' => 'required',
+        'publication' => 'required',
+        'editor' => 'required',
+        'pages' => 'required',
+        'volume' => 'required',
+        'example' => 'required',
+        'aquisition_year' => 'required',
+        'aquisition' => 'required',
+        'local' => 'required',
+        'image' => 'file',
+        'group_id' => 'exists:groups,id'
+    ];
+
     public $resource = BookResource::class;
     public $root_path = ['name' => 'Livros', 'path' => '/books'];
 
