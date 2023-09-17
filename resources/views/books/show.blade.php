@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col image-container d-flex flex-row align-items-center justify-content-center">
                 <img
-                    src="{{ env('APP_FULL_URL') . '/api/file/' . $data->image }}"
+                    src="{{ env('APP_FULL_URL') . '/api/file/' . ($data->group?$data->group->image:$data->image) }}"
                     alt="Imagem"
                 >
             </div>
