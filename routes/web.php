@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\TombController;
 
@@ -44,6 +45,18 @@ Route::get('/groups/edit/{id}', [GroupController::class, 'edit'])->name('groups.
 Route::post('/groups', [GroupController::class, 'store']);
 Route::put('/groups/{id}', [GroupController::class, 'update']);
 Route::delete('/groups/{id}', [GroupController::class, 'destroy']);
+
+/*------------------------------- CATEGORIAS -------------------------------*/
+/* Rotas de Página */
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.all');
+Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
+Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('categories.edit');
+
+/* Rotas de Registro */
+Route::post('/categories', [CategoryController::class, 'store']);
+Route::put('/categories/{id}', [CategoryController::class, 'update']);
+Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);
 
 /*------------------------------- TOMBAMENTOS -------------------------------*/
 Route::post('/tombs', [TombController::class, 'store']);
