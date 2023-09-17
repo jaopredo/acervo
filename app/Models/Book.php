@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 use App\Models\Group;
 use App\Models\Category;
@@ -22,7 +23,7 @@ class Book extends Model
         return $this->belongsTo(Group::class);
     }
 
-    public function category() {
+    public function categories(): BelongsToMany {
         return $this->belongsToMany(Category::class);
     }
 }

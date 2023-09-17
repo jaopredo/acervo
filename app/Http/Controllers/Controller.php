@@ -7,7 +7,8 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
 use Illuminate\Http\Request;
-use App\Http\Resources\PaginationResource;
+// use App\Http\Resources\PaginationResource;
+// use App\Http\Resources\BookResource;
 use App\Filters\Filter;
 
 class Controller extends BaseController
@@ -20,9 +21,10 @@ class Controller extends BaseController
 
     public $model;
     public $validator;
-    public $inputs;
     public $page;
-
+    public $inputs;
+    public $resource;
+    public $root_path;
 
     /*-------------------------- API METHODS --------------------------*/
     public function getAll(Request $request) {
@@ -31,14 +33,15 @@ class Controller extends BaseController
 
         if ($request->filters) {
             $filter = new Filter($request, $this->model);
-            return PaginationResource::collection($filter->sort()->filter());
+            return $this->resource::collection($filter->sort()->filter())->response()->getData();
         }
-        return PaginationResource::collection($this->model::paginate($limit));
+
+        return $this->resource::collection($this->model::paginate($limit))->response()->getData();
     }
 
     public function get($id) {
-        $publication_type = $this->model::findOrFail($id);
-        return $publication_type;
+        $instance = $this->model::findOrFail($id);
+        return new $this->resource($instance);
     }
 
     public function store(Request $request) {
@@ -76,7 +79,7 @@ class Controller extends BaseController
 
         $inst = $this->model::findOrFail($request->id);
 
-        if ($this->model::HAS_FILE && $request->hasFile($inst->file_field)) {
+        if (($this->model::HAS_FILE) && ($request->hasFile($inst->file_field))) {
             $data = $inst->updateFile($request, $data);
         } else {
             $data[$inst->file_field] = $inst[$inst->file_field];
@@ -84,61 +87,62 @@ class Controller extends BaseController
 
         $inst->update($data);
 
-        return redirect("$this->page/edit/$inst->id")->with('msg', 'Editado com Sucesso!');
+        return redirect("$this->page/$inst->id")->with('msg', 'Editado com Sucesso!');
     }
 
 
     /*-------------------------- WEB METHODS --------------------------*/
     public function index(Request $request) {
-        // $search = request('search');
-        // $items = '';
+        $int = $this->getAll($request);
 
-        // if ($search) {
-        //     $books = Book::where([
-        //         ['name', 'like', '%'.$search.'%']
-        //     ])->get();
-
-        //     return view('books/index', ['books' => $books, 'search' => $search]);
-        // }
-
-        // if ($request->ajax()) {
-        //     $books = Book::orderBy('id')->paginate(10);
-        //     // <div class="delete-selector-container">
-        //     //             <input type="checkbox" name="booksDelete[]" name="'. $book->id .'" >
-        //     //         </div>
-        //     foreach ($books as $book) {
-        //         $items = $items.'<div class="card item book-card">
-        //             <div class="card-header">
-        //                 <h2 class="card-title"><a href="/books/'.$book->id.'">'.$book->name.'</a></h2>
-        //             </div>
-        //             <div class="card-body">
-        //                 <p class="card-text">Registro:'.$book->register.'</p>
-        //                 <p class="card-text">Autor: '.$book->author.'</p>
-        //                 <p class="card-text">Páginas:'.$book->pages.'</p>
-        //             </div>
-        //         </div>
-        //         ';
-        //     }
-        //     return $items;
-        // }
-        $books = $this->getAll($request);
-
-        return view('books/index', ['books'=>$books, 'search' => false]);
+        return view(
+            $this->page . '/index',
+            [
+                'data'=> $int->data,
+                'meta' => $int->meta,
+                'path' => [ $this->root_path ]
+            ]
+        );
     }
 
     public function create() {
-        return view('books/create');
+        $relationships = $this->relationships();
+
+        return view(
+            $this->page . '/create', [
+                'relationships' => $relationships,
+                'path' => [
+                    $this->root_path,
+                    [ 'name' => 'Criar Livro', 'path' => 'create' ]
+                ],
+                'inputs' => $this->inputs
+            ]);
     }
 
     public function show($id) {
-        $book = $this->get($id);
+        $data = $this->get($id);
 
-        return view('books/show', ['book'=>$book]);
+        return view(
+            $this->page . '/show', [
+                'data'=>$data,
+                'path' => [
+                    $this->root_path,
+                    [ 'path' => $data->id, 'name' => $data->name ]
+                ]
+            ]);
     }
 
     public function edit($id) {
-        $book = $this->model::findOrFail($id);
+        $data = $this->model::findOrFail($id);
 
-        return view('books/edit', ['book'=>$book]);
+        return view('books/create', [
+            'data'=>$data,
+            'relationships' => $this->relationships(),
+            'path' => [
+                $this->root_path,
+                [ 'name' => 'Editar', 'path' => '#' ],
+                [ 'name' => $data->name, 'path' => $data->id ]
+            ]
+        ]);
     }
 }

@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 
 use App\Models\Book;
-use Illuminate\Database\Eloquent\Collection;
+use App\Http\Resources\BookResource;
+// use Illuminate\Database\Eloquent\Collection;
+use App\Models\Category;
+use App\Models\Group;
 
 class BookController extends Controller
 {
     public $model = Book::class;
-    public $page = "books";
+    public $page = 'books';
     public $inputs = [
         'register',
         'cdd',
@@ -28,4 +31,13 @@ class BookController extends Controller
         'description',
         'image'
     ];
+    public $resource = BookResource::class;
+    public $root_path = ['name' => 'Livros', 'path' => '/books'];
+
+    public function relationships() {
+        return [
+            'categories' => Category::all(),
+            'groups' => Group::all(),
+        ];
+    }
 }

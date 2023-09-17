@@ -1,8 +1,4 @@
 
-.book-card {
-    position: relative;
-}
-
 .delete-selector-container {
     position: absolute;
 
@@ -14,25 +10,7 @@
     accent-color: #81ff6e;
 }
 
-
-/* SHOWING A BOOK */
-.book-ciontainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 100%;
-    height: 100%;
-    background-color: blue;
-}
-
-.image-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.image-container img {
-    width: 50%
+/* SHOW */
+.image-container img{
+    width: 70%;
 }
