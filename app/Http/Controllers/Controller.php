@@ -57,16 +57,10 @@ class Controller extends BaseController
         // $request->validate($this->validator['rules'], $this->validator['messages']);
 
         $inst = new $this->model;
-        $relationships = $this->relationships();
+        $data = $request->except($this->model->foreing_keys);
 
         foreach ($this->inputs as $attr) {
-            if ($relationships) {
-                if (!in_array($attr, $this->foreing_keys)) {
-                    $inst[$attr] = $request[$attr];
-                }
-            } else {
-                $inst[$attr] = $request[$attr];
-            }
+            $inst[$attr] = $data[$attr];
         }
 
         /* VOU TENTAR SALVAR UM ARQUIVO, MAS PODE SER QUE O DOCUMENTO NÃO POSSIBILITE */
@@ -75,16 +69,17 @@ class Controller extends BaseController
         }
         $inst->save();
 
-        if ($relationships) {
-            $relationships['save']($inst->id, $request, 'save');
+        // Salvo as Chaves Estrangeiras
+        if ($this->model::HAS_FOREIGN_KEYS) {
+            $inst->saveForeign($request);
         }
+
 
         if (Route::has("$this->page" . ".show")) {  // Se existir a rota que mostra os registros específicos
             return redirect("$this->page/$inst->id")->with('msg', 'Criado com Sucesso!');
         } else {  // Se não, por exemplo os tombamentos
             return back()->with('msg', 'Criado com Sucesso!');
         }
-        // return response(['foi']);
     }
 
     public function destroy($id) {
@@ -109,25 +104,19 @@ class Controller extends BaseController
     }
 
     public function update(Request $request) {
-        $data = $request->all();
-
         $inst = $this->model::findOrFail($request->id);
-        $relationships = $this->relationships();
+        $data = $request->except($inst->foreign_keys);
 
-        // Tirando as Relationships
-        foreach ($this->foreing_keys as $rls) {
-            if (in_array($rls, $request->keys())) {
-                unset($data[$rls]);
-            }
-        }
-        if ($relationships) {
-            $relationships['save']($inst->id, $request, 'update');
-        }
 
         if (($this->model::HAS_FILE) && ($request->hasFile($inst->file_field))) {
             $data = $inst->updateFile($request, $data);
         } else if ($this->model::HAS_FILE && !($request->hasFile($inst->file_field))) {
             $data[$inst->file_field] = $inst[$inst->file_field];
+        }
+
+        // Salvo as Chaves Estrangeiras
+        if ($this->model::HAS_FOREIGN_KEYS) {
+            $inst->saveForeign($request);
         }
 
         $inst->update($data);

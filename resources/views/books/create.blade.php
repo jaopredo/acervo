@@ -20,13 +20,13 @@
                 <label for="group_id">GRUPO</label>
                 <select class="form-control" name="group_id" id="group_id">
                     <option value="">NENHUM</option>
-                    @foreach ($relationships['fields']['groups'] as $group)
+                    @foreach ($relationships['groups'] as $group)
                         <option value="{{ $group->id }}">{{ $group->name }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="mb-3 col">
-                <x-multiple-select label="CATEGORIAS" id="categories" :values="$data['categories'] ?? []" :options="$relationships['fields']['categories']" />
+                <x-multiple-select label="CATEGORIAS" id="categories" :values="$data['categories'] ?? []" :options="$relationships['categories']" />
             </div>
         </div>
         <div class="row">
