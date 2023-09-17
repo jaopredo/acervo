@@ -1,0 +1,44 @@
+
+.group-image {
+    height: 100%;
+}
+
+.books-container {
+    overflow-y: auto;
+    grid-area: bk_table;
+}
+
+.group-info {
+    font-weight: bolder;
+    color: #656565;
+    font-size: 1.2em;
+}
+
+
+.book-infos-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 70vh;
+    grid-template-areas:
+        "bk_img books"
+    ;
+}
+#group-image-container {
+    grid-area: bk_img;
+}
+
+#books-table-container {
+    grid-area: books;
+
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% 90%;
+    grid-template-areas:
+        "title"
+        "bk_table"
+    ;
+}
+
+#container-title {
+    grid-area: title;
+}

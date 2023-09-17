@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\TombController;
 
 /*
@@ -31,6 +32,18 @@ Route::get('/books/edit/{id}', [BookController::class, 'edit'])->name('books.edi
 Route::post('/books', [BookController::class, 'store']);
 Route::put('/books/{id}', [BookController::class, 'update']);
 Route::delete('/books/{id}', [BookController::class, 'destroy']);
+
+/*------------------------------- GRUPOS -------------------------------*/
+/* Rotas de Página */
+Route::get('/groups', [GroupController::class, 'index'])->name('groups.all');
+Route::get('/groups/create', [GroupController::class, 'create'])->name('groups.create');
+Route::get('/groups/{id}', [GroupController::class, 'show'])->name('groups.show');
+Route::get('/groups/edit/{id}', [GroupController::class, 'edit'])->name('groups.edit');
+
+/* Rotas de Registro */
+Route::post('/groups', [GroupController::class, 'store']);
+Route::put('/groups/{id}', [GroupController::class, 'update']);
+Route::delete('/groups/{id}', [GroupController::class, 'destroy']);
 
 /*------------------------------- TOMBAMENTOS -------------------------------*/
 Route::post('/tombs', [TombController::class, 'store']);

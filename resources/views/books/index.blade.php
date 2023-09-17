@@ -7,7 +7,7 @@
             <th scope="col">CDD</th>
             <th scope="col">Registro</th>
             <th scope="col">Editora</th>
-            <th scope="col">Ações</th>
+            <th scope="col"><div class="actions-container">Ações</div></th>
         </tr>
     </thead>
     <tbody>
@@ -18,12 +18,14 @@
                 <td>{{ $book->register }}</td>
                 <td>{{ $book->editor }}</td>
                 <td>
-                    <form style="display: inline-block" action="/books/{{$book->id}}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger">DELETAR</button>
-                    </form>
-                    <a href="books/edit/{{$book->id}}" class="btn btn-primary">EDITAR</button>
+                    <div class="actions-container">
+                        <form style="display: inline-block" action="/books/{{$book->id}}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger">DELETAR</button>
+                        </form>
+                        <a href="books/edit/{{$book->id}}" class="btn btn-primary">EDITAR</a>
+                    </div>
                 </td>
             </tr>
         @endforeach

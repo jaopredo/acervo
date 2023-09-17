@@ -57,7 +57,7 @@ class Controller extends BaseController
         // $request->validate($this->validator['rules'], $this->validator['messages']);
 
         $inst = new $this->model;
-        $data = $request->except($this->model->foreing_keys);
+        $data = $request->except($inst->foreign_keys);
 
         foreach ($this->inputs as $attr) {
             $inst[$attr] = $data[$attr];
@@ -173,7 +173,7 @@ class Controller extends BaseController
     public function edit($id) {
         $data = $this->model::findOrFail($id);
 
-        return view('books/create', [
+        return view("$this->page/create", [
             'data'=>$data,
             'relationships' => $this->relationships(),
             'path' => [
