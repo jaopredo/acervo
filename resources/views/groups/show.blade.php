@@ -37,8 +37,10 @@
                     </table>
                 </div>
             @else
-                <div class="alert alert-danger text-center">
-                    NENHUM LIVRO ESTÁ ASSOCIADO AO GRUPO
+                <div class="d-flex align-items-start justify-content-center">
+                    <div class="alert alert-danger text-center">
+                        NENHUM LIVRO ESTÁ ASSOCIADO AO GRUPO
+                    </div>
                 </div>
             @endif
         </div>

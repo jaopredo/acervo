@@ -17,6 +17,8 @@ $('.floating-toggler').on('click', function() {
     }
 })
 
-$('.quit-container').on('click', function() {
-    $('.msg').hide()
+$('.msg').ready(function() {
+    setTimeout(function() {
+        $('.msg').fadeOut(400)
+    }, 5000)
 })

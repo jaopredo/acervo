@@ -12,6 +12,7 @@ class Tomb extends Model
     use HasFactory;
 
     const HAS_FILE = false;
+    const HAS_FOREIGN_KEYS = false;
 
     protected $guarded = [];
 

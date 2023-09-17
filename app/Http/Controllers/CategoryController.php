@@ -12,6 +12,9 @@ class CategoryController extends Controller
     public $inputs = [
         'name',
     ];
+    public $validator = [
+        'name' => 'required'
+    ];
     public $resource = GenericResource::class;
     public $root_path = ['name' => 'Categorias', 'path' => '/categories'];
 }

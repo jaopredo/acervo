@@ -67,6 +67,7 @@ ul {
 .options-list {
     background-color: white;
     width: 100%;
+    overflow-y: auto;
     height: fit-content;
     text-align: left;
 
@@ -79,4 +80,9 @@ ul {
 .input-option:hover {
     background-color: #b7ffa6;
     cursor: pointer;
+}
+
+#select-option-list {
+    height: 350px;
+    overflow-y: auto;
 }

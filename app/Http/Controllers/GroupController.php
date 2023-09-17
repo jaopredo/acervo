@@ -14,6 +14,10 @@ class GroupController extends Controller
         'name',
         'image'
     ];
+    public $validator = [
+        'name' => 'required',
+        'image'=> 'required|file'
+    ];
     public $resource = GenericResource::class;
     public $root_path = ['name' => 'Grupos', 'path' => '/groups'];
 }

@@ -14,5 +14,9 @@ class TombController extends Controller
         'book_id',
         'tomb'
     ];
+    public $validator = [
+        'book_id' => 'required|exists:books,id',
+        'tomb' => 'required|date'
+    ];
     public $resource = GenericResource::class;
 }
