@@ -14,3 +14,10 @@
 .image-container img{
     width: 70%;
 }
+
+.tomb {
+    font-weight: bold;
+    font-size: 1.4rem;
+    text-align: left;
+    padding-left: 20px;
+}

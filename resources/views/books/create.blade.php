@@ -15,21 +15,20 @@
         @isset($data)
             @method('PUT')
         @endisset
-        @if ($relationships)
-            <div class="row">
-                <div class="mb-3 col">
-                    <div class="mb-3 col">
-                        <label for="group_id">GRUPO</label>
-                        <select class="form-control" name="group_id" id="group_id">
-                            <option value="">NENHUM</option>
-                            @foreach ($relationships['groups'] as $group)
-                                <option value="{{ $group->id }}">{{ $group->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
+        <div class="row">
+            <div class="mb-3 col" style="flex-basis: content">
+                <label for="group_id">GRUPO</label>
+                <select class="form-control" name="group_id" id="group_id">
+                    <option value="">NENHUM</option>
+                    @foreach ($relationships['groups'] as $group)
+                        <option value="{{ $group->id }}">{{ $group->name }}</option>
+                    @endforeach
+                </select>
             </div>
-        @endif
+            <div class="mb-3 col">
+                <x-multiple-select label="CATEGORIAS" id="categories" :values="$data['categories'] ?? []" :options="$relationships['categories']" />
+            </div>
+        </div>
         <div class="row">
             <div class="mb-3 col">
                 <label for="register">REGISTRO DO LIVRO</label>
