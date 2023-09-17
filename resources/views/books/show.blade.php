@@ -1,4 +1,4 @@
-@extends('..layouts.main')
+@extends('..templates.show')
 
 @once
     @push ('styles')
@@ -9,24 +9,13 @@
     @endpush
 @endonce
 
-@section ('upper-menu')
-    <div class="buttons-books-container">
-        <a href="/books/edit/{{ $data->id }}" class="btn btn-primary">EDITAR LIVRO</a>
-        <form style="display: inline-block" action="/books/{{$data->id}}" method="post">
-            @csrf
-            @method('DELETE')
-            <button class="btn btn-primary btn-danger">DELETAR LIVRO</a>
-        </form>
-    </div>
-@endsection
-
 @section ('content')
     <div class="container mt-4">
         <div class="row">
             <div class="col image-container d-flex flex-row align-items-center justify-content-center">
                 <img
-                    src="{{ env('APP_FULL_URL') . '/api/file/' . $data->image }}"
-                    alt="Imagem Teste"
+                    src="{{ env('APP_FULL_URL') . '/api/file/' . ($data->group?$data->group->image:$data->image) }}"
+                    alt="Imagem"
                 >
             </div>
             <div class="col bg-white p-1 rounded-2">

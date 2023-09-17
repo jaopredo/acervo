@@ -23,7 +23,7 @@
                         @method('DELETE')
                         <button class="btn btn-danger">DELETAR</button>
                     </form>
-                    <a href="books/edit/{{$book->id}}" class="btn btn-primary">EDITAR</button>
+                    <a href="books/edit/{{$book->id}}" class="btn btn-primary">EDITAR</a>
                 </td>
             </tr>
         @endforeach

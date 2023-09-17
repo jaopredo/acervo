@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\TombController;
+use App\Http\Controllers\GroupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,5 @@ use App\Http\Controllers\TombController;
 // });
 
 Route::get('/file/{name}', [FileController::class, 'index']);
+
+Route::get('/teste', [GroupController::class, 'getAll']);

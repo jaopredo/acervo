@@ -17,7 +17,8 @@ class GroupFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name()
+            'name' => fake()->name(),
+            'image' => fake()->word() . fake()->fileExtension()
         ];
     }
 }
