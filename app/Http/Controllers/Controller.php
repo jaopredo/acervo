@@ -151,7 +151,7 @@ class Controller extends BaseController
                 'relationships' => $relationships,
                 'path' => [
                     $this->root_path,
-                    [ 'name' => 'Criar Livro', 'path' => 'create' ]
+                    [ 'name' => 'Criar ' . $this->root_path['name'], 'path' => 'create' ]
                 ],
                 'inputs' => $this->inputs
             ]);
