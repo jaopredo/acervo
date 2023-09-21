@@ -51,7 +51,7 @@ return [
     'email' => 'Este campo deve ser um email em formato válido. (:attr)',
     'ends_with' => 'The :attribute field must end with one of the following: :values.',
     'enum' => 'The selected :attribute is invalid.',
-    'exists' => 'The selected :attribute is invalid.',
+    'exists' => 'Este campo não existe no nosso banco de dados (:attribute).',
     'file' => 'Este campo deve ser um Arquivo (:attribute).',
     'filled' => 'The :attribute field must have a value.',
     'gt' => [
@@ -101,7 +101,7 @@ return [
         'array' => 'The :attribute field must have at least :min items.',
         'file' => 'The :attribute field must be at least :min kilobytes.',
         'numeric' => 'The :attribute field must be at least :min.',
-        'string' => 'The :attribute field must be at least :min characters.',
+        'string' => 'Este campo deve ter no mínimo :min caracteres. (:attribute)',
     ],
     'min_digits' => 'The :attribute field must have at least :min digits.',
     'missing' => 'The :attribute field must be missing.',

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GroupController;
@@ -18,9 +19,17 @@ use App\Http\Controllers\TombController;
 |
 */
 
-Route::get('/', function () {
-    return redirect('/books');
-});
+Route::get('/login', [AuthController::class, 'login_view'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.method');
+
+/*------------------------------- DASHBOARD -------------------------------*/
+Route::get('/', function() {
+    return view('dashboard', [
+        'path' => [
+            ['name' => 'Início', 'path' => '/']
+        ]
+    ]);
+})->name('dashboard');
 
 /*------------------------------- LIVROS -------------------------------*/
 /* Rotas de Página */
