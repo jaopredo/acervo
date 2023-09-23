@@ -23,6 +23,17 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
+    public function profile_view() {
+        return view('auth.profile', [
+            'user' => auth()->user(),
+            'path' => [
+                ['name' => 'Início', 'path' => '/'],
+                ['name' => 'Perfil', 'path' => '/profile']
+            ]
+        ]);
+    }
+
+
     public function login(Request $request) {
         $credentials = $request->validate([
             'email' => 'required|email|exists:users,email',
@@ -48,5 +59,14 @@ class AuthController extends Controller
         Auth::login($user);
 
         return response($user);
+    }
+
+    public function logout(Request $request) {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect(route('login'));
     }
 }

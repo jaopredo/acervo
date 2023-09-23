@@ -19,8 +19,12 @@ use App\Http\Controllers\TombController;
 |
 */
 
+Route::get('/profile', [AuthController::class, 'profile_view'])->name('profile');
+
 Route::get('/login', [AuthController::class, 'login_view'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.method');
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 /*------------------------------- DASHBOARD -------------------------------*/
 Route::get('/', function() {
@@ -29,7 +33,7 @@ Route::get('/', function() {
             ['name' => 'Início', 'path' => '/']
         ]
     ]);
-})->name('dashboard');
+})->name('dashboard')->middleware('auth');
 
 /*------------------------------- LIVROS -------------------------------*/
 /* Rotas de Página */
