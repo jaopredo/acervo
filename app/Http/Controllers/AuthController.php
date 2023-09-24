@@ -2,13 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
 
+use Illuminate\Http\Request;
+use App\Http\Requests\ChangePasswordRequest;
+
+use App\Http\Resources\GenericResource;
+
 class AuthController extends Controller
 {
+    public $model = User::class;
+    public $page = 'admin';
+    public $inputs = [
+        'email',
+        'password',
+        'password_confirmation',
+        'name'
+    ];
+
+    public $validator = [
+        'email' => 'required',
+        'password' => 'required',
+        'password_confirmation' => 'required|same:password',
+        'name' => 'required'
+    ];
+
+    public $resource = GenericResource::class;
+    public $root_path = ['name' => 'Administradores', 'path' => '/admin'];
+
     public function __construct()
     {
         $this->middleware('auth', ['except' => [
@@ -19,13 +43,14 @@ class AuthController extends Controller
         ]]);
     }
 
+    /*----------- VIEWS -----------*/
     public function login_view() {
         return view('auth.login');
     }
 
     public function profile_view() {
-        return view('auth.profile', [
-            'user' => auth()->user(),
+        return view('admin.create', [
+            'data' => auth()->user(),
             'path' => [
                 ['name' => 'Início', 'path' => '/'],
                 ['name' => 'Perfil', 'path' => '/profile']
@@ -33,7 +58,7 @@ class AuthController extends Controller
         ]);
     }
 
-
+    /*----------- FUNCTIONS -----------*/
     public function login(Request $request) {
         $credentials = $request->validate([
             'email' => 'required|email|exists:users,email',
@@ -50,15 +75,13 @@ class AuthController extends Controller
     }
 
     public function register(Request $request) {
-        $user = User::create([
+        User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password
         ]);
 
-        Auth::login($user);
-
-        return response($user);
+        return redirect(route('admin.all'))->with('msg', 'Administrador criado com sucesso!');
     }
 
     public function logout(Request $request) {
@@ -68,5 +91,25 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect(route('login'));
+    }
+
+    public function change_password(ChangePasswordRequest $request) {
+        // Validando usuário
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->old_password
+        ];
+        if (Auth::attempt($credentials)) {
+            $user = User::where('email', '=', $request->email);
+            $user->update([
+                'password' => Hash::make($request->password)
+            ]);
+
+            return back()->with('msg', 'Senha alterada com sucesso!');
+        } else {
+            return back()->withErrors([
+                'login' => 'Sua antiga senha está incorreta!'
+            ]);
+        }
     }
 }

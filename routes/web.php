@@ -19,12 +19,24 @@ use App\Http\Controllers\TombController;
 |
 */
 
+/*------------------------------- ADMINISTRADORES -------------------------------*/
+/* Rotas de Página */
 Route::get('/profile', [AuthController::class, 'profile_view'])->name('profile');
-
 Route::get('/login', [AuthController::class, 'login_view'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('login.method');
 
+Route::get('/admin', [AuthController::class, 'index'])->name('admin.all');
+Route::get('/admin/create', [AuthController::class, 'create'])->name('admin.create');
+Route::get('/admin/{id}', [AuthController::class, 'show'])->name('admin.show');
+Route::get('/admin/edit/{id}', [AuthController::class, 'edit'])->name('admin.edit');
+
+/* Rotas de Registro */
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/login', [AuthController::class, 'login'])->name('login.method');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/change_password', [AuthController::class, 'change_password'])->name('change_password');
+
+Route::put('/admin/{id}', [AuthController::class, 'update']);
+Route::delete('/admin/{id}', [AuthController::class, 'destroy']);
 
 /*------------------------------- DASHBOARD -------------------------------*/
 Route::get('/', function() {
