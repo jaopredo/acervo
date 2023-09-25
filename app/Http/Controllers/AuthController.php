@@ -108,7 +108,7 @@ class AuthController extends Controller
             return back()->with('msg', 'Senha alterada com sucesso!');
         } else {
             return back()->withErrors([
-                'login' => 'Sua antiga senha está incorreta!'
+                'old_password' => 'Sua antiga senha está incorreta!'
             ]);
         }
     }
