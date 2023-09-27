@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PasswordForgotController;
+
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GroupController;
@@ -19,10 +21,18 @@ use App\Http\Controllers\TombController;
 |
 */
 
+/*------------------------------- ESQUECEU A SENHA -------------------------------*/
+Route::get('/forgot-password', [PasswordForgotController::class, 'forgot_password'])->name('password.forget');
+Route::get('/change-password/{token}', [PasswordForgotController::class, 'password_form'])->middleware('guest')->name('password.reset');
+
+Route::post('/forgot-password', [PasswordForgotController::class, 'send_email'])->middleware('guest')->name('password.email');
+Route::post('/change-password', [PasswordForgotController::class, 'redefine_password'])->middleware('guest')->name('password.redefine');
+
 /*------------------------------- ADMINISTRADORES -------------------------------*/
 /* Rotas de Página */
 Route::get('/profile', [AuthController::class, 'profile_view'])->name('profile');
 Route::get('/login', [AuthController::class, 'login_view'])->name('login');
+Route::post('/update-password', [AuthController::class, 'reset_password'])->middleware('guest')->name('password.update');
 
 Route::get('/admin', [AuthController::class, 'index'])->name('admin.all');
 Route::get('/admin/create', [AuthController::class, 'create'])->name('admin.create');
