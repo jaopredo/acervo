@@ -10,7 +10,7 @@
             <th scope="col">Ações</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="books-container">
         @foreach ($data as $book)
             <tr>
                 <td><a class="item-link" href="{{route('books.show', $book->id)}}">{{ $book->name }}</a></td>

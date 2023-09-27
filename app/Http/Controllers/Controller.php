@@ -18,7 +18,7 @@ class Controller extends BaseController
     use AuthorizesRequests, ValidatesRequests;
 
     public function __construct() {
-        $this->middleware('auth');
+        // $this->middleware('auth');
     }
 
     public $model;

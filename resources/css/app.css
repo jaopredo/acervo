@@ -5,6 +5,12 @@
     box-sizing: border-box;
 }
 
+
+body {
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
 a{
     text-decoration: none;
 }
@@ -17,4 +23,13 @@ ul {
 .form-error {
     color: rgb(255, 109, 109);
     font-size: .8em;
+}
+
+/* ÍCONES */
+.iconed {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
 }

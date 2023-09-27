@@ -25,6 +25,6 @@ class MultipleSelect extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.multiple-select');
+        return view('components.inputs.multiple-select');
     }
 }

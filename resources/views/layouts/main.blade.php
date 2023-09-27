@@ -16,7 +16,8 @@
     @stack('styles')
 </head>
 <body>
-    <div class="interface">
+    <div class="interface position-relative">
+        <div class="filter-cover" style="display: none"></div>
         <header class="header">
             <a href="/" class="site-brand">
                 <img src="{{ asset('img/logo-ceara.png') }}" alt="LOGO" class="logo">
@@ -96,6 +97,7 @@
             <div class="content-container">
                 @yield('content')
             </div>
+            <x-filters/>
         </main>
         @if (session('msg'))
             <div class="msg alert alert-success" role="alert">

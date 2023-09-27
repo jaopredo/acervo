@@ -22,6 +22,6 @@ class ActionButtons extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.action-buttons');
+        return view('components.table.action-buttons');
     }
 }

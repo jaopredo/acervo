@@ -1,22 +1,23 @@
 @extends ('..layouts.main')
 
 @once
-    @push ('styles')
-        @vite(['resources/css/books.css'])
-    @endpush
-    @push ('scripts')
-        @vite(['resources/js/search.js'])
+    @push('styles')
+        @vite([
+            'resources/css/books.css',
+            'resources/css/floating.css',
+            'resources/css/components/filters.css',
+        ])
     @endpush
 @endonce
 
 @section ('upper-menu')
-    <form id="search-form" class="form-inline" method="GET" action="/books">
-        <input id="search-input" class="form-control mr-sm-2" name="search" type="search" placeholder="Buscar">
-        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">PROCURAR</button>
-    </form>
-
-    <div>
-        <a href="{{ $path[0]['path'] }}/create" class="btn btn-primary btn-success">CRIAR</a>
+    <div class="d-flex align-items-center justify-content-center gap-2">
+        <a href="{{ $path[0]['path'] }}/create" class="iconed btn btn-primary btn-success">
+            <x-bi-plus-circle-dotted /> CRIAR
+        </a>
+        <button class="iconed filter-activation btn btn-dark">
+            <x-bi-filter /> FILTROS
+        </button>
     </div>
 @endsection
 
@@ -26,27 +27,7 @@
             <table class="table" style="table-layout: fixed">
                 @yield('content-table')
             </table>
-            <div class="w-100 px-4 pb-2 d-flex align-items-center justify-content-between">
-                <div>Selecione a Página</div>
-                <div>
-                    <div class="p-links-container d-flex flex-row align-items-center justify-content-end">
-                        <div class="d-flex flex-row align-items-center justify-content-end p-links-container-container">
-                            @foreach ($meta->links as $link)
-                                @if ($link->label != '...')
-                                    <a
-                                        href="{{ $link->url }}"
-                                        class="pagination-link {{ $link->active?'pagination-link-active':'' }}"
-                                    >{!! $link->label !!}</a>
-                                @else
-                                    <span class="pagination-link-separator">
-                                        {!! $link->label !!}
-                                    </span>
-                                @endif
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <x-paginator :meta="$meta"/>
         @else
             <div class="no-data-error d-flex align-items-center justify-content-center flex-row">
                 <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" fill="currentColor" class="bi bi-sign-dead-end" viewBox="0 0 16 16">

@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Profile extends Component
+class Filters extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class Profile extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.floating.profile');
+        return view('components.floating.filters');
     }
 }
