@@ -59,27 +59,6 @@ label {
     width: 100%;
     gap: 3px;
 }
-.menu-item {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-
-    width: 100%;
-}
-.nav-link {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-
-    gap: 8px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-radius: 10px;
-
-    width: 90%;
-}
 
 .nav-link:hover, .active {
     background-color: var(--general-opacity-green);

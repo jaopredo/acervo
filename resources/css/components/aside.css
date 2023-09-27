@@ -1,0 +1,29 @@
+.menu-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+}
+.nav-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+
+    width: 90%;
+}
+
+.menu-section h3 {
+    font-size: 1.1em;
+    text-align: center;
+    color: #474747;
+    border-bottom: 1px solid rgb(163, 163, 163);
+    padding-bottom: 3px;
+}

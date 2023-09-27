@@ -6,12 +6,12 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class CreateButton extends Component
+class RoutesList extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct(public array $path)
     {
         //
     }
@@ -21,6 +21,6 @@ class CreateButton extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.create-button');
+        return view('components.layout.routes-list');
     }
 }
