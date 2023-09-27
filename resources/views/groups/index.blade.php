@@ -12,15 +12,10 @@
     <tbody>
         @foreach ($data as $group)
             <tr>
-                <td><a class="item-link" href="/groups/{{$group->id}}">{{ $group->name }}</a></td>
+                <td><a class="item-link" href="{{route('groups.show', $group->id)}}">{{ $group->name }}</a></td>
                 <td>
                     <div class="actions-container">
-                        <form style="display: inline-block" action="/groups/{{$group->id}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger">DELETAR</button>
-                        </form>
-                        <a href="groups/edit/{{$group->id}}" class="btn btn-primary">EDITAR</a>
+                        <x-action-buttons :id="$group->id" route="groups" />
                     </div>
                 </td>
             </tr>
