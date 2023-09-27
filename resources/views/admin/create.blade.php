@@ -10,7 +10,7 @@
     </h1>
     <form
         @isset($data)
-            action="/change_password"
+            action="{{route('password.update')}}"
         @else
             action="/register"
         @endisset
