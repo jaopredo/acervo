@@ -31,6 +31,12 @@ class BookController extends Controller
         'group_id'
     ];
 
+    public $filters = [
+        [ 'name' => 'name', 'label' => 'Nome', 'operator' => 'like' ],
+        [ 'name' => 'register', 'label' => 'Registro', 'operator' => 'like' ],
+        [ 'name' => 'isbn', 'label' => 'ISBN', 'operator' => 'like' ],
+    ];
+
     public $validator = [
         'register' => 'required',
         'cdd' => 'required',

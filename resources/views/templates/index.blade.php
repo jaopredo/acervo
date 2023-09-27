@@ -25,7 +25,12 @@
     <div class="pt-1 mt-4 rounded-2 bg-white d-flex flex-column align-items-center justify-content-end">
         @if (count($data) > 0)
             <table class="table" style="table-layout: fixed">
-                @yield('content-table')
+                <thead>
+                    <tr>@yield('table-header')</tr>
+                </thead>
+                <tbody>
+                    @yield('table-content')
+                </tbody>
             </table>
             <x-paginator :meta="$meta"/>
         @else
@@ -40,4 +45,5 @@
             </div>
         @endif
     </div>
+    <x-filters :filters="$filters" :path="$path[0]['path']" />
 @endsection

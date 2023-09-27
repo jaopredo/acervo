@@ -1,7 +1,5 @@
 
 $('#multiple-select').ready(function() {
-    console.log('teste')
-
     for (let item of $('.multiple-select-item')) {
         let id = item.getAttribute('data-id')
 

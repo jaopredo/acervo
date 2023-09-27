@@ -1,7 +1,7 @@
 #filter-container {
     position: absolute;
     top: 0;
-    right: 0;
+    right: -700px;
     background-color: white;
 
     z-index: 3;
@@ -19,7 +19,7 @@
     height: 85vh;
     width: 100%;
 
-    background-color: rgba(0, 0, 0, 0.481);
+    background-color: rgba(0, 0, 0, 0.266);
 }
 
 .filter-activation-icon:hover {
