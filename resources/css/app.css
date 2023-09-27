@@ -12,3 +12,9 @@ a{
 ul {
     list-style: none;
 }
+
+/* FORMULÁRIOS */
+.form-error {
+    color: rgb(255, 109, 109);
+    font-size: .8em;
+}

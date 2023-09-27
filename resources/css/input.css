@@ -60,7 +60,6 @@ ul {
 .show-options {
     background-color: transparent;
     border: none;
-    height: 100%;
     border-radius: 5px;
 }
 
@@ -83,6 +82,6 @@ ul {
 }
 
 #select-option-list {
-    height: 350px;
+    max-height: 350px;
     overflow-y: auto;
 }

@@ -7,6 +7,8 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\TombController;
 use App\Http\Controllers\GroupController;
 
+use App\Http\Controllers\AuthController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,4 +26,4 @@ use App\Http\Controllers\GroupController;
 
 Route::get('/file/{name}', [FileController::class, 'index']);
 
-Route::get('/teste', [GroupController::class, 'getAll']);
+Route::post('/register', [AuthController::class, 'register']);

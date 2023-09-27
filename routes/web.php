@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PasswordForgotController;
+
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GroupController;
@@ -18,9 +21,41 @@ use App\Http\Controllers\TombController;
 |
 */
 
-Route::get('/', function () {
-    return redirect('/books');
-});
+/*------------------------------- ESQUECEU A SENHA -------------------------------*/
+Route::get('/forgot-password', [PasswordForgotController::class, 'forgot_password'])->name('password.forget');
+Route::get('/change-password/{token}', [PasswordForgotController::class, 'password_form'])->middleware('guest')->name('password.reset');
+
+Route::post('/forgot-password', [PasswordForgotController::class, 'send_email'])->middleware('guest')->name('password.email');
+Route::post('/change-password', [PasswordForgotController::class, 'redefine_password'])->middleware('guest')->name('password.redefine');
+
+/*------------------------------- ADMINISTRADORES -------------------------------*/
+/* Rotas de Página */
+Route::get('/profile', [AuthController::class, 'profile_view'])->name('profile');
+Route::get('/login', [AuthController::class, 'login_view'])->name('login');
+Route::post('/update-password', [AuthController::class, 'reset_password'])->middleware('guest')->name('password.update');
+
+Route::get('/admin', [AuthController::class, 'index'])->name('admin.all');
+Route::get('/admin/create', [AuthController::class, 'create'])->name('admin.create');
+Route::get('/admin/{id}', [AuthController::class, 'show'])->name('admin.show');
+Route::get('/admin/edit/{id}', [AuthController::class, 'edit'])->name('admin.edit');
+
+/* Rotas de Registro */
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/login', [AuthController::class, 'login'])->name('login.method');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/change_password', [AuthController::class, 'change_password'])->name('change_password');
+
+Route::put('/admin/{id}', [AuthController::class, 'update']);
+Route::delete('/admin/{id}', [AuthController::class, 'destroy']);
+
+/*------------------------------- DASHBOARD -------------------------------*/
+Route::get('/', function() {
+    return view('dashboard', [
+        'path' => [
+            ['name' => 'Início', 'path' => '/']
+        ]
+    ]);
+})->name('dashboard')->middleware('auth');
 
 /*------------------------------- LIVROS -------------------------------*/
 /* Rotas de Página */

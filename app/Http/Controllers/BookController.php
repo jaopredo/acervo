@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 
 use App\Models\Book;
 use App\Http\Resources\BookResource;
@@ -47,7 +46,7 @@ class BookController extends Controller
         'aquisition' => 'required',
         'local' => 'required',
         'image' => 'file',
-        'group_id' => 'exists:groups,id'
+        'group_id' => 'exists:groups,id|nullable'
     ];
 
     public $resource = BookResource::class;
