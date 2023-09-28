@@ -1,0 +1,43 @@
+.action-button-label {
+    font-weight: bold;
+    background-color: #1c1c1c;
+    color: white;
+
+    opacity: 0;
+
+    font-size: .7em;
+    padding: 5px;
+    border-radius: 0.3em;
+
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(110%);
+
+    transition: opacity 300ms;
+}
+
+.action-button-label::before {
+    content: '';
+
+    opacity: 0;
+
+    display: block;
+
+    width: 0;
+    height: 0;
+    border-left: .7em solid transparent;
+    border-right: .7em solid transparent;
+    border-bottom: 1.4em solid #1c1c1c;
+
+    position: absolute;
+
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-95%);
+
+    transition: opacity 300ms;
+}
+
+.action:hover .action-button-label::before, .action:hover .action-button-label {
+    opacity: 1;
+}
