@@ -19,7 +19,7 @@ label {
 
     display: grid;
     grid-template-rows: 15vh 85vh;
-    grid-template-columns: 20vw 80vw;
+    grid-template-columns: 18vw 82vw;
     grid-template-areas:
         "header header"
         "aside main"
@@ -86,7 +86,7 @@ label {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 25px;
+    gap: 2em;
     width: fit-content;
 }
 
