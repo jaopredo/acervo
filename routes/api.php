@@ -8,6 +8,7 @@ use App\Http\Controllers\TombController;
 use App\Http\Controllers\GroupController;
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,5 @@ use App\Http\Controllers\AuthController;
 Route::get('/file/{name}', [FileController::class, 'index']);
 
 Route::post('/register', [AuthController::class, 'register']);
+
+Route::get('/books', [BookController::class, 'getAll']);

@@ -19,12 +19,7 @@
                                 <td>{{$book->editor}}</td>
                                 <td>{{$book->register}}</td>
                                 <td>
-                                    <form style="display: inline-block" action="/books/{{$book->id}}" method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger">DELETAR</button>
-                                    </form>
-                                    <a href="/books/edit/{{$book->id}}" class="btn btn-primary">EDITAR</a>
+                                    <x-action-buttons :id="$book->id" route="books" />
                                 </td>
                             </tr>
                         @endforeach

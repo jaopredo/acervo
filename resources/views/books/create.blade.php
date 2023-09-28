@@ -10,11 +10,11 @@
 @endonce
 
 @section ('content')
-    <form class="mt-4" action="/books/{{$data->id ?? ''}}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @isset($data)
-            @method('PUT')
-        @endisset
+    @isset($data)
+        {{ html()->modelForm($data, 'PUT', route('books.update', $data->id))->open() }}
+    @else
+        {{ html()->form('POST', route('books.save'))->open() }}
+    @endisset
         <div class="row">
             <div class="mb-3 col" style="flex-basis: content">
                 <label for="group_id">GRUPO</label>
@@ -129,7 +129,5 @@
         </div>
 
         <button class="btn btn-primary">ENVIAR</button>
-    </form>
-</div>
-
+    {{ html()->form()->close() }}
 @endsection

@@ -21,6 +21,7 @@ class Controller extends BaseController
         $this->middleware('auth');
     }
 
+    public $filters;
     public $model;
     public $validator;
     public $page;
@@ -137,6 +138,7 @@ class Controller extends BaseController
         return view(
             $this->page . '/index',
             [
+                'filters' => $this->filters ?? [],
                 'data'=> $int->data,
                 'meta' => $int->meta,
                 'path' => [ $this->root_path ]

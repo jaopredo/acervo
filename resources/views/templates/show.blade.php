@@ -2,11 +2,6 @@
 
 @section ('upper-menu')
     <div class="buttons-books-container">
-        <a href="{{$path[0]['path']}}/edit/{{ $data->id }}" class="btn btn-primary">EDITAR</a>
-        <form style="display: inline-block" action="{{$path[0]['path']}}/{{$data->id}}" method="post">
-            @csrf
-            @method('DELETE')
-            <button class="btn btn-primary btn-danger">DELETAR</a>
-        </form>
+        <x-action-buttons :id="$data->id" :route="str_replace('/', '', $path[0]['path'])" />
     </div>
 @endsection

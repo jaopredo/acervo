@@ -38,8 +38,8 @@
 </div>
 
 @pushOnce('scripts')
-    @vite('resources/js/multipleSelect.js')
+    @vite('resources/js/components/multipleSelect.js')
 @endPushOnce
 @pushOnce('styles')
-    @vite('resources/css/input.css')
+    @vite('resources/css/components/input.css')
 @endPushOnce

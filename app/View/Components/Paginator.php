@@ -5,22 +5,23 @@ namespace App\View\Components;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use stdClass;
 
-class Profile extends Component
+class Paginator extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct()
-    {
-        //
-    }
+    public function __construct(
+        public stdClass $meta
+    )
+    {}
 
     /**
      * Get the view / contents that represent the component.
      */
     public function render(): View|Closure|string
     {
-        return view('components.floating.profile');
+        return view('components.table.paginator');
     }
 }

@@ -65,9 +65,9 @@ Route::get('/books/{id}', [BookController::class, 'show'])->name('books.show');
 Route::get('/books/edit/{id}', [BookController::class, 'edit'])->name('books.edit');
 
 /* Rotas de Registro */
-Route::post('/books', [BookController::class, 'store']);
-Route::put('/books/{id}', [BookController::class, 'update']);
-Route::delete('/books/{id}', [BookController::class, 'destroy']);
+Route::post('/books', [BookController::class, 'store'])->name('books.save');
+Route::put('/books/{id}', [BookController::class, 'update'])->name('books.update');
+Route::delete('/books/{id}', [BookController::class, 'destroy'])->name('books.destroy');
 
 /*------------------------------- GRUPOS -------------------------------*/
 /* Rotas de Página */
@@ -77,9 +77,9 @@ Route::get('/groups/{id}', [GroupController::class, 'show'])->name('groups.show'
 Route::get('/groups/edit/{id}', [GroupController::class, 'edit'])->name('groups.edit');
 
 /* Rotas de Registro */
-Route::post('/groups', [GroupController::class, 'store']);
-Route::put('/groups/{id}', [GroupController::class, 'update']);
-Route::delete('/groups/{id}', [GroupController::class, 'destroy']);
+Route::post('/groups', [GroupController::class, 'store'])->name('groups.save');
+Route::put('/groups/{id}', [GroupController::class, 'update'])->name('groups.update');
+Route::delete('/groups/{id}', [GroupController::class, 'destroy'])->name('groups.destroy');
 
 /*------------------------------- CATEGORIAS -------------------------------*/
 /* Rotas de Página */
@@ -89,9 +89,9 @@ Route::get('/categories/{id}', [CategoryController::class, 'show'])->name('categ
 Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('categories.edit');
 
 /* Rotas de Registro */
-Route::post('/categories', [CategoryController::class, 'store']);
-Route::put('/categories/{id}', [CategoryController::class, 'update']);
-Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);
+Route::post('/categories', [CategoryController::class, 'store'])->name('categories.save');
+Route::put('/categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
+Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 
 /*------------------------------- TOMBAMENTOS -------------------------------*/
 Route::post('/tombs', [TombController::class, 'store']);

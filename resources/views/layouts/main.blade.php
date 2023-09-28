@@ -8,15 +8,19 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
+    @bukStyles(true)
     @vite([
         'resources/css/layout.css',
         'resources/css/app.css',
-        'resources/css/floating.css'
+        'resources/css/floating.css',
+        'resources/css/components/aside.css'
     ])
+
     @stack('styles')
 </head>
 <body>
-    <div class="interface">
+    <div class="interface position-relative">
+        <div class="filter-cover" style="display: none"></div>
         <header class="header">
             <a href="/" class="site-brand">
                 <img src="{{ asset('img/logo-ceara.png') }}" alt="LOGO" class="logo">
@@ -39,57 +43,12 @@
         </header>
         <aside class="aside d-flex flex-column align-items-stretch justify-content-start">
             <nav class="navbar">
-                <menu class="navbar-nav mb-2 mb-lg-0 flex-column">
-                    <li class="nav-item menu-item d-flex align-items-stretch">
-                        <a href="/books" @class([
-                            'nav-link',
-                            'active' => $path[0]['path']=='/books'
-                        ])>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book-fill" viewBox="0 0 16 16">
-                                <path d="M8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/>
-                            </svg>
-                            LIVROS
-                        </a>
-                    </li>
-                    <li class="nav-item menu-item">
-                        <a href="/groups" @class([
-                            'nav-link',
-                            'active' => $path[0]['path']=='/groups'
-                        ])>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-collection-fill" viewBox="0 0 16 16">
-                                <path d="M0 13a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 16 13V6a1.5 1.5 0 0 0-1.5-1.5h-13A1.5 1.5 0 0 0 0 6v7zM2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3zm2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1z"/>
-                            </svg>
-                            AGRUPAMENTOS
-                        </a>
-                    </li>
-                    <li class="nav-item menu-item">
-                        <a href="/categories" @class([
-                            'nav-link',
-                            'active' => $path[0]['path']=='/categories'
-                        ])>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-fill" viewBox="0 0 16 16">
-                                <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/>
-                            </svg>
-                            CATEGORIAS
-                        </a>
-                    </li>
-                </menu>
+                <x-side-menu :actual="$path[0]['path']"/>
             </nav>
         </aside>
-        <main id="content-container" class="position-relative">
+        <main id="content-container" class="position-relative overflow-x-hidden">
             <div class="upper-menu">
-                <div class="links-container d-flex flex-row align-items-center justify-content-start">
-                    @foreach ($path as $item)
-                        <div class="d-flex align-items-center justify-content-center">
-                            <span class="links-separator d-flex flex-row align-items-center justify-content-start">
-                                <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                                </svg>
-                            </span>
-                            <a class="link-path" href="{{$item['path']}}">{{$item['name']}}</a>
-                        </div>
-                    @endforeach
-                </div>
+                <x-routes-list :path="$path" />
 
                 @yield('upper-menu')
             </div>
@@ -110,5 +69,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.13/jquery.mask.js" integrity="sha512-OyVk2res2p8ZxK6Jf0Z6a9LhiQVn97RqQOF/G5p9rHm7W09tVg6wqbFG6TnDbLxyeEJb39PXXNsGQMmw1wlouQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     @vite('resources/js/layout.js')
     @stack('scripts')
+    @bukScripts(true)
 </body>
 </html>

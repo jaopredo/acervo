@@ -22,3 +22,7 @@ $('.msg').ready(function() {
         $('.msg').fadeOut(400)
     }, 5000)
 })
+
+$('form').ready(function() {
+    $('label + *').addClass('form-control')
+})
