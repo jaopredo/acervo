@@ -10,20 +10,17 @@
 @endonce
 
 @section ('content')
+    @foreach ($errors->all() as $error)
+        {{$error}}
+    @endforeach
     @isset($data)
-        {{ html()->modelForm($data, 'PUT', route('books.update', $data->id))->open() }}
+        {{ html()->modelForm($data, 'PUT', route('books.update', $data->id))->acceptsFiles()->open() }}
     @else
-        {{ html()->form('POST', route('books.save'))->open() }}
+        {{ html()->form('POST', route('books.save'))->acceptsFiles()->open() }}
     @endisset
         <div class="row">
             <div class="mb-3 col" style="flex-basis: content">
-                <label for="group_id">GRUPO</label>
-                <select class="form-control" name="group_id" id="group_id">
-                    <option value="">NENHUM</option>
-                    @foreach ($relationships['groups'] as $group)
-                        <option value="{{ $group->id }}">{{ $group->name }}</option>
-                    @endforeach
-                </select>
+                <x-multiple-select label="GRUPOS" id="groups" :values="$data['groups'] ?? []" :options="$relationships['groups']" />
             </div>
 
             <div class="mb-3 col">

@@ -24,6 +24,6 @@ class Group extends Model
     public $foreign_keys = [];
 
     public function books() {
-        return $this->hasMany(Book::class);
+        return $this->belongsToMany(Book::class, 'book_group');
     }
 }

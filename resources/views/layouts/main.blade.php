@@ -13,7 +13,8 @@
         'resources/css/layout.css',
         'resources/css/app.css',
         'resources/css/floating.css',
-        'resources/css/components/aside.css'
+        'resources/css/components/aside.css',
+        'resources/css/components/action-buttons.css'
     ])
 
     @stack('styles')

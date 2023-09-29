@@ -11,7 +11,7 @@ trait ForeignKeys {
         // return response($data);
         foreach ($this->foreign_keys as $key) {
             if ($request->has($key)) {
-                $this->categories()->sync($data[$key]);
+                $this->$key()->sync($data[$key]);
             }
         }
     }

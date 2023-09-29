@@ -6,7 +6,6 @@
             'resources/css/books.css',
             'resources/css/floating.css',
             'resources/css/components/filters.css',
-            'resources/css/components/action-buttons.css'
         ])
     @endpush
 @endonce

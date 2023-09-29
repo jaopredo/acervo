@@ -28,7 +28,6 @@ class BookController extends Controller
         'local',
         'description',
         'image',
-        'group_id'
     ];
 
     public $filters = [
@@ -51,8 +50,7 @@ class BookController extends Controller
         'aquisition_year' => 'required',
         'aquisition' => 'required',
         'local' => 'required',
-        'image' => 'file',
-        'group_id' => 'exists:groups,id|nullable'
+        'image' => 'file'
     ];
 
     public $resource = BookResource::class;
