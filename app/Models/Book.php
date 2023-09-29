@@ -25,11 +25,11 @@ class Book extends Model
 
     /* CHAVES ESTRANGEIRAS */
     const HAS_FOREIGN_KEYS = true;
-    public $foreign_keys = ['categories'];
+    public $foreign_keys = ['categories', 'groups'];
 
     /* RELAÇÕES */
-    public function group() {
-        return $this->belongsTo(Group::class);
+    public function groups() {
+        return $this->belongsToMany(Group::class, 'book_group');
     }
 
     public function categories(): BelongsToMany {

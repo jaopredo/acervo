@@ -25,11 +25,13 @@
                             <th scope="row">Registro</th>
                             <td>{{ $data->register }} </td>
                         </tr>
-                        @if ($data->group)
+                        @if (count($data->groups) > 0)
                             <tr>
                                 <th scope="row">Agrupamento</th>
                                 <td>
-                                    {{ $data->group->name }}
+                                    @foreach ($data->groups as $group)
+                                        {{ $group->name }},
+                                    @endforeach
                                 </td>
                             </tr>
                         @endif

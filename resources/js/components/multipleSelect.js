@@ -1,11 +1,13 @@
 
-$('#multiple-select').ready(function() {
-    for (let item of $('.multiple-select-item')) {
-        let id = item.getAttribute('data-id')
+// $('.multiple-select').ready(function() {
+//     // console.log($('.multiple-select').attr('data-id'))
 
-        $(`#select-option-${id}`).remove()
-    }
-})
+//     for (let item of $('.multiple-select-item')) {
+//         let id = item.getAttribute('data-id')
+
+//         $(`#select-option-${id}`).remove()
+//     }
+// })
 
 /* SCROLANDO AS OPÇÕES SE FOREM MUITAS */
 $('.multiple-select').on('wheel', function(e) {
@@ -20,24 +22,29 @@ $('.multiple-select').on('wheel', function(e) {
 
 /* MOSTRANDO OU ESCONDENDO AS OPÇÕES */
 $('.show-options').on('click', function(event) {
-    $('.options-list').toggle();
+    const id = this.getAttribute('data-id')
+
+    $(`#options-list-${id}`).toggle();
 })
 
 /* QUANDO CLICA NUMA TAG */
 $('body').on('click', '.multiple-select-item', function() {
-    const id = this.getAttribute('data-id')
+    const itemID = this.getAttribute('data-id')
+    const associated = this.getAttribute('data-associated')
     const label = this.getAttribute('data-label')
 
-    $(`#multiple-item-${id}`).remove()
+    $(`#multiple-item-${itemID}-${associated}`).remove()
 
-    $('#select-option-list').append(`
+    $(`#no-text-${associated}`).hide()
+
+    $(`#select-option-list-${associated}`).append(`
         <li
-            id="select-option-${id}"
-            class="input-option p-2"
+            id="select-option-${itemID}-${associated}"
+            class="input-option option-${associated} p-2"
 
             data-label="${label}"
-            data-associated="${id}"
-            data-value="${id}"
+            data-associated="${associated}"
+            data-value="${itemID}"
         >
             ${label}
         </li>
@@ -50,10 +57,15 @@ $('body').on('click', '.input-option', function() {
     const id = this.getAttribute('data-value')
     const label = this.getAttribute('data-label')
 
-    $(`#select-option-${id}`).remove()
+    $(`#select-option-${id}-${form}`).remove()
 
-    $(`#multiple-select`).append(`
-        <li data-label="${label}" data-id="${id}" id="multiple-item-${id}" class="multiple-select-item">
+
+    if ($(`.option-${form}`).length == 0) {
+        $(`#no-text-${form}`).toggle()
+    }
+
+    $(`#multiple-select-${form}`).append(`
+        <li data-label="${label}" data-id="${id}" data-associated="${form}" id="multiple-item-${id}-${form}" class="multiple-select-item">
             <div class="close-item-icon" data-id="${id}">
                 <svg width="18" class="close-icon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
