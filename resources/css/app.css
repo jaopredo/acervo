@@ -1,27 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap'); */
 
-*, *::after, *::before {
-    padding: 0;
-    margin: 0;
-    border: none;
-    box-sizing: border-box;
-    font-family: 'Ubuntu', sans-serif;
-}
-
-
-body {
-    overflow-x: hidden;
-    overflow-y: hidden;
-}
-
-a{
-    text-decoration: none;
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* FORMULÁRIOS */
 .form-error {

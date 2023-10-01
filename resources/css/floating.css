@@ -53,7 +53,7 @@
     transition: transform 600ms, opacity 600ms;
     transform-origin: top right;
 
-    background-color: white;
+    /* background-color: white; */
     padding: 20px;
     border-radius: 10px;
 
