@@ -27,6 +27,6 @@ use App\Http\Controllers\BookController;
 
 Route::get('/file/{name}', [FileController::class, 'index']);
 
-Route::post('/register', [AuthController::class, 'register']);
+Route::post('/register', [AuthController::class, 'register'])->middleware('guest');
 
 Route::get('/books', [BookController::class, 'getAll']);

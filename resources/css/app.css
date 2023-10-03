@@ -4,17 +4,27 @@
 @tailwind components;
 @tailwind utilities;
 
-/* FORMULÁRIOS */
-.form-error {
-    color: rgb(255, 109, 109);
-    font-size: .8em;
+/* LAYOUT DA PÁGINA */
+#interface {
+    display: grid;
+    grid-template-columns: 25vw 75vw;
+    grid-template-rows: 10vh 90vh;
+    grid-template-areas:
+        "header header"
+        "aside main"
+    ;
+
+    min-height: 100vh;
 }
 
-/* ÍCONES */
-.iconed {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 3px;
+#header {
+    grid-area: header;
+}
+
+#side {
+    grid-area: aside;
+}
+
+#content {
+    grid-area: main;
 }
