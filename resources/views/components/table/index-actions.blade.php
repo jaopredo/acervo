@@ -1,8 +1,8 @@
-<div class="d-flex align-items-center justify-content-center gap-2">
-    <a href="{{ $path }}/create" class="iconed btn btn-primary btn-success">
+<div class="flex items-center justify-center gap-2">
+    <a href="{{ $path }}/create" class="flex bg-leaf-dark active:bg-leaf-darker hover:bg-leaf p-1.5 rounded-lg text-white items-center gap-1">
         <x-bi-plus-circle-dotted /> CRIAR
     </a>
-    <button class="iconed filter-activation btn btn-dark">
+    <button class="filter-activation flex bg-night-dark active:bg-night-darker hover:bg-night-light p-1.5 rounded-lg text-white items-center gap-1">
         <x-bi-filter /> FILTROS
     </button>
 </div>

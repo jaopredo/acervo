@@ -16,13 +16,14 @@
     @stack('styles')
 </head>
 <body>
-    <div id="interface">
+    <div id="interface" class="overflow-hidden">
+        <div class="filter-cover absolute bottom-0 left-0 w-full bg-gray-950 z-10 opacity-80" style="height: 90vh; display: none;"></div>
         <x-header/>
 
-        <x-side-menu :actual="$path[0]['path']"/>
+        <x-side-menu :actual="count($path)>0?$path[0]['path']:'/dashboard'"/>
 
-        <main id="content">
-            <div>
+        <main id="content" class="relative bg-gray-100 rounded-tl-lg p-3 overflow-auto">
+            <div class="flex items-center justify-between px-3">
                 <x-routes-list :path="$path" />
 
                 @yield('upper-menu')

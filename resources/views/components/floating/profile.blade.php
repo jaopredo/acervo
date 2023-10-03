@@ -1,5 +1,5 @@
 <div
-    class="floating-container"
+    class="floating-container transition-transform transition-opacity scale-0 opacity-0"
     id="profile-container"
 >
     <section>

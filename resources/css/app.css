@@ -1,13 +1,17 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+* {
+    font-family: 'Ubuntu', sans-serif;
+}
+
 /* LAYOUT DA PÁGINA */
 #interface {
     display: grid;
-    grid-template-columns: 25vw 75vw;
+    grid-template-columns: 18vw 82vw;
     grid-template-rows: 10vh 90vh;
     grid-template-areas:
         "header header"
@@ -27,4 +31,33 @@
 
 #content {
     grid-area: main;
+}
+
+/* FORMULÁRIOS */
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 4px;
+    margin-bottom: .7em;
+}
+
+.input {
+    outline: none;
+    padding: 5px;
+    border-radius: .275em;
+    border: 1px solid theme('colors.night.light');
+    font-size: .875em;
+
+    transition: border-color 200ms, outline 200ms;
+}
+
+.input:focus {
+    border: 1px solid transparent;
+    outline: 2px solid theme('colors.leaf.light');
+}
+
+label {
+    font-size: .975em;
 }

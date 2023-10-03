@@ -4,7 +4,7 @@
     @endpush
 @endonce --}}
 
-<header id="header" class="flex items-center justify-between p-3">
+<header id="header" class="flex items-center justify-between p-3 z-30 bg-neutral-50">
     <a href="/" class="flex items-center justify-center gap-2 text-xl text-leaf">
         <x-bi-book-fill width="27" height="27" />
         <p class="font-bold">ACERVO</p>
@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    <div id="notification-container" class="floating-container">
+    <div id="notification-container" class="floating-container transition-transform transition-opacity scale-0 opacity-0">
         <h2>NOTIFICAÇÕES</h2>
     </div>
     <x-profile/>

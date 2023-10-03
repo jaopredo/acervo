@@ -52,7 +52,6 @@ Route::delete('/admin/{id}', [AuthController::class, 'destroy']);
 Route::get('/', function() {
     return view('dashboard', [
         'path' => [
-            ['name' => 'Início', 'path' => '/']
         ]
     ]);
 })->name('dashboard')->middleware('auth');

@@ -9,7 +9,7 @@ $('.filter-activation').on('click', function() {
 
         $('.filter-cover').toggle()
         $('.filter-cover').animate({
-            opacity: 1
+            opacity: .5
         })
     } else {
         $('#filter-container').animate({
