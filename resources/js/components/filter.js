@@ -11,6 +11,7 @@ $('.filter-activation').on('click', function() {
         $('.filter-cover').animate({
             opacity: .5
         })
+        $('#content').addClass('overflow-y-hidden')
     } else {
         $('#filter-container').animate({
             right: '-700px'
@@ -20,6 +21,7 @@ $('.filter-activation').on('click', function() {
         })
         setTimeout(function () {
             $('.filter-cover').toggle()
+            $('#content').removeClass('overflow-y-hidden')
         }, 400)
     }
 

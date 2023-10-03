@@ -4,6 +4,8 @@
 @tailwind components;
 @tailwind utilities;
 
+$leaf_light: theme('colors.leaf.light');
+
 * {
     font-family: 'Ubuntu', sans-serif;
 }
@@ -33,6 +35,19 @@
     grid-area: main;
 }
 
+/* TABELA */
+.table {
+    width: 100%;
+
+    td, th {
+        padding: .4em .8em;
+    }
+
+    tbody tr:nth-child(odd) {
+        background-color: theme('colors.slate.200');
+    }
+}
+
 /* FORMULÁRIOS */
 .input-container {
     display: flex;
@@ -47,17 +62,22 @@
     outline: none;
     padding: 5px;
     border-radius: .275em;
-    border: 1px solid theme('colors.night.light');
+    border: 1px solid theme('colors.slate.200');
     font-size: .875em;
 
     transition: border-color 200ms, outline 200ms;
-}
 
-.input:focus {
-    border: 1px solid transparent;
-    outline: 2px solid theme('colors.leaf.light');
+    &:focus {
+        border: 1px solid transparent;
+        outline: 4px solid $leaf_light;
+    }
 }
 
 label {
     font-size: .975em;
+}
+
+/* REDIRECTION */
+.redirect:hover {
+    color: theme('colors.leaf.dark');
 }

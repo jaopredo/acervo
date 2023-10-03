@@ -1,9 +1,9 @@
 @extends('..templates.index')
 
 @section('table-header')
-    <th scope="col">Nome</th>
-    <th scope="col">
-        <div class="actions-container">Ações</div>
+    <th scope="col" class="text-left">Nome</th>
+    <th scope="col" class="text-right">
+        Ações
     </th>
 @endsection
 
@@ -12,7 +12,7 @@
         <tr>
             <td><a class="item-link" href="{{route('groups.show', $group->id)}}">{{ $group->name }}</a></td>
             <td>
-                <div class="actions-container">
+                <div class="flex items-center justify-end">
                     <x-action-buttons :id="$group->id" route="groups" />
                 </div>
             </td>

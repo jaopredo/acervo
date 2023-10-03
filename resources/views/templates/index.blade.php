@@ -15,9 +15,9 @@
 @endsection
 
 @section ('content')
-    <div>
+    <div class="bg-slate-50 p-2 mt-2 rounded-md">
         @if (count($data) > 0)
-            <table>
+            <table class="table-fixed border-collapse p-2 table border-b border-slate-200 text-left text-sm font-light">
                 <thead>
                     <tr>@yield('table-header')</tr>
                 </thead>

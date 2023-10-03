@@ -8,10 +8,10 @@
 
     @vite([
         /* PRINCIPAL */
-        'resources/css/app.css',
+        'resources/css/app.scss',
 
         /* COMPONENTES */
-        'resources/css/components/floating.css'
+        'resources/css/components/floating.scss'
     ])
     @stack('styles')
 </head>
@@ -22,8 +22,8 @@
 
         <x-side-menu :actual="count($path)>0?$path[0]['path']:'/dashboard'"/>
 
-        <main id="content" class="relative bg-gray-100 rounded-tl-lg p-3 overflow-auto">
-            <div class="flex items-center justify-between px-3">
+        <main id="content" class="relative bg-gray-200 rounded-tl-lg p-3 overflow-y-auto overflow-x-hidden">
+            <div class="flex items-center justify-between p-3">
                 <x-routes-list :path="$path" />
 
                 @yield('upper-menu')
