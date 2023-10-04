@@ -28,8 +28,14 @@ $('.show-options').on('click', function(event) {
 
     element.toggle()
 
+    if (($(`#options-list-${id}`).css('display') == 'block')) {
+        $(`#multiple-${id}-select`).addClass('false-focus');
+    } else {
+        $(`#multiple-${id}-select`).removeClass('false-focus');
+    }
+
     if (isElementInViewport(element[0])) {
-        element.css('transform', 'translateY(30px)')
+        element.css('top', '120%')
     } else {
         element.css('transform', 'translateY(-100%)')
     }
@@ -39,12 +45,6 @@ $('.show-options').on('click', function(event) {
 $('body').on('click', '.multiple-select', function(event) {
     event.stopPropagation()
     const id = this.getAttribute('data-id')
-
-    if (!($(`#options-list-${id}`).css('display') == 'block')) {
-        $(`#${this.id}`).addClass('false-focus');
-    } else {
-        $(`#${this.id}`).removeClass('false-focus');
-    }
 
     $(`#${id}-button`).trigger('click')
 })
@@ -76,7 +76,9 @@ $('body').on('click', '.multiple-select-item', function(event) {
 })
 
 /* QUANDO CLICA NUM ESPECÍFICO */
-$('body').on('click', '.input-option', function() {
+$('body').on('click', '.input-option', function(event) {
+    event.stopPropagation()
+
     const form = this.getAttribute('data-associated')
     const id = this.getAttribute('data-value')
     const label = this.getAttribute('data-label')

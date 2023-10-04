@@ -87,19 +87,27 @@ $leaf_light: theme('colors.leaf.light');
 }
 
 .input {
+    @apply shadow-sm;
+
     outline: none;
+    display: block;
     padding: 5px;
     border-radius: .275em;
     border: 1px solid theme('colors.slate.200');
     background: white;
-    font-size: .875em;
+
+    min-height: 2.5em;
 
     transition: border-color 200ms, outline 200ms;
-
     &:focus {
         border: 1px solid transparent;
         outline: 4px solid $leaf_light;
     }
+}
+
+.false-focus {
+    border: 1px solid transparent;
+    outline: 4px solid theme('colors.leaf.light');
 }
 
 label {

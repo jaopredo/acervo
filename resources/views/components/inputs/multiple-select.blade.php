@@ -19,7 +19,7 @@
             </li>
         @endforeach
     </ul>
-    <button type="button" data-id="{{$id}}" id="{{$id}}-button" class="bg-white show-options flex items-center justify-end">
+    <button type="button" data-id="{{$id}}" id="{{$id}}-button" class="bg-white show-options flex items-center justify-end absolute right-0 top-1/2 -translate-y-1/2">
         <x-ri-arrow-down-s-line :width="18" />
     </button>
 
@@ -45,5 +45,5 @@
     @vite('resources/js/components/multipleSelect.js')
 @endPushOnce
 @pushOnce('styles')
-    @vite('resources/css/components/input.scss')
+    @vite('resources/css/components/multipleSelect.scss')
 @endPushOnce

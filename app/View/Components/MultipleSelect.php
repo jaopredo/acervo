@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 use Illuminate\Database\Eloquent\Collection;
+
 // use Illuminate\Database\Eloquent\Model;
 
 class MultipleSelect extends Component
@@ -18,8 +19,9 @@ class MultipleSelect extends Component
         public string $id,
         public Collection $options,
         public $values,
-        public $exclude = [],
-    ){}
+        public array $exclude = [],
+    ){
+    }
 
     /**
      * Get the view / contents that represent the component.

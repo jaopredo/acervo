@@ -16,11 +16,7 @@
             <x-multiple-select label="LIVROS" id="books" :values="$data['books'] ?? []" :options="$relationships['books']" />
         </div>
 
-        <div class="input-container">
-            <label for="image">IMAGEM</label>
-            <input type="file" name="image" id="image" class="input">
-            <p class="form-error">{{$errors->first('image')}}</p>
-        </div>
+        <x-file-upload id="image"/>
 
         <button class="leaf-button w-full">ENVIAR</button>
     {{ html()->form()->close() }}
