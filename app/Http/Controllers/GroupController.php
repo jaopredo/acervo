@@ -20,6 +20,9 @@ class GroupController extends Controller
         'name' => 'required',
         'image'=> 'required|file'
     ];
+    public $filters = [
+        [ 'name' => 'name', 'label' => 'Nome', 'operator' => 'like' ],
+    ];
     public $resource = GenericResource::class;
     public $root_path = ['name' => 'Grupos', 'path' => '/groups'];
 
