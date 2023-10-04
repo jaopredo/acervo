@@ -1,15 +1,16 @@
 <label for="{{$id}}">{{$label}}</label>
-<div class="position-relative form-control list d-flex align-items-stretch justify-content-between pr-5">
-    <ul id="multiple-select-{{$id}}" data-id="{{$id}}" class="multiple-select gap-2 d-flex flex-row align-items-center">
+<div data-id="{{$id}}" id="multiple-{{$id}}-select" class="multiple-select relative input hover:cursor-pointer flex items-stretch justify-between pr-5">
+    <ul id="multiple-select-{{$id}}" data-id="{{$id}}" class="gap-2 flex items-center flex-wrap">
         @foreach($values as $category)
             <li
                 data-label="{{$category->name}}"
                 data-id="{{$category->id}}"
-                id="multiple-item-{{$category->id}}"
-                class="multiple-select-item"
+                data-associated="{{$id}}"
+                id="multiple-item-{{$category->id}}-{{$id}}"
+                class="multiple-select-item hover:cursor-pointer"
             >
                 <div class="close-item-icon" data-id="{{$category->id}}">
-                    <svg width="18" class="close-icon xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                    <svg width="18" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 </div>
@@ -18,15 +19,17 @@
             </li>
         @endforeach
     </ul>
-    <button type="button" data-id="{{$id}}" class="bg-white show-options d-flex align-items-center justify-content-end">
+    <button type="button" data-id="{{$id}}" id="{{$id}}-button" class="bg-white show-options flex items-center justify-end">
         <x-ri-arrow-down-s-line :width="18" />
     </button>
 
-    <div id="options-list-{{$id}}" class="options-list position-absolute rounded-2 py-2" style="display: none">
+    <div id="options-list-{{$id}}" class="options-list z-10 absolute rounded-md py-2" style="display: none">
         @if (count($options) > 0)
-            <ul id="select-option-list-{{$id}}" class="select-option-list p-0 d-flex flex-column align-items-stretch justify-content-start options-list-list">
+            <ul id="select-option-list-{{$id}}" class="select-option-list scrollable p-0 flex flex-col items-stretch justify-start options-list-list">
                 @foreach ($options as $option)
-                    <li id="select-option-{{$option->id}}-{{$id}}" class="input-option option-{{$id}} p-2" data-label="{{$option->name}}" data-associated="{{$id}}" data-value="{{$option->id}}">{{$option->name}}</li>
+                    @if (!in_array($option->id, array_map(function($v){return $v['id'];} , $exclude)))
+                        <li id="select-option-{{$option->id}}-{{$id}}" class="input-option option-{{$id}} p-2" data-label="{{$option->name}}" data-associated="{{$id}}" data-value="{{$option->id}}">{{$option->name}}</li>
+                    @endif
                 @endforeach
             </ul>
         @else
@@ -42,5 +45,5 @@
     @vite('resources/js/components/multipleSelect.js')
 @endPushOnce
 @pushOnce('styles')
-    @vite('resources/css/components/input.css')
+    @vite('resources/css/components/input.scss')
 @endPushOnce

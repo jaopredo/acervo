@@ -5,24 +5,23 @@ namespace App\View\Components;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use App\Models\Book;
 
-class ActionButtons extends Component
+class Tombs extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct(
-        public string $route,
-        public int $id,
-        public string $action
-    )
-    {}
+    public function __construct(public $book)
+    {
+        //
+    }
 
     /**
      * Get the view / contents that represent the component.
      */
     public function render(): View|Closure|string
     {
-        return view('components.table.action-buttons');
+        return view('components.books.tombs');
     }
 }

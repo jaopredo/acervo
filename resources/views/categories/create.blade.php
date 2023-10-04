@@ -1,17 +1,17 @@
 @extends('..layouts.main')
 
 @section('content')
-    <form class="mt-4" action="/categories/{{$data->id ?? ''}}" method="POST">
-        @csrf
-        @isset($data)
-            @method('PUT')
-        @endisset
-        <div class="row">
+    @isset($data)
+        {{ html()->modelForm($data, 'PUT', route('categories.update', $data->id))->open() }}
+    @else
+        {{ html()->form('POST', route('categories.save'))->open() }}
+    @endisset
+        <div class="input-container">
             <label for="name">NOME</label>
-            <input type="text" id="name" name="name" class="form-control" value="{{ $data->name ?? '' }}">
+            <input type="text" id="name" name="name" class="input" value="{{ $data->name ?? '' }}">
             <p class="form-error">{{$errors->first('name')}}</p>
         </div>
 
-        <button class="btn btn-primary row mt-4">ENVIAR</button>
-    </form>
+        <button class="leaf-button w-full">ENVIAR</button>
+    {{ html()->form()->close() }}
 @endsection

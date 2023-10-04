@@ -1,22 +1,27 @@
 @extends('..layouts.main')
 
 @section('content')
-    <form class="mt-4" action="/groups/{{$data->id ?? ''}}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @isset($data)
-            @method('PUT')
-        @endisset
-        <div class="row">
+    @isset($data)
+        {{ html()->modelForm($data, 'PUT', route('groups.update', $data->id))->acceptsFiles()->open() }}
+    @else
+        {{ html()->form('POST', route('groups.save'))->acceptsFiles()->open() }}
+    @endisset
+        <div class="input-container">
             <label for="name">NOME</label>
-            <input type="text" id="name" name="name" class="form-control" value="{{ $data->name ?? '' }}">
+            <input type="text" id="name" name="name" class="input" value="{{ $data->name ?? '' }}">
             <p class="form-error">{{$errors->first('name')}}</p>
         </div>
-        <div class="row">
+
+        <div class="input-container">
+            <x-multiple-select label="LIVROS" id="books" :values="$data['books'] ?? []" :options="$relationships['books']" />
+        </div>
+
+        <div class="input-container">
             <label for="image">IMAGEM</label>
-            <input type="file" name="image" id="image" class="form-control">
+            <input type="file" name="image" id="image" class="input">
             <p class="form-error">{{$errors->first('image')}}</p>
         </div>
 
-        <button class="btn btn-primary row mt-4">ENVIAR</button>
-    </form>
+        <button class="leaf-button w-full">ENVIAR</button>
+    {{ html()->form()->close() }}
 @endsection

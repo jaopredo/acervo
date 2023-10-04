@@ -51,7 +51,7 @@ class Controller extends BaseController
 
     public function get($id) {
         $instance = $this->model::findOrFail($id);
-        return new $this->resource($instance);
+        return (new $this->resource($instance));
     }
 
     public function store(Request $request) {

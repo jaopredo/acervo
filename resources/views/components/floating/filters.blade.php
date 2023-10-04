@@ -14,12 +14,12 @@
             @endforeach
             <div class="flex items-center justify-end gap-2">
                 <a href="{{$path}}"
-                    class="bg-white hover:bg-gray-100 text-gray-800 text-sm font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                    class="elevated-button"
                 >
                     LIMPAR
                 </a>
                 <button
-                    class="flex bg-night-dark text-sm active:bg-night-darker hover:bg-night-light py-2 px-4 rounded text-white items-center gap-1 font-semibold"
+                    class="night-button"
                 >
                     APLICAR
                 </button>

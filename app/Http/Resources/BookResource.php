@@ -17,15 +17,8 @@ class BookResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        /* RELATIONSHIPS */
-        $categories = [];
-        foreach($this->categories as $category) {
-            array_push($categories, $category['name']);
-        }
-
         return [
             "id"=> $this->id,
-            "categories" => $categories,
 			"register"=> $this->register,
 			"cdd"=> $this->cdd,
 			"isbn"=> $this->isbn,

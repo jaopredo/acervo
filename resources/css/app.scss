@@ -32,7 +32,26 @@ $leaf_light: theme('colors.leaf.light');
 }
 
 #content {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 10% auto;
+    grid-template-areas:
+        "upper-menu"
+        "cont"
+    ;
+
     grid-area: main;
+}
+#content::-webkit-scrollbar {
+    width: 10px;
+}
+#content::-webkit-scrollbar-track {
+    @apply bg-transparent;
+}
+#content::-webkit-scrollbar-thumb {
+    width: 10px;
+    background: theme('colors.gray.500');
+    border-radius: 20px;
 }
 
 /* TABELA */
@@ -49,12 +68,21 @@ $leaf_light: theme('colors.leaf.light');
 }
 
 /* FORMULÁRIOS */
+.form-error {
+    @apply text-red-400 text-sm;
+}
+
+.input-group {
+    @apply flex items-center justify-between gap-2 flex-wrap;
+
+    & > * {
+        flex-grow: 1;
+    }
+}
+
 .input-container {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-    gap: 4px;
+    @apply flex flex-col items-stretch gap-2;
+    flex-grow: 1;
     margin-bottom: .7em;
 }
 
@@ -63,6 +91,7 @@ $leaf_light: theme('colors.leaf.light');
     padding: 5px;
     border-radius: .275em;
     border: 1px solid theme('colors.slate.200');
+    background: white;
     font-size: .875em;
 
     transition: border-color 200ms, outline 200ms;
@@ -80,4 +109,52 @@ label {
 /* REDIRECTION */
 .redirect:hover {
     color: theme('colors.leaf.dark');
+}
+
+/* BUTTONS */
+.leaf-button {
+    @apply flex bg-leaf-dark text-sm active:bg-leaf-darker hover:bg-leaf py-2 px-4 rounded text-white items-center justify-center gap-1 font-semibold transition-colors;
+}
+.leaf-button-outline {
+    @apply flex bg-transparent border-leaf-dark border text-leaf-dark text-sm active:bg-leaf-darker hover:bg-leaf py-2 px-4 rounded hover:text-white items-center justify-center gap-1 font-semibold transition-colors;
+}
+
+.night-button {
+    @apply flex bg-night-dark text-sm active:bg-night-darker hover:bg-night-light py-2 px-4 rounded text-white items-center justify-center gap-1 font-semibold transition-colors;
+}
+.night-button-outline {
+    @apply flex bg-transparent border-night-dark border text-sm active:bg-night-darker hover:bg-night-dark py-2 px-4 rounded hover:text-white items-center justify-center gap-1 font-semibold transition-colors;
+}
+
+.elevated-button {
+    @apply bg-white flex items-center justify-center hover:bg-gray-100 text-gray-800 text-sm font-semibold py-2 px-4 border border-gray-400 rounded shadow  transition-colors;
+}
+
+
+/* ALERTS */
+.alert {
+    @apply p-2 rounded-md border;
+}
+
+.alert-error {
+    @apply border-red-600 bg-red-200 text-red-500;
+}
+
+.alert-success {
+    @apply border-emerald-800 bg-green-200 text-emerald-600;
+}
+
+/* SCROLLABLES */
+.scrollable::-webkit-scrollbar {
+    width: 10px;
+}
+
+.scrollable::-webkit-scrollbar-track {
+    @apply bg-transparent;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+    width: 10px;
+    background: theme('colors.gray.500');
+    border-radius: 20px;
 }

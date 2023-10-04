@@ -39,4 +39,8 @@ class Book extends Model
     public function tombs() {
         return $this->hasMany(Tomb::class);
     }
+
+    public function exclude_show() {
+        return ['id', 'created_at', 'updated_at', 'categories', 'tombs', 'groups', 'image'];
+    }
 }
