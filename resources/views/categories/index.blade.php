@@ -10,10 +10,10 @@
 @section ('table-content')
     @foreach ($data as $category)
         <tr>
-            <td><a class="item-link" href="{{route('categories.show', $category->id)}}">{{ $category->name }}</a></td>
+            <td><a href="{{route('categories.show', $category->id)}}" class="redirect">{{ $category->name }}</a></td>
             <td>
                 <div class="flex items-center justify-end">
-                    <x-action-buttons :id="$category->id" route="categories" />
+                    <x-action-buttons action="table" :id="$category->id" route="categories" />
                 </div>
             </td>
         </tr>

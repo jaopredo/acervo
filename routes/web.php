@@ -79,6 +79,7 @@ Route::get('/groups/edit/{id}', [GroupController::class, 'edit'])->name('groups.
 Route::post('/groups', [GroupController::class, 'store'])->name('groups.save');
 Route::put('/groups/{id}', [GroupController::class, 'update'])->name('groups.update');
 Route::delete('/groups/{id}', [GroupController::class, 'destroy'])->name('groups.destroy');
+Route::patch('/groups/{id}', [GroupController::class, 'add_books'])->name('groups.patch-books');
 
 /*------------------------------- CATEGORIAS -------------------------------*/
 /* Rotas de Página */

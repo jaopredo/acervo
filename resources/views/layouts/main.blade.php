@@ -23,20 +23,20 @@
         <x-side-menu :actual="count($path)>0?$path[0]['path']:'/dashboard'"/>
 
         <main id="content" class="relative bg-gray-200 rounded-tl-lg p-3 overflow-y-auto overflow-x-hidden">
-            <div class="flex items-center justify-between p-3">
+            <div class="flex items-center justify-between p-3" style="grid-area: upper-menu;">
                 <x-routes-list :path="$path" />
 
                 @yield('upper-menu')
             </div>
-            <div>
+            <div style="grid-area: cont;">
                 @yield('content')
             </div>
         </main>
-        <!-- @if (session('msg'))
-            <div class="msg alert alert-success" role="alert">
+        @if (session('msg'))
+            <div class="msg alert alert-success fixed -right-44 top-16 w-96 z-30 text-left" role="alert">
                 {{ session('msg') }}
             </div>
-        @endif -->
+        @endif
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>

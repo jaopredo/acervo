@@ -16,7 +16,7 @@
             <td>{{ $book->register }}</td>
             <td>{{ $book->editor }}</td>
             <td>
-                <x-action-buttons :id="$book->id" route="books" />
+                <x-action-buttons action="table" :id="$book->id" route="books" />
             </td>
         </tr>
     @endforeach

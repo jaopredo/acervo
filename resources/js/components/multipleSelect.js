@@ -10,15 +10,15 @@
 // })
 
 /* SCROLANDO AS OPÇÕES SE FOREM MUITAS */
-$('.multiple-select').on('wheel', function(e) {
-    if (e.originalEvent.deltaY > 0) {
-        this.scrollLeft += 100;
-        e.preventDefault();
-    } else {
-        this.scrollLeft -= 100;
-        e.preventDefault();
-    }
-})
+// $('.multiple-select').on('wheel', function(e) {
+//     if (e.originalEvent.deltaY > 0) {
+//         this.scrollLeft += 100;
+//         e.preventDefault();
+//     } else {
+//         this.scrollLeft -= 100;
+//         e.preventDefault();
+//     }
+// })
 
 /* MOSTRANDO OU ESCONDENDO AS OPÇÕES */
 $('.show-options').on('click', function(event) {

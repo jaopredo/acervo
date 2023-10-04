@@ -4,26 +4,26 @@
     @push('styles')
         @vite('resources/css/groups.css')
     @endpush
+    @push('scripts')
+        @vite('resources/js/group.js')
+    @endpush
 @endonce
 
 @section('content')
-    <div class="mt-3 book-infos-container">
-        <div id="group-image-container" class="d-flex align-items-center justify-content-center">
-            <img
-                src="{{ env('APP_FULL_URL') . '/api/file/' . $data->image }}"
-                alt="Imagem"
-                class="h-100"
-            >
-        </div>
-        <div id="books-table-container">
-            <h2 id="container-title">Livros do Grupo</h2>
+    <div class="flex items-stretch justify-center gap-2 h-full">
+        <div
+            style="background-image: url('{{ env('APP_FULL_URL') . '/api/file/' . $data->image }}')"
+            class="flex-grow bg-center bg-contain w-1/2 h-full"
+        ></div>
+        <div class="flex-grow w-1/2">
+            <h2 class="text-lg font-bold text-center">Livros do Grupo</h2>
             @if (count($data->books) > 0)
-                <div class="books-container p-2 bg-white rounded-2">
+                <div class="p-2 bg-white rounded-2">
                     <table class="table">
                         <thead>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Editora</th>
-                            <th scope="col">Registro</th>
+                            <th scope="col" class="text-left">Nome</th>
+                            <th scope="col" class="text-left">Editora</th>
+                            <th scope="col" class="text-left">Registro</th>
                         </thead>
                         <tbody>
                             @foreach ($data->books as $book)
@@ -37,12 +37,29 @@
                     </table>
                 </div>
             @else
-                <div class="d-flex align-items-start justify-content-center">
-                    <div class="alert alert-danger text-center">
+                <div class="flex items-start justify-center">
+                    <div class="alert alert-error text-center">
                         NENHUM LIVRO ESTÁ ASSOCIADO AO GRUPO
                     </div>
                 </div>
             @endif
+            <section>
+                <div class="flex items-center justify-between mt-2">
+                    <h2 class="text-md font-bold">Adicionar Livros</h2>
+                    <button id="open-button" class="leaf-button-outline toggle-add-book">ADICIONAR</button>
+                    <button id="close-button" class="night-button-outline toggle-add-book" style="display: none">CANCELAR</button>
+                </div>
+                <div id="form-container" style="display: none">
+                    {{ html()->modelForm($data, 'PATCH', route('groups.patch-books', $data->id))->acceptsFiles()->open() }}
+                        <div class="flex align-items justify-between">
+                            <div class="input-container">
+                                <x-multiple-select label="" id="books" :values="[]" :options="App\Models\Book::all()" />
+                                <button type="submit" class="leaf-button-outline">ENVIAR</button>
+                            </div>
+                        </div>
+                    {{ html()->form()->close() }}
+                </div>
+            </section>
         </div>
     </div>
 @endsection

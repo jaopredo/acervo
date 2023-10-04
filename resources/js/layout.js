@@ -18,8 +18,14 @@ $('.floating-toggler').on('click', function() {
 })
 
 $('.msg').ready(function() {
+    $('.msg').animate({
+        right: '-2.5rem',
+    })
+
     setTimeout(function() {
-        $('.msg').fadeOut(400)
+        $('.msg').animate({
+            left: '100vw'
+        })
     }, 5000)
 })
 

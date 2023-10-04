@@ -17,6 +17,8 @@ class Category extends Model
     /* CHAVES ESTRANGEIRAS */
     const HAS_FOREIGN_KEYS = false;
 
+    protected $guarded = [];
+
     public function books() {
         return $this->belongsToMany(Book::class, 'book_category');
     }

@@ -1,6 +1,6 @@
 <label for="{{$id}}">{{$label}}</label>
-<div class="position-relative form-control list d-flex align-items-stretch justify-content-between pr-5">
-    <ul id="multiple-select-{{$id}}" data-id="{{$id}}" class="multiple-select gap-2 d-flex flex-row align-items-center">
+<div class="relative input flex items-stretch justify-between pr-5">
+    <ul id="multiple-select-{{$id}}" data-id="{{$id}}" class="gap-2 flex items-center flex-wrap">
         @foreach($values as $category)
             <li
                 data-label="{{$category->name}}"
@@ -18,13 +18,13 @@
             </li>
         @endforeach
     </ul>
-    <button type="button" data-id="{{$id}}" class="bg-white show-options d-flex align-items-center justify-content-end">
+    <button type="button" data-id="{{$id}}" class="bg-white show-options flex items-center justify-end">
         <x-ri-arrow-down-s-line :width="18" />
     </button>
 
-    <div id="options-list-{{$id}}" class="options-list position-absolute rounded-2 py-2" style="display: none">
+    <div id="options-list-{{$id}}" class="options-list z-10 absolute rounded-md py-2" style="display: none">
         @if (count($options) > 0)
-            <ul id="select-option-list-{{$id}}" class="select-option-list p-0 d-flex flex-column align-items-stretch justify-content-start options-list-list">
+            <ul id="select-option-list-{{$id}}" class="select-option-list scrollable p-0 flex flex-col items-stretch justify-start options-list-list">
                 @foreach ($options as $option)
                     <li id="select-option-{{$option->id}}-{{$id}}" class="input-option option-{{$id}} p-2" data-label="{{$option->name}}" data-associated="{{$id}}" data-value="{{$option->id}}">{{$option->name}}</li>
                 @endforeach
@@ -42,5 +42,5 @@
     @vite('resources/js/components/multipleSelect.js')
 @endPushOnce
 @pushOnce('styles')
-    @vite('resources/css/components/input.css')
+    @vite('resources/css/components/input.scss')
 @endPushOnce

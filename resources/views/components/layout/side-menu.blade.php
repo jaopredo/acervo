@@ -17,6 +17,7 @@
                                 'font-light',
                                 'rounded-md',
                                 'transition-colors',
+                                'text-md',
 
                                 'hover:bg-leaf-lighter',
                                 'hover:text-leaf',
