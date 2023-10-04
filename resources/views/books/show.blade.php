@@ -9,7 +9,7 @@
 @section ('content')
     <div class="flex items-stretch justify-center gap-2 [&>*]:w-3/6">
         <div
-            style="background-image: url('{{ env('APP_FULL_URL') . '/api/file/' . $data->image }}')"
+            style="background-image: url('{{ route('file', $data->image) }}')"
             class="flex-grow bg-center bg-contain"
         >
         </div>

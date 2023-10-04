@@ -1,4 +1,4 @@
-@extends('..layouts.main')
+@extends('..templates.create')
 
 @once
     @push ('scripts')
@@ -6,7 +6,7 @@
     @endpush
 @endonce
 
-@section ('content')
+@section ('content-container')
     @isset($data)
         {{ html()->modelForm($data, 'PUT', route('books.update', $data->id))->acceptsFiles()->open() }}
     @else
@@ -17,8 +17,10 @@
                 <x-multiple-select
                     label="GRUPOS"
                     id="groups"
-                    :exclude="$data['groups']->toArray()"
+
+                    :exclude="isset($data)?$data['groups']->toArray():[]"
                     :values="$data['groups'] ?? []"
+
                     :options="$relationships['groups']"
                 />
             </div>
@@ -27,8 +29,10 @@
                 <x-multiple-select
                     label="CATEGORIAS"
                     id="categories"
-                    :exclude="$data['categories']->toArray()"
+
+                    :exclude="isset($data)?$data['categories']->toArray():[]"
                     :values="$data['categories'] ?? []"
+
                     :options="$relationships['categories']"
                 />
             </div>
@@ -120,11 +124,7 @@
                 <input value="{{ $data->local ?? '' }}" type="text" name="local" id="local" class="input">
                 <p class="form-error">{{$errors->first('local')}}</p>
             </div>
-            <div class="input-container">
-                <label for="image">IMAGEM</label>
-                <input type="file" name="image" id="image" class="input">
-                <p class="form-error">{{$errors->first('image')}}</p>
-            </div>
+            <x-file-upload id="image"/>
         </div>
 
         <div class="input-container">
