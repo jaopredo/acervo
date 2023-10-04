@@ -92,6 +92,7 @@ Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('
 Route::post('/categories', [CategoryController::class, 'store'])->name('categories.save');
 Route::put('/categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
 Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+Route::patch('/categories/{id}', [CategoryController::class, 'add_books'])->name('categories.patch-books');
 
 /*------------------------------- TOMBAMENTOS -------------------------------*/
 Route::post('/tombs', [TombController::class, 'store']);

@@ -1,10 +1,15 @@
+.false-focus {
+    border: 1px solid transparent;
+    outline: 4px solid theme('colors.leaf.light');
+}
+
 .options-list-list {
     list-style: none;
 }
 
 .multiple-select-item {
     font-weight: 600;
-    background-color: #b7ffa6;
+    background-color: theme('colors.night.dark');
     width: fit-content;
     padding-left: 7px;
     padding-right: 7px;
@@ -22,20 +27,19 @@
 
 .multiple-select-item p {
     margin: 0;
+    color: white;
 }
 
 .close-item-icon {
-    border-radius: 50%;
-    color: black;
+    @apply flex items-center justify-center;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius: 50%;
+    color: white;
 }
 
 .close-item-icon:hover {
     cursor: pointer;
-    background-color: #ccffce;
+    background-color: theme('colors.night.light');
 }
 
 .show-options {
@@ -51,14 +55,14 @@
     height: fit-content;
     text-align: left;
 
-    top: 40px;
     left: 0;
 
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.145);
 }
 
 .input-option:hover {
-    background-color: #b7ffa6;
+    background-color: theme('colors.night.light');
+    color: white;
     cursor: pointer;
 }
 

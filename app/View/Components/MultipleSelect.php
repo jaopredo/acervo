@@ -18,6 +18,7 @@ class MultipleSelect extends Component
         public string $id,
         public Collection $options,
         public $values,
+        public $exclude = [],
     ){}
 
     /**

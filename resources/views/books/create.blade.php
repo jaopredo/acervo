@@ -14,11 +14,23 @@
     @endisset
         <div class="input-group">
             <div class="input-container">
-                <x-multiple-select label="GRUPOS" id="groups" :values="$data['groups'] ?? []" :options="$relationships['groups']" />
+                <x-multiple-select
+                    label="GRUPOS"
+                    id="groups"
+                    :exclude="$data['groups']->toArray()"
+                    :values="$data['groups'] ?? []"
+                    :options="$relationships['groups']"
+                />
             </div>
 
             <div class="input-container">
-                <x-multiple-select label="CATEGORIAS" id="categories" :values="$data['categories'] ?? []" :options="$relationships['categories']" />
+                <x-multiple-select
+                    label="CATEGORIAS"
+                    id="categories"
+                    :exclude="$data['categories']->toArray()"
+                    :values="$data['categories'] ?? []"
+                    :options="$relationships['categories']"
+                />
             </div>
         </div>
 

@@ -23,7 +23,6 @@ class GroupController extends Controller
     public $resource = GenericResource::class;
     public $root_path = ['name' => 'Grupos', 'path' => '/groups'];
 
-
     public function add_books(Request $request) {
         $data = $request->only('books');
 
@@ -31,7 +30,6 @@ class GroupController extends Controller
 
         return back()->with('msg', 'Adicionados com sucesso!');
     }
-
 
     public function relationships() {
         return [
