@@ -3,22 +3,20 @@
 @section ('title', 'Login')
 
 @section ('content')
-    <form action="/login" method="POST">
-        @csrf
-        <div class="mb-3">
+    {{ html()->form('POST', route('login'))->open() }}
+        <div class="input-container">
             <label for="email">Email</label>
-            <input placeholder="seuemail@dominio.com" id="email" name="email" type="email" class="form-control">
+            <input placeholder="seuemail@dominio.com" id="email" name="email" type="email" class="input">
             <p class="form-error">{{$errors->first('email')}}</p>
         </div>
-        <div class="mb-3">
+        <div class="input-container">
             <label for="password">Senha</label>
-            <input placeholder="********" id="password" name="password" type="password" class="password form-control">
+            <input placeholder="********" id="password" name="password" type="password" class="input">
             <p class="form-error">{{$errors->first('password')}}</p>
         </div>
-
-        <div class="d-flex align-items-center justify-content-between">
-            <button type="submit" class="btn btn-dark fw-bold">LOGIN</button>
-            <a href="/forgot-password">Esqueci a Senha</a>
+        <div class="flex items-center justify-between">
+            <button type="submit" class="night-button">LOGIN</button>
+            <a href="/forgot-password" class="hover:underline hover:decoration-solid">Esqueci a Senha</a>
         </div>
-    </form>
+    {{ html()->form()->close() }}
 @endsection
