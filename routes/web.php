@@ -52,7 +52,6 @@ Route::delete('/admin/{id}', [AuthController::class, 'destroy']);
 Route::get('/', function() {
     return view('dashboard', [
         'path' => [
-            ['name' => 'Início', 'path' => '/']
         ]
     ]);
 })->name('dashboard')->middleware('auth');
@@ -80,6 +79,7 @@ Route::get('/groups/edit/{id}', [GroupController::class, 'edit'])->name('groups.
 Route::post('/groups', [GroupController::class, 'store'])->name('groups.save');
 Route::put('/groups/{id}', [GroupController::class, 'update'])->name('groups.update');
 Route::delete('/groups/{id}', [GroupController::class, 'destroy'])->name('groups.destroy');
+Route::patch('/groups/{id}', [GroupController::class, 'add_books'])->name('groups.patch-books');
 
 /*------------------------------- CATEGORIAS -------------------------------*/
 /* Rotas de Página */
@@ -92,6 +92,7 @@ Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('
 Route::post('/categories', [CategoryController::class, 'store'])->name('categories.save');
 Route::put('/categories/{id}', [CategoryController::class, 'update'])->name('categories.update');
 Route::delete('/categories/{id}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+Route::patch('/categories/{id}', [CategoryController::class, 'add_books'])->name('categories.patch-books');
 
 /*------------------------------- TOMBAMENTOS -------------------------------*/
 Route::post('/tombs', [TombController::class, 'store']);

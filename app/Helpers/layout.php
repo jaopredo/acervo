@@ -3,23 +3,23 @@
 if (!function_exists('side_menu')) {
     function side_menu() {
         return [
-            'ACERVO' => [
+            'Acervo' => [
                 [
                     'path' => '/books',
-                    'name' => 'LIVROS',
-                    'icon' => 'bi-book-fill'
+                    'name' => 'Livros',
+                    'icon' => 'bi-book'
                 ],
                 [
                     'path' => '/groups',
-                    'name' => 'AGRUPAMENTOS',
+                    'name' => 'Agrupamentos',
                     'icon' => 'bi-boxes'
                 ],
                 [
                     'path' => '/categories',
-                    'name' => 'CATEGORIAS',
-                    'icon' => 'bi-bookmark-fill'
+                    'name' => 'Categorias',
+                    'icon' => 'bi-bookmark'
                 ],
-            ]
+            ],
         ];
     }
 }

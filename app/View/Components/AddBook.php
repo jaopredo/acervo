@@ -6,23 +6,21 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class ActionButtons extends Component
+class AddBook extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct(
-        public string $route,
-        public int $id,
-        public string $action
-    )
-    {}
+    public function __construct()
+    {
+        //
+    }
 
     /**
      * Get the view / contents that represent the component.
      */
     public function render(): View|Closure|string
     {
-        return view('components.table.action-buttons');
+        return view('components.add-book');
     }
 }

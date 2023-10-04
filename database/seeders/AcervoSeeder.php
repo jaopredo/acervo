@@ -17,10 +17,11 @@ class AcervoSeeder extends Seeder
     public function run(): void
     {
         for ($i = 0; $i < 5; $i++) {
-            $books = Book::factory()->count(6)->create();
+            $groups = Group::factory()->count(5)->create();
+            $books = Book::factory()->count(6)->hasAttached($groups)->create();
             Category::factory()->hasAttached($books)->create();
         }
 
-        Book::factory()->count(10)->for(Group::factory()->create())->create();
+        // Book::factory()->count(10)->for(Group::factory()->create())->create();
     }
 }
