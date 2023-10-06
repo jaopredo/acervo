@@ -45,8 +45,8 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.method');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::post('/change_password', [AuthController::class, 'change_password'])->name('change_password');
 
-Route::put('/admin/{id}', [AuthController::class, 'update']);
-Route::delete('/admin/{id}', [AuthController::class, 'destroy']);
+Route::put('/admin/{id}', [AuthController::class, 'update'])->name('admin.update');
+Route::delete('/admin/{id}', [AuthController::class, 'destroy'])->name('admin.destroy');
 
 /*------------------------------- DASHBOARD -------------------------------*/
 Route::get('/', function() {
