@@ -33,6 +33,11 @@ class AuthController extends Controller
     public $resource = GenericResource::class;
     public $root_path = ['name' => 'Administradores', 'path' => '/admin'];
 
+    public $filters = [
+        [ 'name' => 'name', 'label' => 'Nome', 'operator' => 'like' ],
+        [ 'name' => 'email', 'label' => 'Email', 'operator' => 'like' ],
+    ];
+
     public function __construct()
     {
         $this->middleware('auth', ['except' => [
@@ -52,7 +57,6 @@ class AuthController extends Controller
         return view('admin.create', [
             'data' => auth()->user(),
             'path' => [
-                ['name' => 'Início', 'path' => '/'],
                 ['name' => 'Perfil', 'path' => '/profile']
             ]
         ]);

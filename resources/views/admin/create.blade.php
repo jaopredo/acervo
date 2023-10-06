@@ -1,9 +1,9 @@
 @extends('..layouts.main')
 
 @section('content')
-    <h1 class="mt-2">
+    <h1 class="mt-2 text-lg font-bold">
         @isset($data)
-            Minha Conta
+            Conta
         @else
             Criar Administrador
         @endisset
@@ -14,40 +14,40 @@
         @else
             action="/register"
         @endisset
-    method="POST" class="bg-white rounded-2 p-4">
+    method="POST" class="bg-white rounded-md p-4">
         @csrf
 
-        <div class="row mt-2 mb-2">
-            <div class="col">
+        <div class="input-group">
+            <div class="input-container">
                 <label for="name">Nome</label>
-                <input type="text" @disabled($data->name ?? false) class="form-control" name="name" value="{{$data->name ?? ''}}">
+                <input type="text" @disabled($data->name ?? false) class="input" name="name" value="{{$data->name ?? ''}}">
             </div>
-            <div class="col">
+            <div class="input-container">
                 <label for="email">Email</label>
-                <input type="email" @isset($data) readonly @endisset class="form-control disabled" name="email" value="{{$data->email ?? ''}}">
+                <input type="email" @isset($data) readonly @endisset class="input disabled" name="email" value="{{$data->email ?? ''}}">
                 <p class="form-error">{{$errors->first('email')}}</p>
             </div>
         </div>
         <hr>
-        <div class="row mt-2 mb-4">
+        <div class="input-group">
             @isset($data)
-                <div class="col">
+                <div class="input-container">
                     <label for="old_password">Antiga Senha</label>
-                    <input type="password" class="form-control" id="old_password" name="old_password">
+                    <input type="password" class="input" id="old_password" name="old_password">
                     <p class="form-error">{{$errors->first('old_password')}}</p>
                 </div>
             @endisset
-            <div class="col">
+            <div class="input-container">
                 <label for="password">Nova Senha</label>
-                <input type="password" class="form-control" id="password" name="password">
+                <input type="password" class="input" id="password" name="password">
                 <p class="form-error">{{$errors->first('password')}}</p>
             </div>
-            <div class="col">
+            <div class="input-container">
                 <label for="password_confirmation">Confirmar Senha</label>
-                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+                <input type="password" class="input" id="password_confirmation" name="password_confirmation">
                 <p class="form-error">{{$errors->first('password_confirmation')}}</p>
             </div>
         </div>
-        <button class="mt-2 btn btn-primary">ENVIAR</button>
+        <button class="leaf-button">ENVIAR</button>
     </form>
 @endsection
