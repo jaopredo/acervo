@@ -11,10 +11,12 @@
 
 @section('content')
     <div class="flex items-stretch justify-center gap-2 h-full">
+        @if ($data->image)
         <div
             style="background-image: url('{{ env('APP_FULL_URL') . '/api/file/' . $data->image }}')"
             class="flex-grow bg-center bg-contain w-1/2 h-full"
         ></div>
+        @endif
         <div class="flex-grow w-1/2">
             <h2 class="text-lg font-bold text-center">Livros do Grupo</h2>
             @if (count($data->books) > 0)

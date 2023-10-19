@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Http\Resources\GenericResource;
 
@@ -18,7 +17,8 @@ class StudentController extends Controller
         'password',
         'registration',
         'classroom_id',
-        'cpf'
+        'cpf',
+        'image'
     ];
     public $validator = [
         'name' => 'required',
@@ -26,7 +26,8 @@ class StudentController extends Controller
         'password' => 'required|min:8',
         'password_confirmation' => 'required|same:password',
         'cpf' => 'required',
-        'registration' => 'required'
+        'registration' => 'required',
+        'image' => 'nullable'
     ];
     public $filters = [
         [ 'name' => 'name', 'label' => 'Nome', 'operator' => 'like' ],

@@ -8,11 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Classroom;
 use App\Models\Loan;
 
+use App\Traits\FileValidator;
+
 class Student extends Model
 {
-    use HasFactory;
+    use HasFactory, FileValidator;
 
-    const HAS_FILE = false;
+    const HAS_FILE = true;
+    public $file_field = "image";
 
     const HAS_FOREIGN_KEYS = false;
 

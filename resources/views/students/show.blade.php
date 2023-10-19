@@ -9,6 +9,15 @@
                     <div class="flex items-center justify-center flex-grow">
                         <x-bi-person-circle class="w-48 h-48 text-gray-500"/>
                     </div>
+                @else
+                    <div class="flex items-center justify-center flex-grow">
+                    <div
+                    class="w-48 h-48 bg-no-repeat bg-center bg-contain rounded-full shadow-md"
+                    style="background-image: url('{{route('file', $data->image)}}')"
+                    >
+
+                    </div>
+                    </div>
                 @endif
                 <div class="bg-white p-2 rounded-md flex-grow">
                     <table class="table w-full">

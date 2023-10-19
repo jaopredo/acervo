@@ -53,6 +53,11 @@
             <p class="form-error">{{$errors->first('classroom_id')}}</p>
         </div>
 
+        <div class="input-container">
+            <x-file-upload id='image' />
+            <p class="form-error">{{$errors->first('classroom_id')}}</p>
+        </div>
+
         <button class="leaf-button w-full">ENVIAR</button>
     {{ html()->form()->close() }}
 @endsection

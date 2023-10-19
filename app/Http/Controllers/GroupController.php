@@ -18,7 +18,7 @@ class GroupController extends Controller
     ];
     public $validator = [
         'name' => 'required',
-        'image'=> 'required|file'
+        'image'=> 'file'
     ];
     public $filters = [
         [ 'name' => 'name', 'label' => 'Nome', 'operator' => 'like' ],

@@ -60,7 +60,9 @@ class Controller extends BaseController
         $data = $request->except($inst->foreign_keys);
 
         foreach ($this->inputs as $attr) {
-            $inst[$attr] = $data[$attr];
+            if (array_key_exists($attr, $data)) {
+                $inst[$attr] = $data[$attr];
+            }
         }
 
         /* VOU TENTAR SALVAR UM ARQUIVO, MAS PODE SER QUE O DOCUMENTO NÃO POSSIBILITE */
