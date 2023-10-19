@@ -10,6 +10,9 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\TombController;
 
+use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\StudentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -98,3 +101,27 @@ Route::patch('/categories/{id}', [CategoryController::class, 'add_books'])->name
 Route::post('/tombs', [TombController::class, 'store']);
 Route::put('/tombs/{id}', [TombController::class, 'update']);
 Route::delete('/tombs/{id}', [TombController::class, 'destroy']);
+
+/*------------------------------- SALAS -------------------------------*/
+/* Rotas de Página */
+Route::get('/classrooms', [ClassroomController::class, 'index'])->name('classrooms.all');
+Route::get('/classrooms/create', [ClassroomController::class, 'create'])->name('classrooms.create');
+Route::get('/classrooms/{id}', [ClassroomController::class, 'show'])->name('classrooms.show');
+Route::get('/classrooms/edit/{id}', [ClassroomController::class, 'edit'])->name('classrooms.edit');
+
+/* Rotas de Registro */
+Route::post('/classrooms', [ClassroomController::class, 'store'])->name('classrooms.save');
+Route::put('/classrooms/{id}', [ClassroomController::class, 'update'])->name('classrooms.update');
+Route::delete('/classrooms/{id}', [ClassroomController::class, 'destroy'])->name('classrooms.destroy');
+
+/*------------------------------- ESTUDANTES -------------------------------*/
+/* Rotas de Página */
+Route::get('/students', [StudentController::class, 'index'])->name('students.all');
+Route::get('/students/create', [StudentController::class, 'create'])->name('students.create');
+Route::get('/students/{id}', [StudentController::class, 'show'])->name('students.show');
+Route::get('/students/edit/{id}', [StudentController::class, 'edit'])->name('students.edit');
+
+/* Rotas de Registro */
+Route::post('/students', [StudentController::class, 'store'])->name('students.save');
+Route::put('/students/{id}', [StudentController::class, 'update'])->name('students.update');
+Route::delete('/students/{id}', [StudentController::class, 'destroy'])->name('students.destroy');
