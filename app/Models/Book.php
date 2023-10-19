@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\Group;
 use App\Models\Category;
 use App\Models\Tomb;
+use App\Models\Loan;
 
 use App\Traits\FileValidator;
 use App\Traits\ForeignKeys;
@@ -38,6 +39,10 @@ class Book extends Model
 
     public function tombs() {
         return $this->hasMany(Tomb::class);
+    }
+
+    public function loans() {
+        return $this->hasMany(Loan::class);
     }
 
     public function exclude_show() {

@@ -12,6 +12,7 @@ use App\Http\Controllers\TombController;
 
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\LoansController;
 
 /*
 |--------------------------------------------------------------------------
@@ -125,3 +126,17 @@ Route::get('/students/edit/{id}', [StudentController::class, 'edit'])->name('stu
 Route::post('/students', [StudentController::class, 'store'])->name('students.save');
 Route::put('/students/{id}', [StudentController::class, 'update'])->name('students.update');
 Route::delete('/students/{id}', [StudentController::class, 'destroy'])->name('students.destroy');
+
+/*------------------------------- ESTUDANTES -------------------------------*/
+/* Rotas de Página */
+Route::get('/loans', [LoansController::class, 'index'])->name('loans.all');
+Route::get('/loans/create', [LoansController::class, 'create'])->name('loans.create');
+Route::get('/loans/{id}', function () {
+    return redirect(route('loans.all'));
+})->name('loans.show');
+Route::get('/loans/edit/{id}', [LoansController::class, 'edit'])->name('loans.edit');
+
+/* Rotas de Registro */
+Route::post('/loans', [LoansController::class, 'store'])->name('loans.save');
+Route::put('/loans/{id}', [LoansController::class, 'update'])->name('loans.update');
+Route::delete('/loans/{id}', [LoansController::class, 'destroy'])->name('loans.destroy');

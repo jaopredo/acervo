@@ -31,6 +31,10 @@ class Controller extends BaseController
         return null;
     }
 
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     /*-------------------------- API METHODS --------------------------*/
     public function getAll(Request $request) {
         $limit = 10;

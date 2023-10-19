@@ -1,0 +1,30 @@
+
+.radio-span {
+    @apply block bg-slate-400 relative;
+
+    width: 16px;
+    height: 16px;
+
+    border-radius: 50%;
+}
+
+.radio-span::before {
+    @apply absolute left-1/2 top-1/2 bg-white hidden;
+
+    content: "";
+
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+
+    width: 9px;
+    height: 9px;
+}
+
+input[type="radio"]:checked {
+    & + .radio-span {
+        @apply bg-leaf;
+    }
+    & + .radio-span::before {
+        @apply block;
+    }
+}
