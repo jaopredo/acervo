@@ -1,43 +1,38 @@
 @extends('..templates.show')
 
-@once
-    @push('styles')
-        @vite('resources/css/groups.css')
-    @endpush
-    @push('scripts')
-        @vite('resources/js/group.js')
-    @endpush
-@endonce
-
 @section('content')
-    <div class="flex items-stretch justify-center gap-2 h-full">
-        <div class="flex-grow">
-            <h2 class="text-lg font-bold text-center">Alunos da Sala</h2>
-            @if (count($data->students) > 0)
-                <div class="p-2 bg-white rounded-2">
-                    <table class="table">
-                        <thead>
-                            <th scope="col" class="text-left">Nome</th>
-                            <th scope="col" class="text-left">Email</th>
-                            <th scope="col" class="text-left">Registro</th>
-                        </thead>
+    <div class="flex flex-col items-stretch gap-2 h-full">
+        <article class="flex items-stretch flex-col w-full">
+            <h1 class="text-xl font-bold text-center">Informações do Aluno</h1>
+            <div class="flex gap-2 items-center justify-between">
+                @if (!$data->image)
+                    <div class="flex items-center justify-center flex-grow">
+                        <x-bi-person-circle class="w-48 h-48 text-gray-500"/>
+                    </div>
+                @endif
+                <div class="bg-white p-2 rounded-md flex-grow">
+                    <table class="table w-full">
                         <tbody>
-                            @foreach ($data->students as $student)
-                                <tr>
-                                    <td><a class="item-link" href="{{route('students.show', $student->id)}}">{{$student->name}}</a></td>
-                                    <td>{{$student->email}}</td>
-                                </tr>
+                            @foreach ($data->response()->getData()->data as $key=>$field)
+                                @if (!in_array($key, $data->exclude_show()))
+                                    <tr>
+                                        <th scope="row" class="text-right">{{__("fields.student.$key")}}</th>
+                                        <td>{{$field}}</td>
+                                    </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>
                 </div>
-            @else
-                <div class="flex items-start justify-center">
-                    <div class="alert alert-error text-center">
-                        NENHUM ALUNO ESTÁ ASSOCIADO À ESTA SALA
-                    </div>
-                </div>
-            @endif
-        </div>
+            </div>
+        </article>
+
+        <article>
+            <h1 class="text-xl font-bold text-center">Livros Pendentes</h1>
+        </article>
+
+        <article>
+            <h1 class="text-xl font-bold text-center">Desempenho Particular</h1>
+        </article>
     </div>
 @endsection

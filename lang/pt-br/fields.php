@@ -20,5 +20,11 @@ return [
         'groups' => 'Agrupamentos',
         'description' => 'Descrição',
         'available' => 'Disponível'
+    ],
+    'student' => [
+        'name' => 'Nome',
+        'cpf' => 'CPF',
+        'registration' => 'Matrícula',
+        'email' => 'Email'
     ]
 ];

@@ -13,13 +13,11 @@ use App\Filters\Filter;
 
 use Illuminate\Support\Facades\Route;
 
+use App\Helpers\Meta;
+
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
-
-    public function __construct() {
-        $this->middleware('auth');
-    }
 
     public $filters;
     public $model;
@@ -28,13 +26,10 @@ class Controller extends BaseController
     public $inputs;
     public $resource;
     public $root_path;
-    public $foreing_keys;
 
     public function relationships() {
-
+        return null;
     }
-
-    public $meta;  // Funções que são executadas antes de enviar o formulário
 
     /*-------------------------- API METHODS --------------------------*/
     public function getAll(Request $request) {
@@ -65,7 +60,7 @@ class Controller extends BaseController
         }
 
         /* VOU TENTAR SALVAR UM ARQUIVO, MAS PODE SER QUE O DOCUMENTO NÃO POSSIBILITE */
-        if ($this->model::HAS_FILE) {
+        if ($this->model::HAS_FILE && $request->hasFile($inst->file_field)) {
             $inst->storeFile($request);
         }
 
@@ -157,7 +152,8 @@ class Controller extends BaseController
                     [ 'name' => 'Criar ' . $this->root_path['name'], 'path' => 'create' ]
                 ],
                 'inputs' => $this->inputs
-            ]);
+            ]
+        );
     }
 
     public function show($id) {
@@ -170,7 +166,8 @@ class Controller extends BaseController
                     $this->root_path,
                     [ 'path' => $data->id, 'name' => $data->name ]
                 ]
-            ]);
+            ]
+        );
     }
 
     public function edit($id) {

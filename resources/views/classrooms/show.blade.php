@@ -24,8 +24,9 @@
                         <tbody>
                             @foreach ($data->students as $student)
                                 <tr>
-                                    <td><a class="item-link" href="{{route('students.show', $student->id)}}">{{$student->name}}</a></td>
+                                    <td><a class="redirect" href="{{route('students.show', $student->id)}}">{{$student->name}}</a></td>
                                     <td>{{$student->email}}</td>
+                                    <td>{{$student->registration}}</td>
                                 </tr>
                             @endforeach
                         </tbody>

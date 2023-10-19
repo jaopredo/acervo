@@ -8,12 +8,12 @@
 @endsection
 
 @section('table-content')
-    @foreach ($data as $classroom)
+    @foreach ($data as $student)
         <tr>
-            <td><a href="{{route('classrooms.show', $classroom->id)}}" class="redirect">{{ $classroom->name }}</a></td>
+            <td><a href="{{route('students.show', $student->id)}}" class="redirect">{{ $student->name }}</a></td>
             <td>
                 <div class="flex items-center justify-end">
-                    <x-action-buttons action="table" :id="$classroom->id" route="classrooms" />
+                    <x-action-buttons action="table" :id="$student->id" route="students" />
                 </div>
             </td>
         </tr>
