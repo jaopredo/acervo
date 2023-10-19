@@ -1,15 +1,5 @@
 @extends ('..layouts.main')
 
-@once
-    @push('styles')
-        @vite([
-            'resources/css/books.css',
-            'resources/css/floating.css',
-            'resources/css/components/filters.css',
-        ])
-    @endpush
-@endonce
-
 @section ('upper-menu')
     <x-index-actions :path="$path[0]['path']"/>
 @endsection

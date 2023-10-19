@@ -1,0 +1,43 @@
+
+.state-icon:hover {
+    @apply hover:cursor-pointer;
+    & + .state-message  {
+        @apply opacity-100;
+    }
+}
+
+.state-message {
+    @apply absolute
+    bg-night-dark
+    text-white
+    text-sm
+    rounded-sm
+    left-1/2
+    top-5
+    w-28
+    text-center
+    p-1
+    z-10
+    -translate-x-1/2
+    translate-y-2
+    opacity-0
+    pointer-events-none
+    group-hover:opacity-100
+    transition-opacity
+
+    before:block
+    before:absolute
+
+    before:left-1/2
+    before:-top-2
+    before:-translate-x-1/2
+
+    before:w-0
+    before:h-0
+    before:border-x-4
+    before:border-x-transparent
+    before:border-b-8
+    before:border-night-dark;
+
+    word-break: break-all;
+}

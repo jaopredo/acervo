@@ -3,6 +3,7 @@ $('.filter-activation').on('click', function() {
     const activated = !!Number($('#filter-container').attr('data-activated'))
 
     if (!activated) {
+        $('#filter-container').show()
         $('#filter-container').animate({
             right: 0
         })
@@ -22,6 +23,7 @@ $('.filter-activation').on('click', function() {
         setTimeout(function () {
             $('.filter-cover').toggle()
             $('#content').removeClass('overflow-y-hidden')
+            $('#filter-container').hide()
         }, 400)
     }
 
