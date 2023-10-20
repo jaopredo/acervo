@@ -23,11 +23,13 @@
                 <input type="password" id="password" name="password" class="input" value="{{ $data->password ?? '' }}">
                 <p class="form-error">{{$errors->first('password')}}</p>
             </div>
+            @if (!isset($data))
             <div class="input-container">
                 <label for="password_confirmation">CONFIRMAR SENHA</label>
                 <input type="password" id="password_confirmation" name="password_confirmation" class="input">
                 <p class="form-error">{{$errors->first('password_confirmation')}}</p>
             </div>
+            @endif
         </div>
 
         <div class="input-group">
@@ -44,12 +46,16 @@
         </div>
 
         <div class="input-container">
-            <label for="classroom_id">SALA DO ALUNO</label>
-            <select id="classroom_id" name="classroom_id" class="input">
-                @foreach ($relationships['classrooms'] as $classroom)
-                    <option value="{{$classroom->id}}">{{$classroom->name}}</option>
-                @endforeach
-            </select>
+            <x-search-select
+                :endpoint="route('classrooms.api.all')"
+                :values="[
+                    'label' => $data->classroom->name ?? '',
+                    'id' => $data->classroom->id ?? ''
+                ]"
+                
+                label="SALA DO ALUNO"
+                id="classroom_id"
+            />
             <p class="form-error">{{$errors->first('classroom_id')}}</p>
         </div>
 

@@ -13,7 +13,13 @@
         </div>
 
         <div class="input-container">
-            <x-multiple-select label="LIVROS" id="books" :values="$data['books'] ?? []" :options="$relationships['books']" />
+            <x-search-select
+                label="LIVROS"
+                id="books"
+                :values="$data['books'] ?? []"
+                :endpoint="route('books.api.all')"
+                multiple
+            />
         </div>
 
         <x-file-upload id="image"/>

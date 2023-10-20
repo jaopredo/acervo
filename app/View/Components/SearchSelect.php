@@ -14,6 +14,7 @@ class SearchSelect extends Component
         public $id,
         public $label,
         public bool $multiple = false,
+        public $values = [],
         public $attr = 'name'
     )
     {}

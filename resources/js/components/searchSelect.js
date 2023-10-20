@@ -19,6 +19,8 @@ function isElementInViewport (el) {
     );
 }
 
+
+/* QUANDO DIGITAR NO INPUT DE PROCURAR */
 let timeout = setTimeout(() => {
 }, 0);
 
@@ -28,17 +30,16 @@ $('body').on('keypress', '.search-input', async function(event) {
     const related = this.getAttribute('data-related')
     const endpointUrl = this.getAttribute('data-endpoint')
     const attr = this.getAttribute('data-attr')
+    const multiple = this.getAttribute('data-multiple')
 
     timeout = setTimeout(function() {
         const { value } = event.target
         const endpoint = `${endpointUrl}?filters[${attr}][like]=${value}`
 
-        console.log(endpoint)
-
         if (value != "") {
-            $(`#select-option-list-${related}`).text('')
+            $(`#search-options-list-${related}`).text('')
             $(`#loading-${related}`).show()
-            $(`#select-option-list-${related}`).show();
+            $(`#search-options-list-${related}`).show();
             $(`#no-text-${related}`).hide()
             $(`#not-found-${related}`).hide()
 
@@ -53,7 +54,7 @@ $('body').on('keypress', '.search-input', async function(event) {
 
                         if (data.length > 0) {
                             for (let item of data) {
-                                $(`#select-option-list-${related}`).append(`
+                                $(`#search-options-list-${related}`).append(`
                                     <li
                                         id="input-option-${related}-${item.id}"
                                         data-related="${related}"
@@ -78,19 +79,23 @@ $('body').on('keypress', '.search-input', async function(event) {
     }, 500)
 })
 
+
 /* MOSTRANDO OU ESCONDENDO AS OPÇÕES */
-$('.show-options').on('click', function(event) {
+$('.show-search').on('click', function(event) {
     event.stopPropagation()
 
     const id = this.getAttribute('data-id')
-    const element = $(`#options-list-${id}`)
+    const element = $(`#options-list-container-${id}`)
+
+    element.css('top', '0%')
+    element.css('transform', 'none')
 
     element.toggle()
 
-    if (($(`#options-list-${id}`).css('display') == 'block')) {
-        $(`#multiple-${id}-select`).addClass('false-focus');
+    if (($(`#options-list-container-${id}`).css('display') == 'block')) {
+        $(`#search-${id}-select`).addClass('false-focus');
     } else {
-        $(`#multiple-${id}-select`).removeClass('false-focus');
+        $(`#search-${id}-select`).removeClass('false-focus');
     }
 
     if (isElementInViewport(element[0])) {
@@ -100,6 +105,7 @@ $('.show-options').on('click', function(event) {
     }
 })
 
+
 /* ATIVANDO O TRIGGER QUANDO CLICA NA LISTA */
 $('.search-input').on('click', function(event) {
     event.stopPropagation()
@@ -108,15 +114,46 @@ $('.search-input').on('click', function(event) {
     $(`#${id}-button`).trigger('click')
 })
 
-/* QUANDO CLICAR */
+
+/* QUANDO CLICAR EM UM ITEM DA LISTA */
 $('body').on('click', '.input-option', function(event) {
     const related = this.getAttribute('data-related')
     const id = this.getAttribute('data-id')
+    const multiple = !!Number($(`#search-${related}`).attr('data-multiple'))
     
-    $(`#${related}`).val(this.innerText)
-    $(`#${related}`).trigger('change')
-    $(`#hidden-${related}`).val(id)
-}) 
+    if (!multiple) {
+        $(`#${related}`).val(this.innerText)
+        $(`#${related}`).trigger('change')
+        $(`#hidden-${related}`).val(id)
+    } else {
+        for (let item of $(`.search-${related}-item`)) {
+            if (id == item.getAttribute('data-id')) return
+        }
+
+        $(`#search-select-${related}`).append(`
+            <li
+                id="search-list-option-${related}-${id}"
+                data-related="${related}"
+                data-id="${id}"
+                class="multiple-select-item search-${related}-item"
+            >
+                <div class="close-item-icon close-search-icon">
+                    <svg width="18" class="close-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </div>
+                <p>${this.innerText}</p>
+                <input type="hidden" name="${related}[]" value="${id}">
+            </li>
+        `)
+    }
+})
+
+
+$('body').on('click', '.multiple-select-item', function(event) {
+    this.parentNode.removeChild(this)
+})
+
 
 $('.final-input').on('click', function() {
     const related = this.getAttribute('data-related')

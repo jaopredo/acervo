@@ -12,6 +12,8 @@ class Classroom extends Model
 {
     use HasFactory, ForeignKeys;
 
+    protected $guarded = [];
+
     const HAS_FILE = false;
     const HAS_FOREIGN_KEYS = false;
 

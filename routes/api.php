@@ -4,13 +4,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\FileController;
-use App\Http\Controllers\TombController;
-use App\Http\Controllers\GroupController;
 
 use App\Http\Controllers\AuthController;
+
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\CategoryController;
 
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\ClassroomController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +33,17 @@ Route::get('/file/{name}', [FileController::class, 'index'])->name('file');
 
 Route::post('/register', [AuthController::class, 'register'])->middleware('guest');
 
+/* ======= SEM AUTENTICAÇÃO ======= */
 /* LIVROS */
 Route::get('/books', [BookController::class, 'getAll'])->name('books.api.all');
+/* GRUPOS */
+Route::get('/groups', [GroupController::class, 'getAll'])->name('groups.api.all');
+/* CATEGORIAS */
+Route::get('/categories', [CategoryController::class, 'getAll'])->name('categories.api.all');
 
 /* ALUNOS */
-Route::get('/students', [StudentController::class, 'getAll'])->name('students.api.all');
+Route::get('/classrooms', [ClassroomController::class, 'getAll'])->name('classrooms.api.all');
+
+
+/* ======= COM AUTENTICAÇÃO ======= */
+

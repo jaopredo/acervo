@@ -14,6 +14,8 @@ class Student extends Model
 {
     use HasFactory, FileValidator;
 
+    protected $guarded = [];
+
     const HAS_FILE = true;
     public $file_field = "image";
 
