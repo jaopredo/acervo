@@ -46,7 +46,13 @@
             {{ html()->modelForm($data, 'PATCH', route('categories.patch-books', $data->id))->acceptsFiles()->open() }}
                 <div class="flex align-items justify-between">
                     <div class="input-container">
-                        <x-multiple-select label="" id="books" :values="[]" :exclude="$data->books->toArray()" :options="App\Models\Book::all()" />
+                        <x-search-select
+                            label=""
+                            id="books"
+                            :values="[]"
+                            :endpoint="route('books.api.all')"
+                            multiple
+                        />
                         <button type="submit" class="leaf-button-outline">ENVIAR</button>
                     </div>
                 </div>

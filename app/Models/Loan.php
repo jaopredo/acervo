@@ -12,6 +12,8 @@ class Loan extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+    
     const HAS_FILE = false;
     const HAS_FOREIGN_KEYS = false;
 

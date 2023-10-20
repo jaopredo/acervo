@@ -28,26 +28,26 @@ $('#loan-type-selection').on('change', function(e) {
 
 /* FORMULÁRIO DE CRIAÇÃO */
 $('#student_id').on('change', function (event) {
-    const { options, selectedIndex } = event.target
+    const { value } = event.target
     
-    $('#student_name').val(options[selectedIndex].text)
+    $('#student_name').val(value)
 })
 
 $('#book_id').on('change', function (event) {
-    const { options, selectedIndex } = event.target
+    const { value } = event.target
     
-    $('#book_name').val(options[selectedIndex].text)
+    $('#book_name').val(value)
 })
 
 $('#yes').on('click', function() {
-    $("#student-id-container").toggle()
-    $("#student-name-container").toggle()
+    $("#student-id-container").show()
+    $("#student-name-container").hide()
 
     $('#student_name').val('')
 })
 $('#no').on('click', function() {
-    $("#student-id-container").toggle()
-    $("#student-name-container").toggle()
+    $("#student-id-container").hide()
+    $("#student-name-container").show()
 
     $('#student_id').val('')
 })

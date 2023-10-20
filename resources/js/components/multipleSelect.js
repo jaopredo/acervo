@@ -35,9 +35,11 @@ $('.show-options').on('click', function(event) {
     }
 
     if (isElementInViewport(element[0])) {
-        element.css('top', '120%')
+        element.css('transform', 'translateY(30px)')
     } else {
-        element.css('transform', 'translateY(-100%)')
+        element.css({
+            transform: 'translateY(-100%)',
+        })
     }
 })
 

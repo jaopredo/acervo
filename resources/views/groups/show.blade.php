@@ -30,7 +30,7 @@
                         <tbody>
                             @foreach ($data->books as $book)
                                 <tr>
-                                    <td><a class="item-link" href="{{route('books.show', $book->id)}}">{{$book->name}}</a></td>
+                                    <td><a href="{{route('books.show', $book->id)}}" class="redirect">{{$book->name}}</a></td>
                                     <td>{{$book->editor}}</td>
                                     <td>{{$book->register}}</td>
                                 </tr>
@@ -55,7 +55,13 @@
                     {{ html()->modelForm($data, 'PATCH', route('groups.patch-books', $data->id))->acceptsFiles()->open() }}
                         <div class="flex align-items justify-between">
                             <div class="input-container">
-                                <x-multiple-select label="" id="books" :values="[]" :options="App\Models\Book::all()" />
+                                <x-search-select
+                                    label=""
+                                    id="books"
+                                    :values="[]"
+                                    :endpoint="route('books.api.all')"
+                                    multiple
+                                />
                                 <button type="submit" class="leaf-button-outline">ENVIAR</button>
                             </div>
                         </div>

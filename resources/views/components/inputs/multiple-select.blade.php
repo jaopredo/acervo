@@ -45,5 +45,5 @@
     @vite('resources/js/components/multipleSelect.js')
 @endPushOnce
 @pushOnce('styles')
-    @vite('resources/css/components/multipleSelect.scss')
+    @vite('resources/css/components/genericSelect.scss')
 @endPushOnce

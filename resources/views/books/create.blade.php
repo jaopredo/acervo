@@ -14,26 +14,22 @@
     @endisset
         <div class="input-group">
             <div class="input-container">
-                <x-multiple-select
+                <x-search-select
                     label="GRUPOS"
                     id="groups"
-
-                    :exclude="isset($data)?$data['groups']->toArray():[]"
-                    :values="$data['groups'] ?? []"
-
-                    :options="$relationships['groups']"
+                    :values="$data->groups ?? []"
+                    :endpoint="route('groups.api.all')"
+                    multiple
                 />
             </div>
 
             <div class="input-container">
-                <x-multiple-select
+                <x-search-select
                     label="CATEGORIAS"
                     id="categories"
-
-                    :exclude="isset($data)?$data['categories']->toArray():[]"
-                    :values="$data['categories'] ?? []"
-
-                    :options="$relationships['categories']"
+                    :values="$data->categories ?? []"
+                    :endpoint="route('categories.api.all')"
+                    multiple
                 />
             </div>
         </div>
