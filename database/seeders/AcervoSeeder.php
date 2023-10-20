@@ -9,6 +9,10 @@ use App\Models\Book;
 use App\Models\Category;
 use App\Models\Group;
 
+use App\Models\Classroom;
+use App\Models\Student;
+use App\Models\Loan;
+
 class AcervoSeeder extends Seeder
 {
     /**
@@ -22,6 +26,8 @@ class AcervoSeeder extends Seeder
             Category::factory()->hasAttached($books)->create();
         }
 
-        // Book::factory()->count(10)->for(Group::factory()->create())->create();
+        foreach (range(1, 9) as $i) {
+            Student::factory()->count(40)->for(Classroom::factory()->create())->create();
+        }
     }
 }

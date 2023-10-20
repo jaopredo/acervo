@@ -10,6 +10,8 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 
+use App\Http\Controllers\StudentController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,5 +31,8 @@ Route::get('/file/{name}', [FileController::class, 'index'])->name('file');
 
 Route::post('/register', [AuthController::class, 'register'])->middleware('guest');
 
-Route::get('/books', [BookController::class, 'getAll'])->middleware('guest');
-Route::get('/books/{id}', [BookController::class, 'get'])->middleware('guest');
+/* LIVROS */
+Route::get('/books', [BookController::class, 'getAll'])->name('books.api.all');
+
+/* ALUNOS */
+Route::get('/students', [StudentController::class, 'getAll'])->name('students.api.all');
