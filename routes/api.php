@@ -42,8 +42,8 @@ Route::get('/groups', [GroupController::class, 'getAll'])->name('groups.api.all'
 Route::get('/categories', [CategoryController::class, 'getAll'])->name('categories.api.all');
 
 /* ALUNOS */
-Route::get('/classrooms', [ClassroomController::class, 'getAll'])->name('classrooms.api.all');
+Route::get('/students', [StudentController::class, 'getAll'])->name('students.api.all');
 
 
 /* ======= COM AUTENTICAÇÃO ======= */
-
+Route::get('/classrooms', [ClassroomController::class, 'getAll'])->name('classrooms.api.all');

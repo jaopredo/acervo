@@ -30,6 +30,10 @@
                         id="student_id"
                         :endpoint="route('students.api.all')"
                         label="ESCOLHA O ALUNO"
+                        :values="[
+                            'id' => '',
+                            'label' => ''
+                        ]"
                     />
                     <p class="form-error">{{$errors->first('student_id')}}</p>
                 </div>
@@ -43,6 +47,10 @@
                 <x-search-select
                     id="book_id"
                     endpoint="{{route('books.api.all')}}"
+                    :values="[
+                        'id' => '',
+                        'label' => ''
+                    ]"
                     label="ESCOLHA O LIVRO"
                 />
                 <p class="form-error">{{$errors->first('book_id')}}</p>
