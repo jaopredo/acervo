@@ -121,14 +121,21 @@ label {
 }
 
 /* BUTTONS */
+.button {
+    @apply flex py-2 px-4 rounded items-center justify-center gap-1 font-semibold transition-colors text-sm;
+}
+
 .leaf-button {
-    @apply flex bg-leaf-dark text-sm active:bg-leaf-darker hover:bg-leaf py-2 px-4 rounded text-white items-center justify-center gap-1 font-semibold transition-colors;
+    @extend .button;
+    @apply bg-leaf-dark active:bg-leaf-darker hover:bg-leaf text-white;
 }
 .leaf-button-outline {
-    @apply flex bg-transparent border-leaf-dark border text-leaf-dark text-sm active:bg-leaf-darker hover:bg-leaf py-2 px-4 rounded hover:text-white items-center justify-center gap-1 font-semibold transition-colors;
+    @extend .button;
+    @apply bg-transparent border-leaf-dark text-leaf-dark active:bg-leaf-darker hover:bg-leaf  hover:text-white;
 }
 
 .night-button {
+    @extend .button;
     @apply flex bg-night-dark text-sm active:bg-night-darker hover:bg-night-light py-2 px-4 rounded text-white items-center justify-center gap-1 font-semibold transition-colors;
 }
 .night-button-outline {
@@ -142,7 +149,7 @@ label {
 
 /* ALERTS */
 .alert {
-    @apply p-2 rounded-md border;
+    @apply p-2 rounded-md;
 }
 
 .alert-error {
@@ -150,7 +157,7 @@ label {
 }
 
 .alert-success {
-    @apply border-emerald-800 bg-green-200 text-emerald-600;
+    @apply bg-green-200 text-emerald-600;
 }
 
 /* SCROLLABLES */

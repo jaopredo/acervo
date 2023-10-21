@@ -1,12 +1,4 @@
 
-
-// $('.nav-link').on('click', function() {
-//     if (!this.classList.contains('active')) {
-//         $('.nav-link').removeClass('active')
-//         this.classList.add('active')
-//     }
-// })
-
 $('.floating-toggler').on('click', function() {
     let containerId = this.id.split('-icon').join('')
     let container = $(`#${containerId}`)
@@ -32,3 +24,5 @@ $('.msg').ready(function() {
 $('form').ready(function() {
     $('label + *').addClass('form-control')
 })
+
+

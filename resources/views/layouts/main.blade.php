@@ -34,8 +34,17 @@
             </div>
         </main>
         @if (session('msg'))
-            <div class="msg alert alert-success fixed -right-44 top-16 w-96 z-30 text-left" role="alert">
-                {{ session('msg') }}
+            <div
+                class="msg alert alert-success fixed -right-44 top-16 w-96 z-30 text-left pl-2 pr-2
+                flex items-baseline gap-2" role="alert"
+            >
+                <div class="flex">
+                    <x-bi-check-circle-fill class="text-green-500 w-5 h-5" />
+                </div>
+                <div class="flex flex-col">
+                    <h2 class="font-semibold text-emerald-900">Sucesso!</h2>
+                    <p class="text-emerald-700 text-sm">{{ session('msg') }}</p>
+                </div>
             </div>
         @endif
     </div>
