@@ -149,7 +149,7 @@ label {
 
 /* ALERTS */
 .alert {
-    @apply p-2 rounded-md border;
+    @apply p-2 rounded-md;
 }
 
 .alert-error {
@@ -157,7 +157,7 @@ label {
 }
 
 .alert-success {
-    @apply border-emerald-800 bg-green-200 text-emerald-600;
+    @apply bg-green-200 text-emerald-600;
 }
 
 /* SCROLLABLES */
