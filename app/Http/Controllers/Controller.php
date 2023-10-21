@@ -36,7 +36,7 @@ class Controller extends BaseController
 
     /*-------------------------- API METHODS --------------------------*/
     public function getAll(Request $request) {
-        $limit = 10;
+        $limit = 9;
         if ($request->limit) $limit = $request->limit;
 
         if ($request->filters) {

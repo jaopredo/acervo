@@ -1,11 +1,18 @@
+@once
+    @push('scripts')
+        @vite('resources/js/components/deleteConfirmation.js')
+    @endpush
+@endonce
+
 <div class="flex items-center justify-center gap-2">
     <div class="relative group bg-slate-50 rounded-md text-night-light shadow-md shadow-night-light hover:bg-night hover:text-white transition-all">
-        <x-form-button :action="route($route . '.destroy', $id)" method="DELETE"
-            class="flex items-center justify-center p-2 gap-2"
+        <button
+            class="delete-button flex items-center justify-center p-2 gap-2"
+            data-route="{{route($route . '.destroy', $id)}}"
         >
             <x-bi-trash-fill/>
             {{$action=='show'?'Deletar':''}}
-        </x-form-button>
+        </button>
 
         @if ($action!='show')
             <span @class([
