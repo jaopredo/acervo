@@ -5,7 +5,7 @@
 @section('content')
     <form action="{{route('password.email')}}" method="POST">
         @csrf
-        <p class="block mb-2 text-center text-sm">
+        <p class="block mb-2 mt-2 text-justify text-sm">
             Olá! Aparentemente você esqueceu sua senha. Não se preocupe! Informe seu email e, daqui uns segundos, nós lhe enviaremos um link para alterar sua senha!
         </p>
         <div class="input-container">
@@ -14,8 +14,8 @@
             <p class="form-error">{{$errors->first('email')}}</p>
         </div>
         <div class="flex items-center justify-between">
-            <button type="submit" class="night-button">ENVIE-ME UM EMAIL</button>
-            <a href="/login" class="hover:underline hover:decoration-solid">Fazer Login</a>
+            <button type="submit" class="leaf-button">ENVIE-ME UM EMAIL</button>
+            <a href="/login" class="text-leaf hover:underline hover:decoration-solid">Fazer Login</a>
         </div>
 
         @if (session('msg'))

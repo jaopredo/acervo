@@ -13,10 +13,12 @@
 </head>
 <body>
     <main class="w-100 h-screen flex flex-col items-center justify-center gap-3 bg-slate-200">
-        <section>
-            <x-bi-book :width="80" :height="80"/>
-        </section>
-        <section id="content" class="bg-white rounded-md p-4 w-3/4 shadow-lg">
+        <section id="content" class="bg-white rounded-md p-8 w-2/5 shadow-lg">
+            <a href="/" class="flex items-center justify-center gap-2 text-xl text-leaf">
+                <x-bi-book-fill width="18" height="18" />
+                <h1 class="text-sm font-bold">ACERVO</h1>
+            </a>
+            <p class="text-center text-xl text-leaf font-bold uppercase mt-4">Bem-vindo(a) ao Acervo</p>
             @yield('content')
         </section>
     </main>
