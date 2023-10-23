@@ -21,7 +21,7 @@ style="display: none"
         <form id="delete-button" method="POST">
             @csrf
             @method('DELETE')
-            <button method="DELETE"
+            <button
                 class="delete-confirmation button bg-rose-600 text-white hover:bg-rose-700 active:bg-rose-800"
             >
                 CONFIRMAR

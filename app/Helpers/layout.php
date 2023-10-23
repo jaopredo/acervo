@@ -36,7 +36,34 @@ if (!function_exists('side_menu')) {
                     'name' => 'Empréstimos',
                     'icon' => 'bi-file-earmark-lock2-fill'
                 ],
+                [
+                    'path' => '/banneds',
+                    'name' => 'Banidos',
+                    'icon' => 'bi-x-octagon'
+                ],
+                [
+                    'path' => '/reserves',
+                    'name' => 'Reservados',
+                    'icon' => 'bi-lock'
+                ],
             ],
+            'Informações' => [
+                [
+                    'path' => '/reads',
+                    'name' => 'Lidos',
+                    'icon' => 'bi-journal-check'
+                ],
+                [
+                    'path' => '/favorites',
+                    'name' => 'Favoritos',
+                    'icon' => 'bi-star'
+                ],
+                [
+                    'path' => '/wishes',
+                    'name' => 'Desejos',
+                    'icon' => 'bi-clipboard2-heart'
+                ],
+            ]
         ];
     }
 }

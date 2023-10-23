@@ -26,5 +26,4 @@
         </div>
     @endif
     <x-filters :filters="$filters" :path="$path[0]['path']" />
-    <x-delete-confirmation/>
 @endsection

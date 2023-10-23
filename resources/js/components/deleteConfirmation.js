@@ -2,6 +2,7 @@
 $('.delete-button').on('click', function() {
     $('.delete-confirmation').show()
     $('.filter-cover').show()
+    $('.filter-cover').css('opacity', '.6')
 
     $('#content').css('overflow-y', 'hidden')
 

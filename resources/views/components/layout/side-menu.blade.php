@@ -1,4 +1,4 @@
-<aside id="side" class="bg-neutral-50">
+<aside id="side" class="bg-neutral-50 scrollable overflow-y-auto">
     <nav>
         <menu class="p-4 flex flex-col items-center justify-start gap-4">
             @foreach (side_menu() as $groupament => $items)

@@ -42,17 +42,17 @@ $leaf_light: theme('colors.leaf.light');
 
     grid-area: main;
 }
-#content::-webkit-scrollbar {
-    width: 10px;
-}
-#content::-webkit-scrollbar-track {
-    @apply bg-transparent;
-}
-#content::-webkit-scrollbar-thumb {
-    width: 10px;
-    background: theme('colors.gray.500');
-    border-radius: 20px;
-}
+// #content::-webkit-scrollbar {
+//     width: 10px;
+// }
+// #content::-webkit-scrollbar-track {
+//     @apply bg-transparent;
+// }
+// #content::-webkit-scrollbar-thumb {
+//     width: 10px;
+//     background: theme('colors.gray.500');
+//     border-radius: 20px;
+// }
 
 /* TABELA */
 .table {
@@ -162,7 +162,7 @@ label {
 
 /* SCROLLABLES */
 .scrollable::-webkit-scrollbar {
-    width: 10px;
+    width: 7px;
 }
 
 .scrollable::-webkit-scrollbar-track {

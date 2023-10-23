@@ -23,7 +23,7 @@
 
         <x-side-menu :actual="count($path)>0?$path[0]['path']:'/dashboard'"/>
 
-        <main id="content" class="relative bg-gray-200 rounded-tl-lg p-3 overflow-y-auto overflow-x-hidden">
+        <main id="content" class="scrollable relative bg-gray-200 rounded-tl-lg p-3 overflow-y-auto overflow-x-hidden">
             <div class="flex items-center justify-between p-3" style="grid-area: upper-menu;">
                 <x-routes-list :path="$path" />
 
@@ -31,6 +31,7 @@
             </div>
             <div style="grid-area: cont;">
                 @yield('content')
+                <x-delete-confirmation/>
             </div>
         </main>
         @if (session('msg'))
