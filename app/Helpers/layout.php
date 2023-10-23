@@ -19,6 +19,11 @@ if (!function_exists('side_menu')) {
                     'name' => 'Categorias',
                     'icon' => 'bi-bookmark'
                 ],
+                [
+                    'path' => '/reserves',
+                    'name' => 'Reservados',
+                    'icon' => 'bi-lock'
+                ],
             ],
             'Alunos' => [
                 [
@@ -40,11 +45,6 @@ if (!function_exists('side_menu')) {
                     'path' => '/banneds',
                     'name' => 'Banidos',
                     'icon' => 'bi-x-octagon'
-                ],
-                [
-                    'path' => '/reserves',
-                    'name' => 'Reservados',
-                    'icon' => 'bi-lock'
                 ],
             ],
             'Informações' => [

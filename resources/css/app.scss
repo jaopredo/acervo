@@ -131,15 +131,16 @@ label {
 }
 .leaf-button-outline {
     @extend .button;
-    @apply bg-transparent border-leaf-dark text-leaf-dark active:bg-leaf-darker hover:bg-leaf  hover:text-white;
+    @apply bg-transparent border border-leaf-dark text-leaf-dark active:bg-leaf-darker hover:bg-leaf  hover:text-white;
 }
 
 .night-button {
     @extend .button;
-    @apply flex bg-night-dark text-sm active:bg-night-darker hover:bg-night-light py-2 px-4 rounded text-white items-center justify-center gap-1 font-semibold transition-colors;
+    @apply bg-night-dark active:bg-night-darker hover:bg-night-light text-white;
 }
 .night-button-outline {
-    @apply flex bg-transparent border-night-dark border text-sm active:bg-night-darker hover:bg-night-dark py-2 px-4 rounded hover:text-white items-center justify-center gap-1 font-semibold transition-colors;
+    @extend .button;
+    @apply bg-transparent border-night-dark border active:bg-night-darker hover:bg-night-dark hover:text-white;
 }
 
 .elevated-button {
@@ -171,6 +172,16 @@ label {
 
 .scrollable::-webkit-scrollbar-thumb {
     width: 10px;
+    background: theme('colors.gray.400');
+    border-radius: 20px;
+}
+.scrollable::-webkit-scrollbar-thumb:hover {
+    width: 10px;
     background: theme('colors.gray.500');
+    border-radius: 20px;
+}
+.scrollable::-webkit-scrollbar-thumb:active {
+    width: 10px;
+    background: theme('colors.gray.600');
     border-radius: 20px;
 }

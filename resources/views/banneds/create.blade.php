@@ -8,9 +8,9 @@
 
 @section('content')
     @isset($data)
-        {{ html()->modelForm($data, 'PUT', route('loans.update', $data->id))->acceptsFiles()->open() }}
+        {{ html()->modelForm($data, 'PUT', route('banneds.update', $data->id))->acceptsFiles()->open() }}
     @else
-        {{ html()->form('POST', route('loans.save'))->acceptsFiles()->open() }}
+        {{ html()->form('POST', route('banneds.save'))->acceptsFiles()->open() }}
     @endisset
         <div class="input-group" style="align-items: stretch;">
             <div class="input-container">
@@ -48,43 +48,12 @@
                     <p class="form-error">{{$errors->first('student_name')}}</p>
                 </div>
             </div>
-            <div class="input-container justify-end">
-                <x-search-select
-                    id="book_id"
-                    endpoint="{{route('books.api.all')}}"
-                    :values="[
-                        'id' => $data->book->id ?? '',
-                        'label' => $data->book->name ?? ''
-                    ]"
-                    label="ESCOLHA O LIVRO"
-                />
-                <p class="form-error">{{$errors->first('book_id')}}</p>
-                <input value="{{$data->book->name ?? ''}}" type="hidden" name="book_name" id="book_name">
-            </div>
         </div>
 
         <div class="input-container">
-            <label for="loan_date">DIA DO EMPRÉSTIMO</label>
-            <input type="date" name="loan_date" value="{{$data->loan_date ?? ''}}" id="loan_date" class="input">
-            <p class="form-error">{{$errors->first('loan_date')}}</p>
-        </div>
-
-        <div class="input-container">
-            <label for="expire_selection">QUANDO O EMPRÉSTIMO VAI EXPIRAR?</label>
-            <select name="expire_selection" id="expire_selection" class="input">
-                <option value="7">1 semana</option>
-                <option value="14">2 semanas</option>
-                <option value="21">3 semanas</option>
-                <option value="0">Personalizado</option>
-            </select>
+            <label for="expire_date">ATÉ QUANDO O ALUNO FICARÁ BANIDO?</label>
+            <input type="date" value="{{\Carbon\Carbon::now()->addDays(7)->format('Y-m-d')}}" class="input" name="expire_date" id="expire_date">
             <p class="form-error">{{$errors->first('expire_date')}}</p>
-
-            <div id="expire-days-form" class="input-container" style="display: none">
-                <label for="expire_days">Informe em quantos <strong>DIAS</strong> o empréstimo irá expirar</label>
-                <input type="number" id="expire_days" name="expire_days" class="input" min="7" max="30" value="7">
-            </div>
-
-            <input type="date" class="hidden" name="expire_date" id="expire_date">
         </div>
 
         <button class="leaf-button w-full">ENVIAR</button>
