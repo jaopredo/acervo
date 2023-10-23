@@ -43,13 +43,11 @@ $('#yes').on('click', function() {
     $("#student-id-container").show()
     $("#student-name-container").hide()
 
-    $('#student_name').val('')
+    $('#no').attr('checked', 'false')
 })
 $('#no').on('click', function() {
     $("#student-id-container").hide()
     $("#student-name-container").show()
-
-    $('#student_id').val('')
 })
 
 

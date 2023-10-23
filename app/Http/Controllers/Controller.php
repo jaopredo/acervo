@@ -27,10 +27,6 @@ class Controller extends BaseController
     public $resource;
     public $root_path;
 
-    public function relationships() {
-        return null;
-    }
-
     public function __construct() {
     }
 
@@ -78,9 +74,9 @@ class Controller extends BaseController
 
 
         if (Route::has("$this->page" . ".show")) {  // Se existir a rota que mostra os registros específicos
-            return redirect("$this->page/$inst->id")->with('msg', 'Criado com Sucesso!');
+            return redirect(route("$this->page.specific", $inst->id))->with('msg', 'Criado com Sucesso!');
         } else {  // Se não, por exemplo os tombamentos
-            return back()->with('msg', 'Criado com Sucesso!');
+            return redirect(route("$this->page.all"));
         }
     }
 
@@ -147,11 +143,8 @@ class Controller extends BaseController
     }
 
     public function create() {
-        $relationships = $this->relationships();
-
         return view(
             $this->page . '/create', [
-                'relationships' => $relationships,
                 'path' => [
                     $this->root_path,
                     [ 'name' => 'Criar ' . $this->root_path['name'], 'path' => 'create' ]
@@ -180,7 +173,6 @@ class Controller extends BaseController
 
         return view("$this->page/create", [
             'data'=>$data,
-            'relationships' => $this->relationships(),
             'path' => [
                 $this->root_path,
                 [ 'name' => 'Editar', 'path' => '#' ],

@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class LoanResource extends JsonResource
+class BannedResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,9 @@ class LoanResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'loan_date' => $this->loan_date,
-            'expire_date' => $this->expire_date,
             'student' => $this->student,
             'student_name' => $this->student_name,
-            'book' => $this->book,
-            'book_name' => $this->book_name
+            'expire_date' => $this->expire_date
         ];
     }
 }

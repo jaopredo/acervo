@@ -55,11 +55,4 @@ class BookController extends Controller
 
     public $resource = BookResource::class;
     public $root_path = ['name' => 'Livros', 'path' => '/books'];
-
-    public function relationships() {
-        return [
-            'categories' => Category::all(),
-            'groups' => Group::all(),
-        ];
-    }
 }

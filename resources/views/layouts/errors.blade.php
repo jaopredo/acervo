@@ -11,7 +11,15 @@
 </head>
 <body>
     <div class="h-screen flex items-center justify-center">
-        @yield('content')
+        <div class="flex flex-col items-center justify-center gap-2">
+            <h3 class="text-leaf text-lg font-bold">@yield('code')</h3>
+            <h1 class="text-5xl font-bold">@yield('title')</h1>
+            <p class="mt-4 text-gray-500">@yield('msg')</p>
+
+            <div class="flex items-center justify-center w-full">
+                <a class="leaf-button w-2/5" href="{{route('dashboard')}}">INÍCIO</a>
+            </div>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
