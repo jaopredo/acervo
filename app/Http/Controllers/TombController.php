@@ -9,7 +9,7 @@ use App\Http\Resources\GenericResource;
 class TombController extends Controller
 {
     public $model = Tomb::class;
-    public $page = 'books';
+    public $page = 'tombs';
     public $inputs = [
         'book_id',
         'tomb'
