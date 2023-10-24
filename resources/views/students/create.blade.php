@@ -47,7 +47,7 @@
 
         <div class="input-container">
             <x-search-select
-                :endpoint="route('classrooms.api.all')"
+                :endpoint="route('api.classrooms.all')"
                 :values="[
                     'label' => $data->classroom->name ?? '',
                     'id' => $data->classroom->id ?? ''

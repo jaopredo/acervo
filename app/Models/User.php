@@ -6,15 +6,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 use App\Notifications\ResetPassword;
 use Illuminate\Contracts\Auth\CanResetPassword;
 
 class User extends Authenticatable implements CanResetPassword
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory, Notifiable;
 
     const HAS_FILE = false;
+    const HAS_FOREIGN_KEYS = false;
 
     /**
      * The attributes that are mass assignable.

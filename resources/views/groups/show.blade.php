@@ -59,7 +59,7 @@
                                     label=""
                                     id="books"
                                     :values="[]"
-                                    :endpoint="route('books.api.all')"
+                                    :endpoint="route('api.books.all')"
                                     multiple
                                 />
                                 <button type="submit" class="leaf-button-outline">ENVIAR</button>

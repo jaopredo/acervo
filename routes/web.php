@@ -2,8 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthWebController;
 use App\Http\Controllers\PasswordForgotController;
+
+use App\Http\Controllers\AdminController;
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
@@ -27,145 +29,158 @@ use App\Http\Controllers\BannedController;
 */
 
 /*------------------------------- ESQUECEU A SENHA -------------------------------*/
-Route::get('/forgot-password', [PasswordForgotController::class, 'forgot_password'])->name('password.forget');
-Route::get('/change-password/{token}', [PasswordForgotController::class, 'password_form'])->middleware('guest')->name('password.reset');
+Route::controller(PasswordForgotController::class)->name('password.')->middleware(['guest'])->group(function () {
+    Route::get('/forgot-password', 'forgot_password')->name('forget');
+    Route::get('/change-password/{token}', 'password_form')->name('reset');
 
-Route::post('/forgot-password', [PasswordForgotController::class, 'send_email'])->middleware('guest')->name('password.email');
-Route::post('/change-password', [PasswordForgotController::class, 'redefine_password'])->middleware('guest')->name('password.redefine');
-
-/*------------------------------- ADMINISTRADORES -------------------------------*/
-/* Rotas de Página */
-Route::get('/profile', [AuthController::class, 'profile_view'])->name('profile');
-Route::get('/login', [AuthController::class, 'login_view'])->name('login');
-Route::post('/update-password', [AuthController::class, 'reset_password'])->middleware('guest')->name('password.update');
-
-Route::get('/admin', [AuthController::class, 'index'])->name('admin.all');
-Route::get('/admin/create', [AuthController::class, 'create'])->name('admin.create');
-Route::get('/admin/{id}', [AuthController::class, 'show'])->name('admin.show');
-Route::get('/admin/edit/{id}', [AuthController::class, 'edit'])->name('admin.edit');
-
-/* Rotas de Registro */
-Route::post('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/login', [AuthController::class, 'login'])->name('login.method');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::post('/change_password', [AuthController::class, 'change_password'])->name('change_password');
-
-Route::put('/admin/{id}', [AuthController::class, 'update'])->name('admin.update');
-Route::delete('/admin/{id}', [AuthController::class, 'destroy'])->name('admin.destroy');
-
-/*------------------------------- DASHBOARD -------------------------------*/
-Route::get('/', function() {
-    return view('dashboard', [
-        'path' => [
-        ]
-    ]);
-})->name('dashboard')->middleware('auth');
-
-/*------------------------------- LIVROS -------------------------------*/
-/* Rotas de Página */
-Route::name('books.')->prefix('books')->controller(BookController::class)->group(function() {
-    Route::get('/', 'index')->name('all');
-    Route::get('/create', 'create')->name('create');
-    Route::get('/{id}', 'show')->name('show');
-    Route::get('/edit/{id}', 'edit')->name('edit');
-
-    /* Rotas de Registro */
-    Route::post('/', 'store')->name('save');
-    Route::put('/{id}', 'update')->name('update');
-    Route::delete('/{id}', 'destroy')->name('destroy');
+    Route::post('/forgot-password', 'send_email')->name('email');
+    Route::post('/change-password', 'redefine_password')->name('redefine');
 });
 
-/*------------------------------- GRUPOS -------------------------------*/
-/* Rotas de Página */
-Route::name('groups.')->prefix('groups')->controller(GroupController::class)->group(function() {
-    Route::get('/', 'index')->name('all');
-    Route::get('/create', 'create')->name('create');
-    Route::get('/{id}', 'show')->name('show');
-    Route::get('/edit/{id}', 'edit')->name('edit');
+/*------------------------------- AUTENTIFICAÇÃO -------------------------------*/
+Route::controller(AuthWebController::class)->group(function() {
+    /* Rotas de Página */
+    Route::get('/profile', 'profile_view')->name('profile');
+    Route::get('/login', 'login_view')->name('login');
+    Route::post('/update-password', 'reset_password')->name('password.update');
 
-    /* Rotas de Registro */
-    Route::post('/', 'store')->name('save');
-    Route::put('/{id}', 'update')->name('update');
-    Route::delete('/{id}', 'destroy')->name('destroy');
-
-    Route::patch('/{id}', 'add_books')->name('patch-books');
+    Route::post('/login', 'login')->name('login.method');
+    Route::post('/logout', 'logout')->middleware(['auth'])->name('logout');
 });
 
-/*------------------------------- CATEGORIAS -------------------------------*/
-/* Rotas de Página */
-Route::name('categories.')->prefix('categories')->controller(CategoryController::class)->group(function() {
-    Route::get('/', 'index')->name('all');
-    Route::get('/create', 'create')->name('create');
-    Route::get('/{id}', 'show')->name('show');
-    Route::get('/edit/{id}', 'edit')->name('edit');
 
-    /* Rotas de Registro */
-    Route::post('/', 'store')->name('save');
-    Route::put('/{id}', 'update')->name('update');
-    Route::delete('/{id}', 'destroy')->name('destroy');
+Route::middleware(['auth'])->group(function() {
+    /*------------------------------- DASHBOARD -------------------------------*/
+    Route::get('/', function() {
+        return view('dashboard', [
+            'path' => [
+            ]
+        ]);
+    })->name('dashboard')->middleware('auth');
 
-    Route::patch('/{id}', 'add_books')->name('patch-books');
-});
+    /*------------------------------- ADMINISTRADORES -------------------------------*/
+    Route::controller(AdminController::class)->group(function() {
+        Route::prefix('/admin')->name('admin.')->group(function() {
+            Route::get('/', 'index')->name('all');
+            Route::get('/create', 'create')->name('create');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+    
+            Route::post('/', 'store')->name('save');
+            Route::put('/{id}', 'update')->name('update');
+            Route::delete('/{id}', 'destroy')->name('destroy');
+        });
+    
+        /* Rotas de Registro */
+        Route::post('/register', 'register')->name('register');
+        Route::post('/change_password', 'change_password')->name('change_password');
+    });
 
-/*------------------------------- TOMBAMENTOS -------------------------------*/
-Route::name('tombs.')->prefix('tombs')->controller(TombController::class)->group(function() {
-    Route::post('/', 'store')->name('save');
-    Route::put('/{id}', 'update')->name('update');
-    Route::delete('/{id}', 'destroy')->name('destroy');
-});
+    /*------------------------------- LIVROS -------------------------------*/
+    /* Rotas de Página */
+    Route::name('books.')->prefix('books')->controller(BookController::class)->group(function() {
+        Route::get('/', 'index')->name('all');
+        Route::get('/create', 'create')->name('create');
+        Route::get('/{id}', 'show')->name('show');
+        Route::get('/edit/{id}', 'edit')->name('edit');
 
-/*------------------------------- SALAS -------------------------------*/
-Route::name('classrooms.')->prefix('classrooms')->controller(ClassroomController::class)->group(function() {
-    Route::get('/', 'index')->name('all');
-    Route::get('/create', 'create')->name('create');
-    Route::get('/{id}', 'show')->name('show');
-    Route::get('/edit/{id}', 'edit')->name('edit');
+        /* Rotas de Registro */
+        Route::post('/', 'store')->name('save');
+        Route::put('/{id}', 'update')->name('update');
+        Route::delete('/{id}', 'destroy')->name('destroy');
+    });
 
-    /* Rotas de Registro */
-    Route::post('/', 'store')->name('save');
-    Route::put('/{id}', 'update')->name('update');
-    Route::delete('/{id}', 'destroy')->name('destroy');
-});
+    /*------------------------------- GRUPOS -------------------------------*/
+    /* Rotas de Página */
+    Route::name('groups.')->prefix('groups')->controller(GroupController::class)->group(function() {
+        Route::get('/', 'index')->name('all');
+        Route::get('/create', 'create')->name('create');
+        Route::get('/{id}', 'show')->name('show');
+        Route::get('/edit/{id}', 'edit')->name('edit');
 
-/*------------------------------- ESTUDANTES -------------------------------*/
-Route::name('students.')->prefix('students')->controller(StudentController::class)->group(function() {
-    Route::get('/', 'index')->name('all');
-    Route::get('/create', 'create')->name('create');
-    Route::get('/{id}', 'show')->name('show');
-    Route::get('/edit/{id}', 'edit')->name('edit');
+        /* Rotas de Registro */
+        Route::post('/', 'store')->name('save');
+        Route::put('/{id}', 'update')->name('update');
+        Route::delete('/{id}', 'destroy')->name('destroy');
 
-    /* Rotas de Registro */
-    Route::post('/', 'store')->name('save');
-    Route::put('/{id}', 'update')->name('update');
-    Route::delete('/{id}', 'destroy')->name('destroy');
-});
+        Route::patch('/{id}', 'add_books')->name('patch-books');
+    });
 
-/*------------------------------- EMPRÉSTIMOS -------------------------------*/
-Route::name('loans.')->prefix('loans')->controller(LoansController::class)->group(function() {
-    Route::get('/', 'index')->name('all');
-    Route::get('/create', 'create')->name('create');
-    Route::get('/{id}', function () {
-        return redirect(route('loans.all'));
-    })->name('loans.show');
-    Route::get('/edit/{id}', 'edit')->name('edit');
+    /*------------------------------- CATEGORIAS -------------------------------*/
+    /* Rotas de Página */
+    Route::name('categories.')->prefix('categories')->controller(CategoryController::class)->group(function() {
+        Route::get('/', 'index')->name('all');
+        Route::get('/create', 'create')->name('create');
+        Route::get('/{id}', 'show')->name('show');
+        Route::get('/edit/{id}', 'edit')->name('edit');
 
-    /* Rotas de Registro */
-    Route::post('/', 'store')->name('save');
-    Route::put('/{id}', 'update')->name('update');
-    Route::delete('/{id}', 'destroy')->name('destroy');
-});
+        /* Rotas de Registro */
+        Route::post('/', 'store')->name('save');
+        Route::put('/{id}', 'update')->name('update');
+        Route::delete('/{id}', 'destroy')->name('destroy');
 
-/*------------------------------- EMPRÉSTIMOS -------------------------------*/
-Route::name('banneds.')->prefix('banneds')->controller(BannedController::class)->group(function() {
-    Route::get('/', 'index')->name('all');
-    Route::get('/create', 'create')->name('create');
-    Route::get('/{id}', function () {
-        return redirect(route('banneds.all'));
-    })->name('loans.show');
-    Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::patch('/{id}', 'add_books')->name('patch-books');
+    });
 
-    /* Rotas de Registro */
-    Route::post('/', 'store')->name('save');
-    Route::put('/{id}', 'update')->name('update');
-    Route::delete('/{id}', 'destroy')->name('destroy');
+    /*------------------------------- TOMBAMENTOS -------------------------------*/
+    Route::name('tombs.')->prefix('tombs')->controller(TombController::class)->group(function() {
+        Route::post('/', 'store')->name('save');
+        Route::put('/{id}', 'update')->name('update');
+        Route::delete('/{id}', 'destroy')->name('destroy');
+    });
+
+    /*------------------------------- SALAS -------------------------------*/
+    Route::name('classrooms.')->prefix('classrooms')->controller(ClassroomController::class)->group(function() {
+        Route::get('/', 'index')->name('all');
+        Route::get('/create', 'create')->name('create');
+        Route::get('/{id}', 'show')->name('show');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+
+        /* Rotas de Registro */
+        Route::post('/', 'store')->name('save');
+        Route::put('/{id}', 'update')->name('update');
+        Route::delete('/{id}', 'destroy')->name('destroy');
+    });
+
+    /*------------------------------- ESTUDANTES -------------------------------*/
+    Route::name('students.')->prefix('students')->controller(StudentController::class)->group(function() {
+        Route::get('/', 'index')->name('all');
+        Route::get('/create', 'create')->name('create');
+        Route::get('/{id}', 'show')->name('show');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+
+        /* Rotas de Registro */
+        Route::post('/', 'store')->name('save');
+        Route::put('/{id}', 'update')->name('update');
+        Route::delete('/{id}', 'destroy')->name('destroy');
+    });
+
+    /*------------------------------- EMPRÉSTIMOS -------------------------------*/
+    Route::name('loans.')->prefix('loans')->controller(LoansController::class)->group(function() {
+        Route::get('/', 'index')->name('all');
+        Route::get('/create', 'create')->name('create');
+        Route::get('/{id}', function () {
+            return redirect(route('loans.all'));
+        })->name('loans.show');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+
+        /* Rotas de Registro */
+        Route::post('/', 'store')->name('save');
+        Route::put('/{id}', 'update')->name('update');
+        Route::delete('/{id}', 'destroy')->name('destroy');
+    });
+
+    /*------------------------------- EMPRÉSTIMOS -------------------------------*/
+    Route::name('banneds.')->prefix('banneds')->controller(BannedController::class)->group(function() {
+        Route::get('/', 'index')->name('all');
+        Route::get('/create', 'create')->name('create');
+        Route::get('/{id}', function () {
+            return redirect(route('banneds.all'));
+        })->name('loans.show');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+
+        /* Rotas de Registro */
+        Route::post('/', 'store')->name('save');
+        Route::put('/{id}', 'update')->name('update');
+        Route::delete('/{id}', 'destroy')->name('destroy');
+    });
 });

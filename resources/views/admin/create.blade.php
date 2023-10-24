@@ -10,11 +10,11 @@
     </h1>
     <form
         @isset($data)
-            action="{{route('password.update')}}"
+            action="{{route('change_password')}}"
         @else
-            action="/register"
+            action="{{route('admin.save')}}"
         @endisset
-    method="POST" class="bg-white rounded-md p-4">
+            method="POST" class="bg-white rounded-md p-4">
         @csrf
 
         <div class="input-group">

@@ -18,7 +18,7 @@
                     label="GRUPOS"
                     id="groups"
                     :values="$data->groups ?? []"
-                    :endpoint="route('groups.api.all')"
+                    :endpoint="route('api.groups.all')"
                     multiple
                 />
             </div>
@@ -28,7 +28,7 @@
                     label="CATEGORIAS"
                     id="categories"
                     :values="$data->categories ?? []"
-                    :endpoint="route('categories.api.all')"
+                    :endpoint="route('api.categories.all')"
                     multiple
                 />
             </div>
