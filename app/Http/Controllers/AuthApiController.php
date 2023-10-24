@@ -53,7 +53,7 @@ class AuthApiController extends Controller
             'cpf' => 'required',
             'registration' => 'required',
             'image' => 'nullable',
-            'classroom_id' => 'required|exists:students,id'
+            'classroom_id' => 'required|exists:classrooms,id'
         ]);
 
         $user = Student::create([

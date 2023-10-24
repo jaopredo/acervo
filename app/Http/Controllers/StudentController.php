@@ -29,7 +29,7 @@ class StudentController extends Controller
         'registration' => 'required',
         'image' => 'nullable',
 
-        'classroom_id' => 'required|exists:students,id'
+        'classroom_id' => 'required|exists:classrooms,id'
     ];
     public $filters = [
         [ 'name' => 'name', 'label' => 'Nome', 'operator' => 'like' ],
