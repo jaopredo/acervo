@@ -17,7 +17,7 @@
                 label="LIVROS"
                 id="books"
                 :values="$data['books'] ?? []"
-                :endpoint="route('books.api.all')"
+                :endpoint="route('api.books.all')"
                 multiple
             />
         </div>

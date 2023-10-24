@@ -28,7 +28,7 @@
                 <div id="student-id-container" class="input-container !mb-0" style="display: none">
                     <x-search-select
                         id="student_id"
-                        :endpoint="route('students.api.all')"
+                        :endpoint="route('api.students.all')"
                         label="ESCOLHA O ALUNO"
                         :values="[
                             'id' => $data->student->id ?? '',

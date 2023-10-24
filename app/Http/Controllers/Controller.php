@@ -27,9 +27,6 @@ class Controller extends BaseController
     public $resource;
     public $root_path;
 
-    public function __construct() {
-    }
-
     /*-------------------------- API METHODS --------------------------*/
     public function getAll(Request $request) {
         $limit = 11;
@@ -74,7 +71,7 @@ class Controller extends BaseController
 
 
         if (Route::has("$this->page" . ".show")) {  // Se existir a rota que mostra os registros específicos
-            return redirect(route("$this->page.specific", $inst->id))->with('msg', 'Criado com Sucesso!');
+            return redirect(route("$this->page.show", $inst->id))->with('msg', 'Criado com Sucesso!');
         } else {  // Se não, por exemplo os tombamentos
             return redirect(route("$this->page.all"));
         }

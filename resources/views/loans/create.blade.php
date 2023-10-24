@@ -28,7 +28,7 @@
                 <div id="student-id-container" class="input-container !mb-0" style="display: none">
                     <x-search-select
                         id="student_id"
-                        :endpoint="route('students.api.all')"
+                        :endpoint="route('api.students.all')"
                         label="ESCOLHA O ALUNO"
                         :values="[
                             'id' => $data->student->id ?? '',
@@ -51,7 +51,7 @@
             <div class="input-container justify-end">
                 <x-search-select
                     id="book_id"
-                    endpoint="{{route('books.api.all')}}"
+                    endpoint="{{route('api.books.all')}}"
                     :values="[
                         'id' => $data->book->id ?? '',
                         'label' => $data->book->name ?? ''

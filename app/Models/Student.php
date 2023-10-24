@@ -3,23 +3,42 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-use App\Models\Classroom;
-use App\Models\Loan;
 
 use App\Traits\FileValidator;
 
-class Student extends Model
+class Student extends Authenticatable implements JWTSubject
 {
-    use HasFactory, FileValidator;
+    use HasFactory, HasApiTokens, FileValidator, Notifiable;
+    
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'cpf',
+        'registration',
+        'image',
 
-    protected $guarded = [];
+        'classroom_id'
+    ];
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
+    const HAS_FOREIGN_KEYS = false;
     const HAS_FILE = true;
     public $file_field = "image";
 
-    const HAS_FOREIGN_KEYS = false;
 
     public function classroom() {
         return $this->belongsTo(Classroom::class);
@@ -31,5 +50,15 @@ class Student extends Model
 
     public function exclude_show() {
         return ['id', 'created_at', 'updated_at', 'password', 'classroom_id', 'image'];
+    }
+
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }

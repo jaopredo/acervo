@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Http\Resources\GenericResource;
 
-use App\Models\Classroom;
+use App\Traits\AuthMethods;
 
 class StudentController extends Controller
 {
@@ -27,17 +27,16 @@ class StudentController extends Controller
         'password_confirmation' => 'required|same:password',
         'cpf' => 'required',
         'registration' => 'required',
-        'image' => 'nullable'
+        'image' => 'nullable',
+
+        'classroom_id' => 'required|exists:students,id'
     ];
     public $filters = [
         [ 'name' => 'name', 'label' => 'Nome', 'operator' => 'like' ],
+        [ 'name' => 'email', 'label' => 'Email', 'operator' => 'like' ],
+        [ 'name' => 'registration', 'label' => 'Matrícula', 'operator' => 'like' ],
+        [ 'name' => 'cpf', 'label' => 'CPF', 'operator' => 'like' ],
     ];
     public $resource = GenericResource::class;
-    public $root_path = ['name' => 'Alunos', 'path' => '/students'];
-
-    public function relationships() {
-        return [
-            'classrooms' => Classroom::all()
-        ];
-    }
+    public $root_path = ['name' => 'Alunos', 'path' => '/students'];  
 }
