@@ -17,6 +17,12 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\LoansController;
 use App\Http\Controllers\BannedController;
 
+
+use App\Http\Controllers\ReadController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\WishController;
+
+use App\Http\Controllers\ReserveController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -181,6 +187,26 @@ Route::middleware(['auth'])->group(function() {
         /* Rotas de Registro */
         Route::post('/', 'store')->name('save');
         Route::put('/{id}', 'update')->name('update');
+        Route::delete('/{id}', 'destroy')->name('destroy');
+    });
+
+
+    /*------------------------------- LIDOS -------------------------------*/
+    Route::name('reads.')->prefix('reads')->controller(ReadController::class)->group(function() {
+        Route::get('/', 'index')->name('all');
+    });
+    /*------------------------------- EMPRÉSTIMOS -------------------------------*/
+    Route::name('favorites.')->prefix('favorites')->controller(FavoriteController::class)->group(function() {
+        Route::get('/', 'index')->name('all');
+    });
+    /*------------------------------- EMPRÉSTIMOS -------------------------------*/
+    Route::name('wishes.')->prefix('wishes')->controller(WishController::class)->group(function() {
+        Route::get('/', 'index')->name('all');
+    });
+
+    /*------------------------------- RESERVAS -------------------------------*/
+    Route::name('reserves.')->prefix('reserves')->controller(ReserveController::class)->group(function() {
+        Route::get('/', 'index')->name('all');
         Route::delete('/{id}', 'destroy')->name('destroy');
     });
 });

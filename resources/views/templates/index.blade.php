@@ -1,7 +1,7 @@
 @extends ('..layouts.main')
 
 @section ('upper-menu')
-    <x-index-actions :path="$path[0]['path']"/>
+    <x-index-actions :path="$path[0]['path']" :filters="$filters"/>
 @endsection
 
 @section ('content')
@@ -18,8 +18,8 @@
             <x-paginator :meta="$meta"/>
         </div>
     @else
-        <div class="bg-slate-50 p-2 mt-2 rounded-md h-3/4 flex items-center justify-center flex-col">
-            <x-bi-exclamation-triangle class="text-slate-400 w-1/2 h-1/2" />
+        <div class="bg-slate-50 p-2 h-full mt-2 rounded-md flex items-center justify-center flex-col">
+            <x-bi-exclamation-triangle class="text-slate-400 w-64 h-64" />
             <p class="text-slate-400 uppercase text-center font-bold">
                 Desculpe, mas não fomos capazes de<br> encontrar nenhum registro!
             </p>

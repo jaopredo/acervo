@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Carbon\Carbon;
 
 return new class extends Migration
 {
@@ -15,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->date('expire_date');
+            $table->date('expire_date')->default(Carbon::tomorrow()->format('Y-m-d'));
 
             $table->foreignId('student_id');
             $table->foreignId('book_id');

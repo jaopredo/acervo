@@ -7,7 +7,7 @@
         <option value="1">Para Vencer</option>
         <option value="2">Vencidos</option>
     </select>
-    <x-index-actions :path="$path[0]['path']"/>
+    <x-index-actions :path="$path[0]['path']" :filters="$filters"/>
 @endsection
 
 @section('table-header')
