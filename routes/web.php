@@ -17,6 +17,9 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\LoansController;
 use App\Http\Controllers\BannedController;
 
+
+use App\Http\Controllers\ReadController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -182,5 +185,10 @@ Route::middleware(['auth'])->group(function() {
         Route::post('/', 'store')->name('save');
         Route::put('/{id}', 'update')->name('update');
         Route::delete('/{id}', 'destroy')->name('destroy');
+    });
+
+    /*------------------------------- EMPRÉSTIMOS -------------------------------*/
+    Route::name('reads.')->prefix('reads')->controller(ReadController::class)->group(function() {
+        Route::get('/', 'index')->name('all');
     });
 });

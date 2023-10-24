@@ -32,13 +32,13 @@ $leaf_light: theme('colors.leaf.light');
 }
 
 #content {
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 10% auto;
-    grid-template-areas:
-        "upper-menu"
-        "cont"
-    ;
+    // display: grid;
+    // grid-template-columns: 100%;
+    // grid-template-rows: 10% fit-content;
+    // grid-template-areas:
+    //     "upper-menu"
+    //     "cont"
+    // ;
 
     grid-area: main;
 }

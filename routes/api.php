@@ -14,6 +14,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ClassroomController;
 
+
+use App\Http\Controllers\ReadController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -65,10 +67,14 @@ Route::name('api.')->group(function () {
         Route::get('/classrooms', [ClassroomController::class, 'getAll'])->name('classrooms.all');
     });
 
+    /* ======= COM AUTENTICAÇÃO ======= */
     Route::middleware(['auth:jwt'])->group(function() {
-        
+        /*------------------------------- SALAS -------------------------------*/
+        Route::name('reads.')->prefix('reads')->controller(ReadController::class)->group(function() {
+            Route::get('/', 'getAll')->name('all');
+            Route::post('/', 'store')->name('save');
+            Route::put('/{id}', 'update')->name('update');
+            Route::delete('/{id}', 'destroy')->name('destroy');
+        });
     });
 });
-
-
-/* ======= COM AUTENTICAÇÃO ======= */

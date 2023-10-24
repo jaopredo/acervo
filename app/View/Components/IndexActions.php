@@ -11,7 +11,7 @@ class IndexActions extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public $path)
+    public function __construct(public $path, public $filters)
     {
         //
     }

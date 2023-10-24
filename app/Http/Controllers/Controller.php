@@ -13,8 +13,6 @@ use App\Filters\Filter;
 
 use Illuminate\Support\Facades\Route;
 
-use App\Helpers\Meta;
-
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
@@ -70,31 +68,34 @@ class Controller extends BaseController
         }
 
 
-        if (Route::has("$this->page" . ".show")) {  // Se existir a rota que mostra os registros específicos
-            return redirect(route("$this->page.show", $inst->id))->with('msg', 'Criado com Sucesso!');
-        } else {  // Se não, por exemplo os tombamentos
-            return redirect(route("$this->page.all"));
+        if (is_in_api($request)) {
+            return response(['msg' => 'Registrado com sucesso!']);
+        } else {
+            if (Route::has("$this->page" . ".show")) {  // Se existir a rota que mostra os registros específicos
+                return redirect(route("$this->page.show", $inst->id))->with('msg', 'Criado com Sucesso!');
+            } else {  // Se não, por exemplo os tombamentos
+                return redirect(route("$this->page.all"));
+            }
         }
     }
 
-    public function destroy($id) {
-        $inst = $this->model::findOrFail($id);  // Pego a Instância
+    public function destroy(Request $request) {
+        $inst = $this->model::findOrFail($request->id);  // Pego a Instância
 
         if ($this->model::HAS_FILE) {  // Se o Modelo tiver um Arquivo
             $inst->deleteFile();  // Deleto o Arquivo
         }
 
-        $this->model::destroy($id);  // Deleto o registro da database
+        $this->model::destroy($request->id);  // Deleto o registro da database
 
-        // return response([
-        //     'exists' => Route::has($this->page . '.show') ? 'existe' : 'não existe',
-        //     'msg' => $this->page . '.show'
-        // ]);
-
-        if (Route::has("$this->page" . ".show")) {  // Se existir a rota que mostra os registros específicos
-            return redirect("$this->page")->with('msg', 'Deletado com Sucesso!');
-        } else {  // Se não, por exemplo os tombamentos
-            return back()->with('msg', 'Deletado com Sucesso!');
+        if (is_in_api($request)) {
+            return response(['msg' => 'Deletado com sucesso!']);
+        } else {
+            if (Route::has("$this->page" . ".show")) {  // Se existir a rota que mostra os registros específicos
+                return redirect("$this->page")->with('msg', 'Deletado com Sucesso!');
+            } else {  // Se não, por exemplo os tombamentos
+                return back()->with('msg', 'Deletado com Sucesso!');
+            }
         }
     }
 
@@ -116,10 +117,14 @@ class Controller extends BaseController
 
         $inst->update($data);
 
-        if (Route::has("$this->page" . ".show")) {  // Se existir a rota que mostra os registros específicos
-            return redirect("$this->page/$inst->id")->with('msg', 'Editado com Sucesso!');
-        } else {  // Se não, por exemplo os tombamentos
-            return back()->with('msg', 'Editado com Sucesso!');
+        if (is_in_api($request)) {
+            return response(['msg' => 'Editado com sucesso!']);
+        } else {
+            if (Route::has("$this->page" . ".show")) {  // Se existir a rota que mostra os registros específicos
+                return redirect("$this->page/$inst->id")->with('msg', 'Editado com Sucesso!');
+            } else {  // Se não, por exemplo os tombamentos
+                return back()->with('msg', 'Editado com Sucesso!');
+            }
         }
     }
 
@@ -131,7 +136,7 @@ class Controller extends BaseController
         return view(
             $this->page . '/index',
             [
-                'filters' => $this->filters ?? [],
+                'filters' => $this->filters,
                 'data'=> $int->data,
                 'meta' => $int->meta,
                 'path' => [ $this->root_path ]
