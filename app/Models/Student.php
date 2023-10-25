@@ -52,6 +52,22 @@ class Student extends Authenticatable implements JWTSubject
         return ['id', 'created_at', 'updated_at', 'password', 'classroom_id', 'image'];
     }
 
+    public function favorites() {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function reads() {
+        return $this->hasMany(Read::class);
+    }
+
+    public function wishes() {
+        return $this->hasMany(Wish::class);
+    }
+
+    public function reserves() {
+        return $this->hasMany(Reserve::class);
+    }
+
 
     public function getJWTIdentifier()
     {
