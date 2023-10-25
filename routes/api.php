@@ -100,7 +100,7 @@ Route::name('api.')->group(function () {
         /*------------------------------- RESERVADOS -------------------------------*/
         Route::name('reserves.')->prefix('reserves')->controller(ReserveController::class)->group(function() {
             Route::get('/', 'getAll')->name('all');
-            Route::post('/', 'store')->name('save');
+            Route::post('/', 'create_and_notify')->name('save');
             Route::delete('/{id}', 'destroy')->name('destroy');
         });
     });

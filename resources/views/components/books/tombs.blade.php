@@ -34,7 +34,7 @@
                                     <div class="flex items-center justify-start gap-2">
                                         <input type="date" class="input" value="{{$tomb->tomb}}" name="tomb">
                                         <input type="hidden" value="{{$book->id}}" name="book_id">
-                                        <button class="btn btn-outline-success">ALTERAR</button>
+                                        <button class="leaf-button-outline">ALTERAR</button>
                                     </div>
                                 </form>
                             </td>

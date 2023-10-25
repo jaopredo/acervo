@@ -12,9 +12,15 @@
 
     <div class="flex items-center justify-center gap-3">
         <div id="notification-icon-container"
-            class="group hover:cursor-pointer floating-toggler rounded-lg flex items-center justify-between gap-2 bg-leaf-lighter hover:bg-leaf p-2 transition-colors"
+            class="relative group hover:cursor-pointer floating-toggler rounded-lg flex items-center justify-between gap-2 bg-leaf-lighter hover:bg-leaf p-2 transition-colors"
         >
             <x-bi-bell width="20" height="20" class="text-leaf group-hover:text-leaf-lighter transition-colors" />
+
+            @if (count(auth()->user()->unreadNotifications) > 0)
+                <div class="flex items-center justify-center text-leaf group-hover:text-leaf-lighter transition-colors">
+                    {{count(auth()->user()->unreadNotifications)}}
+                </div>
+            @endif
         </div>
         <div id="profile-icon-container"
             class="group hover:cursor-pointer floating-toggler rounded-3xl flex items-center justify-between gap-2 w-19 bg-night-lighter hover:bg-night p-2 transition-colors"
@@ -28,8 +34,6 @@
         </div>
     </div>
 
-    <div id="notification-container" class="floating-container transition-transform transition-opacity scale-0 opacity-0">
-        <h2>NOTIFICAÇÕES</h2>
-    </div>
+    <x-notifications/>
     <x-profile/>
 </header>

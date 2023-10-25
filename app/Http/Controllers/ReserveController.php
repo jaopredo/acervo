@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Notification;
+
 use App\Models\Reserve;
+use App\Models\User;
 
 use App\Http\Resources\ReserveResource;
+
+use App\Notifications\ReserveCreated;
 
 class ReserveController extends Controller
 {
@@ -25,4 +30,13 @@ class ReserveController extends Controller
     public $root_path = ['name' => 'Reservas', 'path' => '/reserves'];
 
     public $filters = [];
+
+
+    public function create_and_notify(Request $request) {
+        $reserve = $this->store($request);
+
+        Notification::sendNow(User::all(), new ReserveCreated($reserve->getOriginalContent()['entry']));
+
+        return $reserve;
+    }
 }

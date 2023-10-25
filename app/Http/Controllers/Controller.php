@@ -44,14 +44,20 @@ class Controller extends BaseController
     }
 
     public function store(Request $request) {
+        // Valido com base nas regras definidas no controller filho
         $request->validate($this->validator);
 
+        // Crio uma nova instancia
         $inst = new $this->model;
+
+        // Retiro as chaves estrangeiras
         $data = $request->except($inst->foreign_keys);
 
+        // Para cada atributo dentro dos inputs declarados no CONTROLLER FILHO
         foreach ($this->inputs as $attr) {
+            // Se o atributo estiver nas informações passadas
             if (array_key_exists($attr, $data)) {
-                $inst[$attr] = $data[$attr];
+                $inst[$attr] = $data[$attr];  // Coloco na instância
             }
         }
 
@@ -60,7 +66,7 @@ class Controller extends BaseController
             $inst->storeFile($request);
         }
 
-        $inst->save();
+        $inst->save();  // Salvo
 
         // Salvo as Chaves Estrangeiras
         if ($this->model::HAS_FOREIGN_KEYS) {
@@ -68,13 +74,13 @@ class Controller extends BaseController
         }
 
 
-        if (is_in_api($request)) {
-            return response(['msg' => 'Registrado com sucesso!']);
+        if (is_in_api($request)) {  // Se eu estiver na API
+            return response(['msg' => 'Registrado com sucesso!', 'entry' => $inst]);
         } else {
             if (Route::has("$this->page" . ".show")) {  // Se existir a rota que mostra os registros específicos
                 return redirect(route("$this->page.show", $inst->id))->with('msg', 'Criado com Sucesso!');
             } else {  // Se não, por exemplo os tombamentos
-                return redirect(route("$this->page.all"));
+                return back()->with('msg', 'Criado com sucesso!');
             }
         }
     }
@@ -91,8 +97,8 @@ class Controller extends BaseController
         if (is_in_api($request)) {
             return response(['msg' => 'Deletado com sucesso!']);
         } else {
-            if (Route::has("$this->page" . ".show")) {  // Se existir a rota que mostra os registros específicos
-                return redirect("$this->page")->with('msg', 'Deletado com Sucesso!');
+            if (Route::has("$this->page" . ".all")) {  // Se existir a rota que mostra os registros específicos
+                return redirect(route("$this->page.all"))->with('msg', 'Deletado com Sucesso!');
             } else {  // Se não, por exemplo os tombamentos
                 return back()->with('msg', 'Deletado com Sucesso!');
             }
