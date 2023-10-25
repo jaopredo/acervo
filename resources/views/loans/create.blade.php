@@ -71,7 +71,7 @@
 
         <div class="input-container">
             <label for="expire_selection">QUANDO O EMPRÉSTIMO VAI EXPIRAR?</label>
-            <select name="expire_selection" id="expire_selection" class="input">
+            <select id="expire_selection" class="input">
                 <option value="7">1 semana</option>
                 <option value="14">2 semanas</option>
                 <option value="21">3 semanas</option>
@@ -81,7 +81,7 @@
 
             <div id="expire-days-form" class="input-container" style="display: none">
                 <label for="expire_days">Informe em quantos <strong>DIAS</strong> o empréstimo irá expirar</label>
-                <input type="number" id="expire_days" name="expire_days" class="input" min="7" max="30" value="7">
+                <input type="number" id="expire_days" class="input" min="7" max="30" value="7">
             </div>
 
             <input type="date" class="hidden" name="expire_date" id="expire_date">
