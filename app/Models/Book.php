@@ -45,6 +45,23 @@ class Book extends Model
         return $this->hasMany(Loan::class);
     }
 
+    public function favorites() {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function reads() {
+        return $this->hasMany(Read::class);
+    }
+
+    public function wishes() {
+        return $this->hasMany(Wish::class);
+    }
+
+    public function reserves() {
+        return $this->hasMany(Reserve::class);
+    }
+
+
     public function exclude_show() {
         return ['id', 'created_at', 'updated_at', 'categories', 'tombs', 'groups', 'image'];
     }

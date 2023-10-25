@@ -9,6 +9,8 @@ use App\Models\Student;
 use App\Models\Book;
 
 
+use App\Traits\ApiInfos;
+
 class Read extends Model
 {
     use HasFactory;
