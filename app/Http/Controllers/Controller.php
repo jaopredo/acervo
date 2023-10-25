@@ -75,7 +75,7 @@ class Controller extends BaseController
 
 
         if (is_in_api($request)) {  // Se eu estiver na API
-            return response(['msg' => 'Registrado com sucesso!']);
+            return response(['msg' => 'Registrado com sucesso!', 'entry' => $inst]);
         } else {
             if (Route::has("$this->page" . ".show")) {  // Se existir a rota que mostra os registros específicos
                 return redirect(route("$this->page.show", $inst->id))->with('msg', 'Criado com Sucesso!');
