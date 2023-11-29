@@ -41,41 +41,41 @@ Route::get('/file/{name}', [FileController::class, 'index'])->name('file');
 
 Route::name('api.')->group(function () {
     /* ======= SEM AUTENTICAÇÃO ======= */
-    Route::middleware(['guest'])->group(function () {
-        Route::post('/register-user', [AdminController::class, 'store']);
-        /* AUTENTIFICAÇÃO */
-        Route::controller(AuthApiController::class)->group(function() {
-            Route::post('/login', 'login')->name('login');
-            Route::post('/register', 'register')->name('register');
-            Route::post('/logout', 'logout')->name('logout');
-        });
-
-        /* LIVROS */
-        Route::controller(BookController::class)->prefix('books')->name('books.')->group(function () {
-            Route::get('/', 'getAll')->name('all');
-            Route::get('/{id}', 'get')->name('specific');
-        });
-        /* GRUPOS */
-        Route::controller(GroupController::class)->prefix('groups')->name('groups.')->group(function () {
-            Route::get('/', 'getAll')->name('all');
-            Route::get('/{id}', 'get')->name('specific');
-        });
-        /* CATEGORIAS */
-        Route::controller(CategoryController::class)->prefix('categories')->name('categories.')->group(function () {
-            Route::get('/', 'getAll')->name('all');
-            Route::get('/{id}', 'get')->name('specific');
-        });
-        /* ALUNOS */
-        Route::controller(StudentController::class)->prefix('students')->name('students.')->group(function () {
-            Route::get('/', 'getAll')->name('all');
-            Route::get('/{id}', 'get')->name('specific');
-        });
-        /* SALAS */
-        Route::get('/classrooms', [ClassroomController::class, 'getAll'])->name('classrooms.all');
+    Route::post('/register-user', [AdminController::class, 'store']);
+    /* AUTENTIFICAÇÃO */
+    Route::controller(AuthApiController::class)->group(function() {
+        Route::post('/login', 'login')->name('login');
+        Route::post('/register', 'register')->name('register');
+        Route::post('/logout', 'logout')->name('logout');
     });
 
+    /* LIVROS */
+    Route::controller(BookController::class)->prefix('books')->name('books.')->group(function () {
+        Route::get('/', 'getAll')->name('all');
+        Route::get('/{id}', 'get')->name('specific');
+    });
+    /* GRUPOS */
+    Route::controller(GroupController::class)->prefix('groups')->name('groups.')->group(function () {
+        Route::get('/', 'getAll')->name('all');
+        Route::get('/{id}', 'get')->name('specific');
+    });
+    /* CATEGORIAS */
+    Route::controller(CategoryController::class)->prefix('categories')->name('categories.')->group(function () {
+        Route::get('/', 'getAll')->name('all');
+        Route::get('/{id}', 'get')->name('specific');
+    });
+    /* ALUNOS */
+    Route::controller(StudentController::class)->prefix('students')->name('students.')->group(function () {
+        Route::get('/', 'getAll')->name('all');
+        Route::get('/{id}', 'get')->name('specific');
+    });
+    /* SALAS */
+    Route::get('/classrooms', [ClassroomController::class, 'getAll'])->name('classrooms.all');
+
     /* ======= COM AUTENTICAÇÃO ======= */
-    Route::middleware(['auth:jwt'])->group(function() {
+    Route::middleware(['auth:api'])->group(function() {
+        Route::get('/verify', [AuthApiController::class, 'verify']);
+
         /*------------------------------- LIDOS -------------------------------*/
         Route::name('reads.')->prefix('reads')->controller(ReadController::class)->group(function() {
             Route::get('/', 'getAll')->name('all');

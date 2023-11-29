@@ -14,7 +14,7 @@ use App\Models\Student;
 class AuthApiController extends Controller
 {
     public function __construct() {
-        auth()->shouldUse('jwt');
+        auth()->shouldUse('api');
     }
 
     public function login(Request $request)
@@ -28,14 +28,12 @@ class AuthApiController extends Controller
         $token = auth()->attempt($credentials);
         if (!$token) {
             return response()->json([
-                'status' => 'error',
-                'message' => 'Unauthorized',
+                'message' => 'Não autorizado',
             ], 401);
         }
 
         $user = auth()->user();
         return response()->json([
-            'status' => 'success',
             'user' => $user,
             'authorisation' => [
                 'token' => $token,
@@ -68,8 +66,7 @@ class AuthApiController extends Controller
 
         $token = auth()->login($user);
         return response()->json([
-            'status' => 'success',
-            'message' => 'User created successfully',
+            'message' => 'Usuário criado com sucesso!',
             'user' => $user,
             'authorisation' => [
                 'token' => $token,
@@ -82,22 +79,14 @@ class AuthApiController extends Controller
     {
         auth()->logout();
         return response()->json([
-            'status' => 'success',
-            'message' => 'Successfully logged out',
+            'message' => 'Deslogado com sucesso!',
         ]);
     }
 
-    // public function refresh()
-    // {
-    //     return response()->json([
-    //         'status' => 'success',
-    //         'user' => auth()->user(),
-    //         'authorisation' => [
-    //             'token' => auth()->refresh(),
-    //             'type' => 'bearer',
-    //         ]
-    //     ]);
-    // }
+    public function verify()
+    {
+        return response()->json([ 'message' => 'Verificado' ]);
+    }
 
     public function change_password(ChangePasswordRequest $request) {
 
