@@ -47,10 +47,6 @@ class Handler extends ExceptionHandler
             return response([
                 'message' => 'Você informou dados que já estão no banco de dados, tente fazer login!'
             ], Response::HTTP_NOT_ACCEPTABLE);
-        } else if ($e instanceof AuthenticationException) {
-            return response([
-                'message' => 'Não autorizado'
-            ], Response::HTTP_UNAUTHORIZED);
         } else if ($e instanceof ValidationException) {
             return response([
                 'message' => $e->getMessage(),
@@ -58,6 +54,6 @@ class Handler extends ExceptionHandler
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-        return response($e);
+        return parent::render($request, $e);
     }
 }

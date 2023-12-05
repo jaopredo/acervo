@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-const colors = require('tailwindcss/colors')
 
 export default {
   content: [
@@ -9,8 +8,8 @@ export default {
     "./resources/**/*.vue",
   ],
   theme: {
-    colors: {
-        ...colors,
+    extend: {
+      colors: {
         leaf: {
             lighter: '#E6F4F1',
             light: '#96D2C6',
@@ -25,8 +24,8 @@ export default {
             dark: '#071A34',
             darker: '#05152b',
         }
+      },
     },
-    extend: {},
   },
   plugins: []
 }
