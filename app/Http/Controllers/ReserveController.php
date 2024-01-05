@@ -13,6 +13,7 @@ use App\Models\Student;
 use App\Http\Resources\ReserveResource;
 
 use App\Notifications\ReserveCreated;
+use Carbon\Carbon;
 
 class ReserveController extends Controller
 {
@@ -34,7 +35,10 @@ class ReserveController extends Controller
 
 
     public function create_and_notify(Request $request) {
-        $request->request->add(['student_id' => auth()->user()->id]);
+        $request->request->add(['student_id' => auth()->user()->id, 'expire_date'=>Carbon::tomorrow()->toDateString()]);
+        // return response()->json([
+        //     'date' => Carbon::tomorrow(),
+        // ]);
         $student = Student::findOrFail($request->student_id);
 
         if (!$student->isBanned()) {

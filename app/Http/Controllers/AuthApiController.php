@@ -86,6 +86,7 @@ class AuthApiController extends Controller
     public function verify()
     {
         return response()->json([ 'message' => 'Verificado' ]);
+        // return response()->json($user);
     }
 
     public function change_password(ChangePasswordRequest $request) {

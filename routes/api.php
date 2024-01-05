@@ -41,7 +41,10 @@ Route::get('/file/{name}', [FileController::class, 'index'])->name('file');
 
 Route::name('api.')->group(function () {
     /* ======= SEM AUTENTICAÇÃO ======= */
+
+    /* REMOVER POSTERIORMENTE */
     Route::post('/register-user', [AdminController::class, 'store']);
+
     /* AUTENTIFICAÇÃO */
     Route::controller(AuthApiController::class)->group(function() {
         Route::post('/login', 'login')->name('login');
