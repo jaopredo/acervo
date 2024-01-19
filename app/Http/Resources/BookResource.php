@@ -8,6 +8,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use App\Models\Group;
 use App\Models\BookCategory;
 
+use Carbon\Carbon;
+
 class BookResource extends JsonResource
 {
     /**
@@ -37,6 +39,8 @@ class BookResource extends JsonResource
 			"created_at"=> $this->created_at,
 			"updated_at"=> $this->updated_at,
 			"image"=> $this->image,
+			"reserves"=> $this->reserves,
+			"loans" => $this->loans
         ];
     }
 }

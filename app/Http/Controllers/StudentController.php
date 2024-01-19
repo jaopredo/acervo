@@ -7,6 +7,8 @@ use App\Http\Resources\GenericResource;
 
 use App\Traits\AuthMethods;
 
+use App\Http\Resources\StudentResource;
+
 class StudentController extends Controller
 {
     public $model = Student::class;
@@ -37,6 +39,6 @@ class StudentController extends Controller
         [ 'name' => 'registration', 'label' => 'Matrícula', 'operator' => 'like' ],
         [ 'name' => 'cpf', 'label' => 'CPF', 'operator' => 'like' ],
     ];
-    public $resource = GenericResource::class;
+    public $resource = StudentResource::class;
     public $root_path = ['name' => 'Alunos', 'path' => '/students'];  
 }

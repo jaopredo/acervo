@@ -37,7 +37,7 @@
                         </tr>
                     @endif
                     @foreach($data->response()->getData()->data as $key=>$field)
-                        @if (!in_array($key, $data->exclude_show()))
+                        @if (!in_array($key, $data->exclude_show()) && !is_array($field))
                             <tr>
                                 <th scope="row" class="text-right">{{__("fields.book.$key")}}</th>
                                 <td>{{$field}}</td>

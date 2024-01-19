@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Notification;
 
 use App\Models\Reserve;
 use App\Models\User;
+use App\Models\Student;
 
 use App\Http\Resources\ReserveResource;
 
 use App\Notifications\ReserveCreated;
+use Carbon\Carbon;
 
 class ReserveController extends Controller
 {
@@ -33,10 +35,21 @@ class ReserveController extends Controller
 
 
     public function create_and_notify(Request $request) {
-        $reserve = $this->store($request);
+        $request->request->add(['student_id' => auth()->user()->id, 'expire_date'=>Carbon::tomorrow()->toDateString()]);
+        // return response()->json([
+        //     'date' => Carbon::tomorrow(),
+        // ]);
+        $student = Student::findOrFail($request->student_id);
 
-        Notification::sendNow(User::all(), new ReserveCreated($reserve->getOriginalContent()['entry']));
+        if (!$student->isBanned()) {
+            $reserve = $this->store($request);
 
-        return $reserve;
+            Notification::sendNow(User::all(), new ReserveCreated($reserve->getOriginalContent()['entry']));
+            return $reserve;
+        } else {
+            return response([
+                'message' => 'Você não pode reservar um livro, você está banido. Se acha que isso é um erro, entre em contato com a biblioteca'
+            ], 401);
+        }
     }
 }

@@ -11,4 +11,6 @@ class Banned extends Model
 
     const HAS_FILE = false;
     const HAS_FOREIGN_KEYS = false;
+
+    protected $guarded = [];
 }

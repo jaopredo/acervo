@@ -7,9 +7,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-
+use Carbon\Carbon;
 
 use App\Traits\FileValidator;
+
+use App\Models\Banned;
 
 class Student extends Authenticatable implements JWTSubject
 {
@@ -66,6 +68,21 @@ class Student extends Authenticatable implements JWTSubject
 
     public function reserves() {
         return $this->hasMany(Reserve::class);
+    }
+
+
+    public function bans() {
+        return $this->hasMany(Banned::class);
+    }
+
+
+    public function isBanned() {
+        $bans = $this->bans;
+
+        foreach ($bans as $ban) {
+            if (Carbon::parse($ban->expire_date)->isFuture()) return true;
+        }
+        return false;
     }
 
 

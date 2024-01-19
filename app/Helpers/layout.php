@@ -20,9 +20,9 @@ if (!function_exists('side_menu')) {
                     'icon' => 'bi-bookmark'
                 ],
                 [
-                    'path' => '/reserves',
-                    'name' => 'Reservados',
-                    'icon' => 'bi-lock'
+                    'path' => '/loans',
+                    'name' => 'Empréstimos',
+                    'icon' => 'bi-file-earmark-lock2-fill'
                 ],
             ],
             'Alunos' => [
@@ -37,9 +37,9 @@ if (!function_exists('side_menu')) {
                     'icon' => 'bi-window'
                 ],
                 [
-                    'path' => '/loans',
-                    'name' => 'Empréstimos',
-                    'icon' => 'bi-file-earmark-lock2-fill'
+                    'path' => '/reserves',
+                    'name' => 'Reservados',
+                    'icon' => 'bi-lock'
                 ],
                 [
                     'path' => '/banneds',

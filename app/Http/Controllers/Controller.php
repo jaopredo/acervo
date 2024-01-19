@@ -75,10 +75,14 @@ class Controller extends BaseController
 
 
         if (is_in_api($request)) {  // Se eu estiver na API
-            return response(['msg' => 'Registrado com sucesso!', 'entry' => $inst]);
+            return response([
+                'message' => 'Registrado com sucesso!',
+                'entry' => new $this->resource($inst)]);
         } else {
             if (Route::has("$this->page" . ".show")) {  // Se existir a rota que mostra os registros específicos
                 return redirect(route("$this->page.show", $inst->id))->with('msg', 'Criado com Sucesso!');
+            } else if (Route::has("$this->page" . ".all")) {
+                return redirect(route("$this->page.all"))->with('msg', 'Criado com Sucesso!');
             } else {  // Se não, por exemplo os tombamentos
                 return back()->with('msg', 'Criado com sucesso!');
             }
@@ -107,7 +111,7 @@ class Controller extends BaseController
 
     public function update(Request $request) {
         $inst = $this->model::findOrFail($request->id);
-        $data = $request->except($inst->foreign_keys);
+        $data = $request->except($inst->foreign_keys, 'has_register');
 
 
         if (($this->model::HAS_FILE) && ($request->hasFile($inst->file_field))) {
@@ -127,9 +131,11 @@ class Controller extends BaseController
             return response(['msg' => 'Editado com sucesso!']);
         } else {
             if (Route::has("$this->page" . ".show")) {  // Se existir a rota que mostra os registros específicos
-                return redirect("$this->page/$inst->id")->with('msg', 'Editado com Sucesso!');
+                return redirect(route("$this->page.show", $inst->id))->with('msg', 'Editado com Sucesso!');
+            } else if (Route::has("$this->page" . ".all")) {
+                return redirect(route("$this->page.all"))->with('msg', 'Editado com Sucesso!');
             } else {  // Se não, por exemplo os tombamentos
-                return back()->with('msg', 'Editado com Sucesso!');
+                return back()->with('msg', 'Editado com sucesso!');
             }
         }
     }
