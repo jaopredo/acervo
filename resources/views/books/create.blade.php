@@ -1,79 +1,133 @@
-@extends('..layouts.main')
+@extends('..templates.create')
 
 @once
-    @push ('styles')
-        @vite(['resources/css/books.css'])
-    @endpush
     @push ('scripts')
         @vite(['resources/js/bookForm.js'])
     @endpush
 @endonce
 
-@section ('upper-menu')
-    <h1>CRIANDO LIVRO</h1>
-@endsection
+@section ('content-container')
+    @isset($data)
+        {{ html()->modelForm($data, 'PUT', route('books.update', $data->id))->acceptsFiles()->open() }}
+    @else
+        {{ html()->form('POST', route('books.save'))->acceptsFiles()->open() }}
+    @endisset
+        <div class="input-group">
+            <div class="input-container">
+                <x-search-select
+                    label="GRUPOS"
+                    id="groups"
+                    :values="$data->groups ?? []"
+                    :endpoint="route('api.groups.all')"
+                    multiple
+                />
+            </div>
 
-@section ('content')
-<div class="books-container">
-    <form action="/books/create" method="POST" enctype="multipart/form-data">
-        @csrf
-        <div class="mb-3">
-            <label for="register">REGISTRO DO LIVRO</label>
-            <input type="text" id="register" name="register" class="form-control">
+            <div class="input-container">
+                <x-search-select
+                    label="CATEGORIAS"
+                    id="categories"
+                    :values="$data->categories ?? []"
+                    :endpoint="route('api.categories.all')"
+                    multiple
+                />
+            </div>
         </div>
-        <div class="mb-3 input-group">
-            <label class="input-group-text" for="cdd">CDD</label>
-            <input type="text" id="cdd" name="cdd" class="form-control">
-            <label class="input-group-text" for="isbn">ISBN</label>
-            <input type="text" id="isbn" name="isbn" class="form-control">
+
+        <div class="input-group">
+            <div class="input-container">
+                <label for="register">REGISTRO DO LIVRO</label>
+                <input type="text" id="register" name="register" class="input" value="{{ $data->register ?? '' }}">
+                <p class="form-error">{{$errors->first('register')}}</p>
+            </div>
+
+            <div class="input-container">
+                <label for="isbn">ISBN</label>
+                <input type="text" id="isbn" name="isbn" class="input" value="{{ $data->isbn ?? '' }}">
+                <p class="form-error">{{$errors->first('isbn')}}</p>
+            </div>
+
+            <div class="input-container">
+                <label for="cdd">CDD</label>
+                <input type="text" id="cdd" name="cdd" class="input" value="{{ $data->cdd ?? '' }}">
+                <p class="form-error">{{$errors->first('cdd')}}</p>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="name">NOME DO LIVRO</label>
-            <input type="text" id="name" name="name" class="form-control">
+
+        <div class="input-group">
+            <div class="input-container">
+                <label for="name">NOME DO LIVRO</label>
+                <input type="text" id="name" name="name" class="input" value="{{ $data->name ?? '' }}">
+                <p class="form-error">{{$errors->first('name')}}</p>
+            </div>
+
+            <div class="input-container">
+                <label for="author">AUTOR</label>
+                <input type="text" id="author" name="author" class="input" value="{{ $data->author ?? '' }}">
+                <p class="form-error">{{$errors->first('author')}}</p>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="author">AUTOR</label>
-            <input type="text" id="author" name="author" class="form-control">
+
+        <div class="input-group">
+            <div class="input-container">
+                <label for="volume">VOLUME</label>
+                <input type="number"name="volume" id="volume" class="input" value="{{ $data->volume ?? '' }}">
+                <p class="form-error">{{$errors->first('volume')}}</p>
+            </div>
+
+            <div class="input-container">
+                <label for="pages">PÁGINAS</label>
+                <input type="number" name="pages" id="pages" class="input" value="{{ $data->pages ?? '' }}">
+                <p class="form-error">{{$errors->first('pages')}}</p>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="publication">ANO DE PUBLICAÇÃO</label>
-            <input type="number" max="{{ date("Y") }}" name="publication" id="publication" class="form-control">
+
+        <div class="input-group">
+            <div class="input-container">
+                <label for="aquisition-year">ANO DE AQUISIÇÃO</label>
+                <input value="{{ $data->aquisition_year ?? '' }}" type="number" max="{{ date("Y") }}" name="aquisition_year" id="aquisition-year" class="input">
+                <p class="form-error">{{$errors->first('aquisition_year')}}</p>
+            </div>
+
+            <div class="input-container">
+                <label for="publication">ANO DE PUBLICAÇÃO</label>
+                <input value="{{ $data->publication ?? '' }}" type="number" max="{{ date("Y") }}" name="publication" id="publication" class="input">
+                <p class="form-error">{{$errors->first('publication')}}</p>
+            </div>
+
+            <div class="input-container">
+                <label for="example">EXEMPLAR</label>
+                <input value="{{ $data->example ?? '' }}" type="number" name="example" id="example" class="input">
+                <p class="form-error">{{$errors->first('example')}}</p>
+            </div>
         </div>
-        <div class="mb-3">
+
+        <div class="input-container">
             <label for="editor">EDITORA</label>
-            <input type="text" name="editor" id="editor" class="form-control">
+            <input value="{{ $data->editor ?? '' }}" type="text" name="editor" id="editor" class="input">
+            <p class="form-error">{{$errors->first('editor')}}</p>
         </div>
-        <div class="mb-3">
-            <label for="pages">PÁGINAS</label>
-            <input type="number" name="pages" id="pages" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label for="volume">VOLUME</label>
-            <input type="number"name="volume" id="volume" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label for="example">EXEMPLAR</label>
-            <input type="number" name="example" id="example" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label for="aquisition-year">ANO DE AQUISIÇÃO</label>
-            <input type="number" max="{{ date("Y") }}" name="aquisition_year" id="aquisition-year" class="form-control">
-        </div>
-        <div class="mb-3">
+
+        <div class="input-container">
             <label for="aquisition">MÉTODO DE AQUISIÇÃO</label>
-            <input type="text" name="aquisition" id="aquisition" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label for="local">LOCAL</label>
-            <input type="text" name="local" id="local" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label for="image">IMAGEM</label>
-            <input type="file" name="image" id="image" class="form-control">
+            <input value="{{ $data->aquisition ?? '' }}" type="text" name="aquisition" id="aquisition" class="input">
+            <p class="form-error">{{$errors->first('aquisition')}}</p>
         </div>
 
-        <button class="btn btn-primary">ENVIAR</button>
-    </form>
-</div>
+        <div class="input-group">
+            <div class="input-container">
+                <label for="local">LOCAL</label>
+                <input value="{{ $data->local ?? '' }}" type="text" name="local" id="local" class="input">
+                <p class="form-error">{{$errors->first('local')}}</p>
+            </div>
+            <x-file-upload id="image"/>
+        </div>
 
+        <div class="input-container">
+            <label for="description">DESCRIÇÃO</label>
+            <textarea name="description" id="description" class="input">{{$data->description ?? ''}}</textarea>
+        </div>
+
+        <button class="leaf-button w-full">ENVIAR</button>
+    {{ html()->form()->close() }}
 @endsection

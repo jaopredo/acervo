@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+$leaf_light: theme('colors.leaf.light');
+
+* {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+/* LAYOUT DA PÁGINA */
+#interface {
+    display: grid;
+    grid-template-columns: 18vw 82vw;
+    grid-template-rows: 10vh 90vh;
+    grid-template-areas:
+        "header header"
+        "aside main"
+    ;
+
+    min-height: 100vh;
+}
+
+#header {
+    grid-area: header;
+}
+
+#side {
+    grid-area: aside;
+}
+
+#content {
+    // display: grid;
+    // grid-template-columns: 100%;
+    // grid-template-rows: 10% fit-content;
+    // grid-template-areas:
+    //     "upper-menu"
+    //     "cont"
+    // ;
+
+    grid-area: main;
+}
+// #content::-webkit-scrollbar {
+//     width: 10px;
+// }
+// #content::-webkit-scrollbar-track {
+//     @apply bg-transparent;
+// }
+// #content::-webkit-scrollbar-thumb {
+//     width: 10px;
+//     background: theme('colors.gray.500');
+//     border-radius: 20px;
+// }
+
+/* TABELA */
+.table {
+    width: 100%;
+
+    td, th {
+        padding: .4em .8em;
+    }
+
+    tbody tr:nth-child(odd) {
+        background-color: theme('colors.slate.200');
+    }
+}
+
+/* FORMULÁRIOS */
+.form-error {
+    @apply text-red-400 text-sm;
+}
+
+.input-group {
+    @apply flex items-center justify-between gap-2 flex-wrap;
+
+    & > * {
+        flex-grow: 1;
+    }
+}
+
+.input-container {
+    @apply flex flex-col items-stretch gap-2;
+    flex-grow: 1;
+    margin-bottom: .7em;
+}
+
+.input {
+    @apply shadow-sm;
+
+    outline: none;
+    display: block;
+    padding: 5px;
+    border-radius: .275em;
+    border: 1px solid theme('colors.slate.200');
+    background: white;
+
+    min-height: 2.5em;
+
+    transition: border-color 200ms, outline 200ms;
+    &:focus {
+        border: 1px solid transparent;
+        outline: 4px solid $leaf_light;
+    }
+}
+
+.false-focus {
+    border: 1px solid transparent;
+    outline: 4px solid theme('colors.leaf.light');
+}
+
+label {
+    font-size: .975em;
+}
+
+/* REDIRECTION */
+.redirect:hover {
+    color: theme('colors.leaf.dark');
+    cursor: pointer;
+}
+
+/* BUTTONS */
+.button {
+    @apply flex py-2 px-4 rounded items-center justify-center gap-1 font-semibold transition-colors text-sm;
+}
+
+.leaf-button {
+    @extend .button;
+    @apply bg-leaf-dark active:bg-leaf-darker hover:bg-leaf text-white;
+}
+.leaf-button-outline {
+    @extend .button;
+    @apply bg-transparent border border-leaf-dark text-leaf-dark active:bg-leaf-darker hover:bg-leaf  hover:text-white;
+}
+
+.night-button {
+    @extend .button;
+    @apply bg-night-dark active:bg-night-darker hover:bg-night-light text-white;
+}
+.night-button-outline {
+    @extend .button;
+    @apply bg-transparent border-night-dark border active:bg-night-darker hover:bg-night-dark hover:text-white;
+}
+
+.elevated-button {
+    @apply bg-white flex items-center justify-center hover:bg-gray-100 text-gray-800 text-sm font-semibold py-2 px-4 border border-gray-400 rounded shadow  transition-colors;
+}
+
+
+/* ALERTS */
+.alert {
+    @apply p-2 rounded-md;
+}
+
+.alert-error {
+    @apply border-red-600 bg-red-200 text-red-500;
+}
+
+.alert-success {
+    @apply bg-green-200 text-emerald-600;
+}
+
+/* SCROLLABLES */
+.scrollable::-webkit-scrollbar {
+    width: 7px;
+}
+
+.scrollable::-webkit-scrollbar-track {
+    @apply bg-transparent;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+    width: 10px;
+    background: theme('colors.gray.400');
+    border-radius: 20px;
+}
+.scrollable::-webkit-scrollbar-thumb:hover {
+    width: 10px;
+    background: theme('colors.gray.500');
+    border-radius: 20px;
+}
+.scrollable::-webkit-scrollbar-thumb:active {
+    width: 10px;
+    background: theme('colors.gray.600');
+    border-radius: 20px;
+}

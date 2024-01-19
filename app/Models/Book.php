@@ -4,24 +4,65 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
+use App\Models\Group;
+use App\Models\Category;
+use App\Models\Tomb;
+use App\Models\Loan;
+
+use App\Traits\FileValidator;
+use App\Traits\ForeignKeys;
 
 class Book extends Model
 {
-    use HasFactory;
+    use HasFactory, FileValidator, ForeignKeys;
 
-    protected $fillable = [
-        'register',
-        'cdd',
-        'isbn',
-        'name',
-        'author',
-        'publication',
-        'editor',
-        'pages',
-        'volume',
-        'example',
-        'aquisition_year',
-        'aquisition',
-        'local'
-    ];
+    protected $guarded = [];
+
+    /* IMAGENS */
+    const HAS_FILE = true;
+    public $file_field = 'image';
+
+    /* CHAVES ESTRANGEIRAS */
+    const HAS_FOREIGN_KEYS = true;
+    public $foreign_keys = ['categories', 'groups'];
+
+    /* RELAÇÕES */
+    public function groups() {
+        return $this->belongsToMany(Group::class, 'book_group');
+    }
+
+    public function categories(): BelongsToMany {
+        return $this->belongsToMany(Category::class, 'book_category');
+    }
+
+    public function tombs() {
+        return $this->hasMany(Tomb::class);
+    }
+
+    public function loans() {
+        return $this->hasMany(Loan::class);
+    }
+
+    public function favorites() {
+        return $this->hasMany(Favorite::class);
+    }
+
+    public function reads() {
+        return $this->hasMany(Read::class);
+    }
+
+    public function wishes() {
+        return $this->hasMany(Wish::class);
+    }
+
+    public function reserves() {
+        return $this->hasMany(Reserve::class);
+    }
+
+
+    public function exclude_show() {
+        return ['id', 'created_at', 'updated_at', 'categories', 'tombs', 'groups', 'image'];
+    }
 }

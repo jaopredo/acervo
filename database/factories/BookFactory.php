@@ -22,7 +22,8 @@ class BookFactory extends Factory
     public function definition(): array
     {
         return [
-            'register' => Str::random(9),
+            'register' => fake()->uuid(),
+            'description' => fake()->sentence(),
             'cdd' => '1232123',
             'isbn' => '123123',
             'name' => fake()->name(),
@@ -34,7 +35,8 @@ class BookFactory extends Factory
             'example' => 3,
             'aquisition_year' => 2019,
             'aquisition' => "aaaaaaaa",
-            'local' => 'bbbbbbbb'
+            'local' => 'bbbbbbbb',
+            'image' => fake()->word() . '.' . fake()->fileExtension()
         ];
     }
 }
