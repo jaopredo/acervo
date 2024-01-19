@@ -13,11 +13,9 @@ class FavoriteController extends Controller
     public $model = Favorite::class;
     public $resource = FavoriteResource::class;
     public $inputs = [
-        'student_id',
         'book_id',
     ];
     public $validator = [
-        'student_id'=> 'required|exists:students,id',
         'book_id'=> 'required|exists:books,id',
     ];
 
@@ -25,4 +23,21 @@ class FavoriteController extends Controller
     public $root_path = ['name' => 'Favoritos', 'path' => '/favorites'];
 
     public $filters = [];
+
+    public function getStudentFavorites() {
+        $favorites = $this->model::where('student_id', '=', auth()->user()->id)->get();
+
+        return $favorites;
+    }
+
+    public function createWish(Request $request) {
+        $user = auth()->user();
+
+        $favorites = new $this->model;
+        $favorites->student_id = $user->id;
+        $favorites->book_id = $request->book_id;
+        $favorites->save();
+
+        return $favorites;
+    }
 }

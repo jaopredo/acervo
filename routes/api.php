@@ -95,8 +95,8 @@ Route::name('api.')->group(function () {
 
         /*------------------------------- FAVORITOS -------------------------------*/
         Route::name('wishes.')->prefix('wishes')->controller(WishController::class)->group(function() {
-            Route::get('/', 'getAll')->name('all');
-            Route::post('/', 'store')->name('save');
+            Route::get('/', 'getStudentWishes')->name('all');
+            Route::post('/', 'createWish')->name('save');
             Route::delete('/{id}', 'destroy')->name('destroy');
         });
 
