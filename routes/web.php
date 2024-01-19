@@ -175,7 +175,7 @@ Route::middleware(['auth'])->group(function() {
         Route::delete('/{id}', 'destroy')->name('destroy');
     });
 
-    /*------------------------------- EMPRÉSTIMOS -------------------------------*/
+    /*------------------------------- BANIDOS -------------------------------*/
     Route::name('banneds.')->prefix('banneds')->controller(BannedController::class)->group(function() {
         Route::get('/', 'index')->name('all');
         Route::get('/create', 'create')->name('create');
@@ -191,22 +191,29 @@ Route::middleware(['auth'])->group(function() {
     });
 
 
-    /*------------------------------- LIDOS -------------------------------*/
-    Route::name('reads.')->prefix('reads')->controller(ReadController::class)->group(function() {
-        Route::get('/', 'index')->name('all');
-    });
-    /*------------------------------- EMPRÉSTIMOS -------------------------------*/
-    Route::name('favorites.')->prefix('favorites')->controller(FavoriteController::class)->group(function() {
-        Route::get('/', 'index')->name('all');
-    });
-    /*------------------------------- EMPRÉSTIMOS -------------------------------*/
-    Route::name('wishes.')->prefix('wishes')->controller(WishController::class)->group(function() {
-        Route::get('/', 'index')->name('all');
-    });
+    /**
+     * Essas rotas seriam utilizadas para visualizar as informações sobre o que os alunos fazem,
+     * como quais os livros mais favoritos, os livros mais lidos e os livros mais desejados.
+     */
 
+    // /*------------------------------- LIDOS -------------------------------*/
+    // Route::name('reads.')->prefix('reads')->controller(ReadController::class)->group(function() {
+    //     Route::get('/', 'index')->name('all');
+    // });
+    // /*------------------------------- FAVORITOS -------------------------------*/
+    // Route::name('favorites.')->prefix('favorites')->controller(FavoriteController::class)->group(function() {
+    //     Route::get('/', 'index')->name('all');
+    // });
+    // /*------------------------------- DESEJADOS -------------------------------*/
+    // Route::name('wishes.')->prefix('wishes')->controller(WishController::class)->group(function() {
+    //     Route::get('/', 'index')->name('all');
+    // });
+    
+    /**
+     * Essa rota iria informar quais os livros que os alunos iam reservar */
     /*------------------------------- RESERVAS -------------------------------*/
-    Route::name('reserves.')->prefix('reserves')->controller(ReserveController::class)->group(function() {
-        Route::get('/', 'index')->name('all');
-        Route::delete('/{id}', 'destroy')->name('destroy');
-    });
+    // Route::name('reserves.')->prefix('reserves')->controller(ReserveController::class)->group(function() {
+    //     Route::get('/', 'index')->name('all');
+    //     Route::delete('/{id}', 'destroy')->name('destroy');
+    // });
 });
