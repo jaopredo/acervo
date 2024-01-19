@@ -43,7 +43,7 @@
 
             <div class="input-container">
                 <label for="isbn">ISBN</label>
-                <input type="text" id="isbn" name="isbn" class="input" value="{{ $data->isbn ?? '' }}">
+                <input type="text" id="isbn" maxlength="17" name="isbn" class="input" value="{{ $data->isbn ?? '' }}">
                 <p class="form-error">{{$errors->first('isbn')}}</p>
             </div>
 
