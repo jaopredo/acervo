@@ -10,11 +10,11 @@
 @endonce
 
 @section('content')
-    <div class="flex items-stretch justify-center gap-2 h-full">
+    <div class="flex items-stretch justify-center gap-2">
         @if ($data->image)
         <div
             style="background-image: url('{{ env('APP_FULL_URL') . '/api/file/' . $data->image }}')"
-            class="flex-grow bg-center bg-contain w-1/2 h-full"
+            class="flex-grow bg-no-repeat bg-center bg-contain w-1/2 h-[70vh]"
         ></div>
         @endif
         <div class="flex-grow w-1/2">
