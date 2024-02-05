@@ -1,7 +1,7 @@
 @extends('..templates.index')
 
 @section ('upper-menu')
-    <select id="loan-type-selection" class="input">
+    <select id="loan-type-selection" class="input !min-h-fit !p-2">
         <option value="" selected disabled>Filtre pelo Estado</option>
         <option value="0">Válidos</option>
         <option value="1">Para Vencer</option>

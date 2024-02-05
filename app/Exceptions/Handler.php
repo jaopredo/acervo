@@ -43,15 +43,17 @@ class Handler extends ExceptionHandler
     }
 
     public function render($request, Throwable $e) {
-        if ($e instanceof UniqueConstraintViolationException) {
-            return response([
-                'message' => 'Você informou dados que já estão no banco de dados, tente fazer login!'
-            ], Response::HTTP_NOT_ACCEPTABLE);
-        } else if ($e instanceof ValidationException) {
-            return response([
-                'message' => $e->getMessage(),
-                'errors' => $e->errors()
-            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        if ($request->expectsJson()) {
+            if ($e instanceof UniqueConstraintViolationException) {
+                return response([
+                    'message' => 'Você informou dados que já estão no banco de dados, tente fazer login!'
+                ], Response::HTTP_NOT_ACCEPTABLE);
+            } else if ($e instanceof ValidationException) {
+                return response([
+                    'message' => $e->getMessage(),
+                    'errors' => $e->errors()
+                ], Response::HTTP_UNPROCESSABLE_ENTITY);
+            }
         }
 
         return parent::render($request, $e);
