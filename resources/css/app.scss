@@ -87,7 +87,7 @@ $leaf_light: theme('colors.leaf.light');
 }
 
 .input {
-    @apply shadow-sm;
+    @apply shadow-sm min-h-[2.6em];
 
     outline: none;
     display: block;
@@ -96,15 +96,12 @@ $leaf_light: theme('colors.leaf.light');
     border: 1px solid theme('colors.slate.200');
     background: white;
 
-    min-height: 2.5em;
-
     transition: border-color 200ms, outline 200ms;
     &:focus {
         border: 1px solid transparent;
         outline: 4px solid $leaf_light;
     }
 }
-
 .false-focus {
     border: 1px solid transparent;
     outline: 4px solid theme('colors.leaf.light');
