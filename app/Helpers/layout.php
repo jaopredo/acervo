@@ -47,6 +47,18 @@ if (!function_exists('side_menu')) {
                     'icon' => 'bi-x-octagon'
                 ],
             ],
+            'Serviços' => [
+                [
+                    'name' => 'Importar',
+                    'path' => '/import',
+                    'icon' => 'iconpark-excel'
+                ],
+                [
+                    'name' => 'Cobrar',
+                    'path' => '/demand',
+                    'icon' => 'mdi-email'
+                ],
+            ]
             // 'Informações' => [
             //     [
             //         'path' => '/reads',
