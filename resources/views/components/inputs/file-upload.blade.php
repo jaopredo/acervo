@@ -1,5 +1,7 @@
+@props(['label' => 'IMAGEM'])
+
 <div class="input-container">
-    <label for="file-upload-{{$id}}">IMAGEM</label>
+    <label for="file-upload-{{$id}}">{{$label}}</label>
     <label for="file-upload-{{$id}}" class="input hover:cursor-pointer">
         <div class="flex items-center justify-center">
             <div class="flex items-center justify-center w-fit">

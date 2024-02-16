@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId("group_id")->nullable();  // ID do grupo que ele está
 
             $table->string("cdd", 14);                  // CDD do livro
-            $table->string("isbn", 17);                 // ISBN do livro
+            $table->string("isbn", 17)->nullable();                 // ISBN do livro
 
             // $table->string('type', 20);                 // Tipo do Livro
             $table->string("name", 65);                 // Nome do Livro
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->integer("publication")->nullable();             // Ano de Publicação
             $table->longText("description")->nullable();
             $table->string("editor", 45);               // Editora do Livro
-            $table->integer("pages");                   // Quantidade de Páginas
+            $table->integer("pages")->nullable();                   // Quantidade de Páginas
             $table->integer("volume")->nullable();                  // Volume
             $table->integer("example")->nullable();                 // Exemplar
             $table->integer("aquisition_year")->nullable();         // Ano de Aquisição

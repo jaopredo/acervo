@@ -17,6 +17,8 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\LoansController;
 use App\Http\Controllers\BannedController;
 
+use App\Http\Controllers\ImportsController;
+use App\Http\Controllers\DemandController;
 
 use App\Http\Controllers\ReadController;
 use App\Http\Controllers\FavoriteController;
@@ -70,12 +72,12 @@ Route::middleware(['auth'])->group(function() {
             Route::get('/', 'index')->name('all');
             Route::get('/create', 'create')->name('create');
             Route::get('/edit/{id}', 'edit')->name('edit');
-    
+
             Route::post('/', 'store')->name('save');
             Route::put('/{id}', 'update')->name('update');
             Route::delete('/{id}', 'destroy')->name('destroy');
         });
-    
+
         /* Rotas de Registro */
         Route::post('/register', 'register')->name('register');
         Route::post('/change_password', 'change_password')->name('change_password');
@@ -190,6 +192,12 @@ Route::middleware(['auth'])->group(function() {
         Route::delete('/{id}', 'destroy')->name('destroy');
     });
 
+    /*------------------------------- SERVIÇOS -------------------------------*/
+    Route::get('/demand', [DemandController::class, 'demand'])->name('demand');
+
+    Route::get('/import', [ImportsController::class, 'imports'])->name('imports');
+    Route::post('/import', [ImportsController::class, 'generate_import'])->name('excel.import');
+
 
     /**
      * Essas rotas seriam utilizadas para visualizar as informações sobre o que os alunos fazem,
@@ -208,7 +216,7 @@ Route::middleware(['auth'])->group(function() {
     // Route::name('wishes.')->prefix('wishes')->controller(WishController::class)->group(function() {
     //     Route::get('/', 'index')->name('all');
     // });
-    
+
     /**
      * Essa rota iria informar quais os livros que os alunos iam reservar */
     /*------------------------------- RESERVAS -------------------------------*/
