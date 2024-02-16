@@ -15,7 +15,7 @@
                         @foreach ($items as $item)
                             <li class="redirect rounded-sm p-2 hover:bg-leaf-lighter">
                                 <a class="gap-1 flex items-center justify-center" href="{{$item['path']}}">
-                                    @svg($item['icon']) {{ $item['name'] }}
+                                    @svg($item['icon'], 'w-5 h-5') {{ $item['name'] }}
                                 </a>
                             </li>
                         @endforeach

@@ -25,7 +25,7 @@
                                 'bg-leaf-lighter' => $actual==$item['path'],
                                 'text-leaf' => $actual==$item['path'],
                             ])>
-                                @svg($item['icon'], 'text-black')
+                                @svg($item['icon'], 'text-black w-4 h-4')
                                 <p @class([
                                     "ml-3",
                                     "capitalize",
