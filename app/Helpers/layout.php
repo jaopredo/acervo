@@ -53,11 +53,11 @@ if (!function_exists('side_menu')) {
                     'path' => '/import',
                     'icon' => 'iconpark-excel'
                 ],
-                [
-                    'name' => 'Cobrar',
-                    'path' => '/demand',
-                    'icon' => 'mdi-email'
-                ],
+                // [
+                //     'name' => 'Cobrar',
+                //     'path' => '/demand',
+                //     'icon' => 'mdi-email'
+                // ],
             ]
             // 'Informações' => [
             //     [

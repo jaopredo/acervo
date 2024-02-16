@@ -18,6 +18,7 @@ use App\Http\Controllers\LoansController;
 use App\Http\Controllers\BannedController;
 
 use App\Http\Controllers\ImportsController;
+use App\Http\Controllers\DemandController;
 
 use App\Http\Controllers\ReadController;
 use App\Http\Controllers\FavoriteController;
@@ -192,7 +193,8 @@ Route::middleware(['auth'])->group(function() {
     });
 
     /*------------------------------- SERVIÇOS -------------------------------*/
-    // Route::get('/demands', )->name('demand');
+    Route::get('/demand', [DemandController::class, 'demand'])->name('demand');
+
     Route::get('/import', [ImportsController::class, 'imports'])->name('imports');
     Route::post('/import', [ImportsController::class, 'generate_import'])->name('excel.import');
 
