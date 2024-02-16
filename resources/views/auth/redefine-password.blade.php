@@ -22,7 +22,7 @@
                 <p class="form-error">{{$errors->first('password_confirmation')}}</p>
             </div>
         </div>
-        <button class="leaf-button w-full">REDEFINIR</button>
+        <x-submit-button class="leaf-button w-full">REDEFINIR</x-submit-button>
 
         @if ($errors->first('generic'))
             <div class="alert alert-error text-center mt-2">

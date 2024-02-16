@@ -1,5 +1,11 @@
 @extends('..layouts.main')
 
+@once
+    @push ('scripts')
+        @vite(['resources/js/studentForm.js'])
+    @endpush
+@endonce
+
 @section('content')
     @isset($data)
         {{ html()->modelForm($data, 'PUT', route('students.update', $data->id))->acceptsFiles()->open() }}
@@ -19,17 +25,10 @@
                 <p class="form-error">{{$errors->first('email')}}</p>
             </div>
             <div class="input-container">
-                <label for="password">SENHA</label>
-                <input type="password" id="password" name="password" class="input" value="{{ $data->password ?? '' }}">
-                <p class="form-error">{{$errors->first('password')}}</p>
+                <label for="phone">TELEFONE</label>
+                <input type="phone" id="phone" name="phone" class="input" value="{{ $data->phone ?? '' }}">
+                <p class="form-error">{{$errors->first('phone')}}</p>
             </div>
-            @if (!isset($data))
-            <div class="input-container">
-                <label for="password_confirmation">CONFIRMAR SENHA</label>
-                <input type="password" id="password_confirmation" name="password_confirmation" class="input">
-                <p class="form-error">{{$errors->first('password_confirmation')}}</p>
-            </div>
-            @endif
         </div>
 
         <div class="input-group">
@@ -52,7 +51,7 @@
                     'label' => $data->classroom->name ?? '',
                     'id' => $data->classroom->id ?? ''
                 ]"
-                
+
                 label="SALA DO ALUNO"
                 id="classroom_id"
             />

@@ -21,7 +21,8 @@ class LoanResource extends JsonResource
             'student' => $this->student,
             'student_name' => $this->student_name,
             'book' => $this->book,
-            'book_name' => $this->book_name
+            'book_name' => $this->book_name,
+            'classroom_name' => $this->classroom_name ?? $this->student->classroom->name
         ];
     }
 }

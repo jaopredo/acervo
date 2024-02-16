@@ -16,6 +16,7 @@
     <th scope="col" class="text-left">Data</th>
     <th scope="col" class="text-left">Vencimento</th>
     <th scope="col" class="text-center">Estado</th>
+    <th scope="col" class="text-center">Sala</th>
     <th scope="col" class="text-right">
         Ações
     </th>
@@ -37,6 +38,9 @@
             <td><div class="flex items-center justify-center relative">
                 <x-loan-state :date="$loan->expire_date" />
             </div></td>
+            <td class="text-center">
+                {{ $loan->classroom_name }}
+            </td>
             <td>
                 <div class="flex items-center justify-end">
                     <x-action-buttons action="table" :id="$loan->id" route="loans" />

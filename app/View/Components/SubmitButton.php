@@ -6,12 +6,12 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class SideMenu extends Component
+class SubmitButton extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct(public string $actual = "")
+    public function __construct()
     {
         //
     }
@@ -21,6 +21,6 @@ class SideMenu extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.layout.side-menu');
+        return view('components.inputs.submit-button');
     }
 }

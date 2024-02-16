@@ -25,6 +25,7 @@ return [
         'name' => 'Nome',
         'cpf' => 'CPF',
         'registration' => 'Matrícula',
-        'email' => 'Email'
+        'email' => 'Email',
+        'phone' => 'Telefone'
     ]
 ];

@@ -128,6 +128,6 @@
             <textarea name="description" id="description" class="input">{{$data->description ?? ''}}</textarea>
         </div>
 
-        <button class="leaf-button w-full">ENVIAR</button>
+        <x-submit-button class="leaf-button w-full">ENVIAR</x-submit-button>
     {{ html()->form()->close() }}
 @endsection
