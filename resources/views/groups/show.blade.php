@@ -1,9 +1,6 @@
 @extends('..templates.show')
 
 @once
-    @push('styles')
-        @vite('resources/css/groups.css')
-    @endpush
     @push('scripts')
         @vite('resources/js/group.js')
     @endpush
