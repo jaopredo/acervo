@@ -18,11 +18,11 @@
                 >
                     LIMPAR
                 </a>
-                <button
+                <x-submit-button
                     class="night-button"
                 >
                     APLICAR
-                </button>
+                </x-submit-button>
             </div>
         </form>
     </div>

@@ -42,25 +42,33 @@
                         @endif
                     @endisset
                 </div>
-                <div id="student-name-container" class="input-container !mb-0">
-                    <label for="student_name">INSIRA O NOME COMPLETO DO ESTUDANTE</label>
-                    <input value="{{$data->student_name ?? ''}}" type="text" class="input" name="student_name" id="student_name">
-                    <p class="form-error">{{$errors->first('student_name')}}</p>
+                <div id="student-name-container" class="!mb-0 flex items-center justify-center gap-2">
+                    <div class="input-container">
+                        <label for="student_name">NOME COMPLETO DO ESTUDANTE</label>
+                        <input value="{{$data->student_name ?? ''}}" type="text" class="input" name="student_name" id="student_name">
+                        <p class="form-error">{{$errors->first('student_name')}}</p>
+                    </div>
+                    <div class="input-container">
+                        <label for="classroom_name">TURMA DO ESTUDANTE</label>
+                        <input value="{{$data->classroom_name ?? ''}}" type="text" class="input" name="classroom_name" id="classroom_name">
+                        <p class="form-error">{{$errors->first('classroom_name')}}</p>
+                    </div>
                 </div>
             </div>
-            <div class="input-container justify-end">
-                <x-search-select
-                    id="book_id"
-                    endpoint="{{route('api.books.all')}}"
-                    :values="[
-                        'id' => $data->book->id ?? '',
-                        'label' => $data->book->name ?? ''
-                    ]"
-                    label="ESCOLHA O LIVRO"
-                />
-                <p class="form-error">{{$errors->first('book_id')}}</p>
-                <input value="{{$data->book->name ?? ''}}" type="hidden" name="book_name" id="book_name">
-            </div>
+        </div>
+
+        <div class="input-container justify-end">
+            <x-search-select
+                id="book_id"
+                endpoint="{{route('api.books.all')}}"
+                :values="[
+                    'id' => $data->book->id ?? '',
+                    'label' => $data->book->name ?? ''
+                ]"
+                label="ESCOLHA O LIVRO"
+            />
+            <p class="form-error">{{$errors->first('book_id')}}</p>
+            <input value="{{$data->book->name ?? ''}}" type="hidden" name="book_name" id="book_name">
         </div>
 
         <div class="input-container">
@@ -87,6 +95,6 @@
             <input type="date" class="hidden" name="expire_date" id="expire_date">
         </div>
 
-        <button class="leaf-button w-full">ENVIAR</button>
+        <x-submit-button class="leaf-button w-full">ENVIAR</x-submit-button>
     {{ html()->form()->close() }}
 @endsection

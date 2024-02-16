@@ -12,6 +12,6 @@
             <p class="form-error">{{$errors->first('name')}}</p>
         </div>
 
-        <button class="leaf-button w-full">ENVIAR</button>
+        <x-submit-button class="leaf-button w-full">ENVIAR</x-submit-button>
     {{ html()->form()->close() }}
 @endsection

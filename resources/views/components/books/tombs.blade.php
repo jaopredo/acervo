@@ -47,7 +47,7 @@
                     <p class="form-error">{{$errors->first('description')}}</p>
                 </div>
             </section>
-            <button class="elevated-button">CRIAR</button>
+            <x-submit-button class="elevated-button">CRIAR</x-submit-button>
         </form>
     </div>
     @if (count($book->tombs) > 0)

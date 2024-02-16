@@ -14,7 +14,7 @@
             <p class="form-error">{{$errors->first('email')}}</p>
         </div>
         <div class="flex items-center justify-between">
-            <button type="submit" class="leaf-button">ENVIE-ME UM EMAIL</button>
+            <x-submit-button type="submit" class="leaf-button">ENVIE-ME UM EMAIL</x-submit-button>
             <a href="/login" class="text-leaf hover:underline hover:decoration-solid">Fazer Login</a>
         </div>
 
