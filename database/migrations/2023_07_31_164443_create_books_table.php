@@ -19,17 +19,18 @@ return new class extends Migration
             $table->string("cdd", 14);                  // CDD do livro
             $table->string("isbn", 17);                 // ISBN do livro
 
+            // $table->string('type', 20);                 // Tipo do Livro
             $table->string("name", 65);                 // Nome do Livro
             $table->string("author", 70);               // Autor do Livro
-            $table->integer("publication");             // Ano de Publicação
-            $table->longText("description");
+            $table->integer("publication")->nullable();             // Ano de Publicação
+            $table->longText("description")->nullable();
             $table->string("editor", 45);               // Editora do Livro
             $table->integer("pages");                   // Quantidade de Páginas
-            $table->integer("volume");                  // Volume
-            $table->integer("example");                 // Exemplar
-            $table->integer("aquisition_year");         // Ano de Aquisição
-            $table->string("aquisition", 80);           // Método de Aquisição
-            $table->string("local", 100);               // Local de Aquisição
+            $table->integer("volume")->nullable();                  // Volume
+            $table->integer("example")->nullable();                 // Exemplar
+            $table->integer("aquisition_year")->nullable();         // Ano de Aquisição
+            $table->string("aquisition", 80)->nullable();           // Método de Aquisição
+            $table->string("local", 100)->nullable();               // Local de Aquisição
             $table->boolean("available")->default(1);               // Disponível
 
             $table->timestamps("");

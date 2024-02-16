@@ -8,11 +8,21 @@
 
 @section ('content')
     <div class="flex items-stretch justify-center gap-2 [&>*]:w-3/6">
-        <div
-            style="background-image: url('{{ route('file', $data->image) }}')"
-            class="flex-grow bg-center bg-contain"
-        >
-        </div>
+        @if ($data->image)
+            <div
+                style="background-image: url('{{ route('file', $data->image) }}')"
+                class="flex-grow bg-center bg-contain"
+            ></div>
+        @else
+            <div
+                class="flex items-center justify-center flex-grow bg-center bg-contain border-2 border-dashed border-leaf rounded-md"
+            >
+                <a href="{{ route('books.edit', $data->id) }}" class="text-leaf no-underline flex items-center justify-center flex-col">
+                    <x-heroicon-o-plus class="w-10 h-10" />
+                    <p>Adicionar uma Imagem</p>
+                </a>
+            </div>
+        @endif
         <div class="bg-white p-1 rounded-md flex-grow">
             <table class="table">
                 <tbody>

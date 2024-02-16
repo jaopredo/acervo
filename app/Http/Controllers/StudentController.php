@@ -16,7 +16,8 @@ class StudentController extends Controller
     public $inputs = [
         'name',
         'email',
-        'password',
+        // 'password',
+        'phone',
         'registration',
         'classroom_id',
         'cpf',
@@ -25,8 +26,9 @@ class StudentController extends Controller
     public $validator = [
         'name' => 'required',
         'email' => 'required|email',
-        'password' => 'required|min:8',
-        'password_confirmation' => 'required|same:password',
+        // 'password' => 'required|min:8',
+        // 'password_confirmation' => 'required|same:password',
+        'phone' => 'required',
         'cpf' => 'required',
         'registration' => 'required',
         'image' => 'nullable',
@@ -40,5 +42,5 @@ class StudentController extends Controller
         [ 'name' => 'cpf', 'label' => 'CPF', 'operator' => 'like' ],
     ];
     public $resource = StudentResource::class;
-    public $root_path = ['name' => 'Alunos', 'path' => '/students'];  
+    public $root_path = ['name' => 'Alunos', 'path' => '/students'];
 }

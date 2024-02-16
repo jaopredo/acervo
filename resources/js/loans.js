@@ -1,11 +1,11 @@
 function addDaysToDate(inputDate, daysToAdd) {
     const date = new Date(inputDate);
     date.setDate(date.getDate() + daysToAdd);
-    
+
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const day = date.getDate().toString().padStart(2, '0');
-    
+
     return `${year}-${month}-${day}`;
 }
 
@@ -29,13 +29,13 @@ $('#loan-type-selection').on('change', function(e) {
 /* FORMULÁRIO DE CRIAÇÃO */
 $('#student_id').on('change', function (event) {
     const { value } = event.target
-    
+
     $('#student_name').val(value)
 })
 
 $('#book_id').on('change', function (event) {
     const { value } = event.target
-    
+
     $('#book_name').val(value)
 })
 
@@ -72,6 +72,6 @@ $("#expire_selection").on('change', function(event) {
 $('#expire_days').on('change', function(event) {
     let { value } = event.target
     value = Number(value)
-    
+
     $('#expire_date').val(addDaysToDate($('#loan_date').val(), value+1))
 })

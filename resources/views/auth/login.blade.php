@@ -15,7 +15,7 @@
             <p class="form-error">{{$errors->first('password')}}</p>
         </div>
         <div class="flex items-center justify-between">
-            <button type="submit" class="leaf-button">LOGIN</button>
+            <x-submit-button class="leaf-button">LOGIN</x-submit-button>
             <a href="/forgot-password" class="text-leaf hover:underline hover:decoration-solid">Esqueci a Senha</a>
         </div>
     {{ html()->form()->close() }}

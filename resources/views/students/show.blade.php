@@ -1,5 +1,7 @@
 @extends('..templates.show')
 
+@php($pend_books = App\Models\Loan::where('expire_date', '<', Carbon\Carbon::today())->get())
+
 @section('content')
     <div class="flex flex-col items-stretch gap-2 h-full">
         <article class="flex items-stretch flex-col w-full">
@@ -38,10 +40,30 @@
 
         <article>
             <h1 class="text-xl font-bold text-center">Livros Pendentes</h1>
-        </article>
-
-        <article>
-            <h1 class="text-xl font-bold text-center">Desempenho Particular</h1>
+            @if (count($pend_books) > 0)
+                <div class="bg-white p-3 rounded-md mt-2">
+                    <table class="table-fixed border-collapse p-2 table border-b border-slate-200 text-left text-sm font-light">
+                        <thead>
+                            <th scope="col" class="text-center">NOME</th>
+                            <th scope="col" class="text-center">QUANDO PEGOU</th>
+                            <th scope="col" class="text-center">QUANDO DEVOLVERIA</th>
+                        </thead>
+                        <tbody>
+                            @foreach ($pend_books as $loan)
+                                <tr>
+                                    <td class="text-center">{{ $loan->book->name }}</td>
+                                    <td class="text-center">{{ Carbon\Carbon::parse($loan->loan_date)->format('d/m/Y') }}</td>
+                                    <td class="text-center">{{ Carbon\Carbon::parse($loan->expire_date)->format('d/m/Y') }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @else
+                <div class="alert alert-success mt-2 text-center font-bold">
+                    ESSE ALUNO NÃO TEM NENHUM LIVRO PENDENTE
+                </div>
+            @endif
         </article>
     </div>
 @endsection
