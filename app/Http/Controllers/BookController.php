@@ -28,6 +28,7 @@ class BookController extends Controller
         'local',
         'description',
         'image',
+        'type'
     ];
 
     public $filters = [
@@ -39,17 +40,10 @@ class BookController extends Controller
     public $validator = [
         'register' => 'required',
         'cdd' => 'required',
-        'isbn' => 'required',
         'name' => 'required',
         'author' => 'required',
-        'publication' => 'required',
         'editor' => 'required',
-        'pages' => 'required',
-        'volume' => 'required',
-        'example' => 'required',
-        'aquisition_year' => 'required',
-        'aquisition' => 'required',
-        'local' => 'required',
+        'type' => 'required',
         'image' => 'file'
     ];
 
