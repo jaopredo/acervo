@@ -102,10 +102,17 @@
             </div>
         </div>
 
-        <div class="input-container">
-            <label for="editor">EDITORA</label>
-            <input value="{{ $data->editor ?? '' }}" type="text" name="editor" id="editor" class="input">
-            <p class="form-error">{{$errors->first('editor')}}</p>
+        <div class="input-group">
+            <div class="input-container">
+                <label for="editor">EDITORA</label>
+                <input value="{{ $data->editor ?? '' }}" type="text" name="editor" id="editor" class="input">
+                <p class="form-error">{{$errors->first('editor')}}</p>
+            </div>
+            <div class="input-container">
+                <label for="type">TIPO DO LIVRO</label>
+                <input value="{{ $data->type ?? '' }}" type="text" name="type" id="type" class="input">
+                <p class="form-error">{{$errors->first('type')}}</p>
+            </div>
         </div>
 
         <div class="input-container">
