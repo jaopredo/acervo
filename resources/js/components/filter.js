@@ -35,3 +35,11 @@ $('.filter-activation').on('click', function() {
         $('#content-container').css('overflow', 'hidden')
     }
 })
+
+$('.filter-input').on('change', function(e) {
+    if (e.target.value == "") {
+        $(`#${e.target.id}`).attr('name', '')
+    } else {
+        $(`#${e.target.id}`).attr('name', e.target.dataset.name)
+    }
+})
