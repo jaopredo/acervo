@@ -5,11 +5,11 @@
             <h1 class="flex items-center justify-center">Filtros</h1>
             <x-bi-arrow-right width="20" height="20" class="filter-activation hover:cursor-pointer" />
         </div>
-        <form class="flex flex-col items-stretch justify-center w-full mt-2">
+        <form id="search-form" class="flex flex-col items-stretch justify-center w-full mt-2">
             @foreach ($filters as $filter)
                 <div class="input-container">
                     <label for="{{$filter['name']}}">{{$filter['label']}}</label>
-                    <input class="input" type="{{$filter['type'] ?? 'text'}}" data-operator="{{$filter['operator']}}" id="{{$filter['name']}}" name="filters[{{$filter['name']}}][{{$filter['operator']}}]">
+                    <input class="input filter-input" type="{{$filter['type'] ?? 'text'}}" data-operator="{{$filter['operator']}}" id="{{$filter['name']}}" data-name="filters[{{$filter['name']}}][{{$filter['operator']}}]">
                 </div>
             @endforeach
             <div class="flex items-center justify-end gap-2">
