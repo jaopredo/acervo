@@ -226,6 +226,14 @@ return [
         'default' => Maatwebsite\Excel\DefaultValueBinder::class,
     ],
 
+    /**
+     * Array that shows the tables and it's corresponding import models
+     */
+    'tables' => [
+        'books' => App\Imports\BooksImport::class,
+        'students' => App\Imports\StudentsImport::class
+    ],
+
     'cache'        => [
         /*
         |--------------------------------------------------------------------------

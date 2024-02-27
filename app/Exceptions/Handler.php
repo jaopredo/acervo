@@ -10,7 +10,7 @@ use Illuminate\Http\Response;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 use Illuminate\Database\UniqueConstraintViolationException;
-use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\QueryException;
 use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
@@ -53,6 +53,12 @@ class Handler extends ExceptionHandler
                     'message' => $e->getMessage(),
                     'errors' => $e->errors()
                 ], Response::HTTP_UNPROCESSABLE_ENTITY);
+            }
+        } else {
+            if ($e instanceof QueryException) {
+                return back()->withErrors([
+                    'query' => $e->getMessage()
+                ]);
             }
         }
 
