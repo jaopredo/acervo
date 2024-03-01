@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\BooksImport;
 
 class ImportsController extends Controller
 {
@@ -22,13 +21,16 @@ class ImportsController extends Controller
         // Validate the uploaded file
         $request->validate([
             'file' => 'required|mimes:xlsx,xls',
+            'import_select' => 'required'
         ]);
 
         // Get the uploaded file
         $file = $request->file('file');
 
+        $correct_import = config('excel.tables.' . $request->import_select);
+
         // Process the Excel file
-        Excel::import(new BooksImport, $file);
+        Excel::import(new $correct_import, $file);
 
         return redirect()->back()->with('success', 'Excel file imported successfully!');
     }

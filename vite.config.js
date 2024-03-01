@@ -22,6 +22,7 @@ export default defineConfig({
                 'resources/js/layout.js',
                 'resources/js/loans.js',
                 'resources/js/tomb.js',
+                'resources/js/imports.js',
                 //---
                 'resources/js/components/deleteConfirmation.js',
                 'resources/js/components/filter.js',

@@ -10,8 +10,9 @@ use Illuminate\Http\Response;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
 
 use Illuminate\Database\UniqueConstraintViolationException;
-use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\QueryException;
 use Illuminate\Validation\ValidationException;
+use PHPOpenSourceSaver\JWTAuth\Exceptions\TokenExpiredException;
 
 class Handler extends ExceptionHandler
 {
@@ -39,6 +40,8 @@ class Handler extends ExceptionHandler
     public function handler(Request $request, Throwable $e) {
         if ($e instanceof RouteNotFoundException) {
             return view('errors.404');
+        } else if ($e instanceof TokenExpiredException) {
+            return view('errors.419');
         }
     }
 
@@ -53,6 +56,12 @@ class Handler extends ExceptionHandler
                     'message' => $e->getMessage(),
                     'errors' => $e->errors()
                 ], Response::HTTP_UNPROCESSABLE_ENTITY);
+            }
+        } else {
+            if ($e instanceof QueryException) {
+                return back()->withErrors([
+                    'query' => $e->getMessage()
+                ]);
             }
         }
 
