@@ -27,13 +27,13 @@ $('#loan-type-selection').on('change', function(e) {
 
 
 /* FORMULÁRIO DE CRIAÇÃO */
-$('#student_id').on('change', function (event) {
+$('#search-student_id').on('change', function (event) {
     const { value } = event.target
 
     $('#student_name').val(value)
 })
 
-$('#book_id').on('change', function (event) {
+$('#search-book_id').on('change', function (event) {
     const { value } = event.target
 
     $('#book_name').val(value)

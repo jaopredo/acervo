@@ -19,6 +19,31 @@ function isElementInViewport (el) {
     );
 }
 
+/**
+ * Open the dropbox when click
+ */
+function dropboxAction(context, action) {
+    const id = context
+    const element = $(`#options-list-container-${id}`)
+
+    element.css('top', '0%')
+    element.css('transform', 'none')
+
+    if (action == 'close') {
+        $(`#search-${id}-select`).removeClass('false-focus');
+        element.css('display', 'none')
+    } else {
+        $(`#search-${id}-select`).addClass('false-focus');
+        element.css('display', 'block')
+    }
+
+    if (isElementInViewport(element[0])) {
+        element.css('top', '120%')
+    } else {
+        element.css('transform', 'translateY(-100%)')
+    }
+}
+
 
 /* QUANDO DIGITAR NO INPUT DE PROCURAR */
 let timeout = setTimeout(() => {
@@ -30,7 +55,8 @@ $('body').on('keypress', '.search-input', async function(event) {
     const related = this.getAttribute('data-related')
     const endpointUrl = this.getAttribute('data-endpoint')
     const attr = this.getAttribute('data-attr')
-    const multiple = this.getAttribute('data-multiple')
+
+    $(`#clear-${related}`).toggle()
 
     timeout = setTimeout(function() {
         const { value } = event.target
@@ -80,56 +106,49 @@ $('body').on('keypress', '.search-input', async function(event) {
 })
 
 
-/* MOSTRANDO OU ESCONDENDO AS OPÇÕES */
-$('.show-search').on('click', function(event) {
-    event.stopPropagation()
-
-    const id = this.getAttribute('data-id')
-    const element = $(`#options-list-container-${id}`)
-
-    element.css('top', '0%')
-    element.css('transform', 'none')
-
-    element.toggle()
-
-    if (($(`#options-list-container-${id}`).css('display') == 'block')) {
-        $(`#search-${id}-select`).addClass('false-focus');
-    } else {
-        $(`#search-${id}-select`).removeClass('false-focus');
-    }
-
-    if (isElementInViewport(element[0])) {
-        element.css('top', '120%')
-    } else {
-        element.css('transform', 'translateY(-100%)')
-    }
-})
-
-
 /* ATIVANDO O TRIGGER QUANDO CLICA NA LISTA */
-$('.search-input').on('click', function(event) {
-    event.stopPropagation()
+$('.search-input').on('focus', function(event) {
     const id = this.getAttribute('data-related')
 
-    $(`#${id}-button`).trigger('click')
+    dropboxAction(id, 'open')
+})
+$('.search-input').on('blur', function(event) {
+    // event.stopPropagation()
+    const id = this.getAttribute('data-related')
+
+    dropboxAction(id, 'close')
 })
 
+/* QUANDO CLICAR NO X, LIMPAR FORMULÁRIO */
+$('.clear').on('click', function() {
+    const related = this.getAttribute('data-related')
+    $(`#search-${related}`).val('')
+    $(`#search-${related}`).attr('readonly', false)
+    $(`#hidden-${related}`).val('')
+
+    $(`#clear-${related}`).toggle()
+
+    $(`#search-options-list-${related}`).text('')
+    $(`#no-text-${related}`).show()
+})
 
 /* QUANDO CLICAR EM UM ITEM DA LISTA */
-$('body').on('click', '.input-option', function(event) {
+$('body').on('mousedown', '.input-option', function(event) {
     const related = this.getAttribute('data-related')
     const id = this.getAttribute('data-id')
     const multiple = !!Number($(`#search-${related}`).attr('data-multiple'))
-    
+
     if (!multiple) {
-        $(`#${related}`).val(this.innerText)
-        $(`#${related}`).trigger('change')
+        $(`#search-${related}`).val(this.innerText)
+        $(`#search-${related}`).attr('readonly', true)
+        $(`#search-${related}`).trigger('change')
         $(`#hidden-${related}`).val(id)
     } else {
         for (let item of $(`.search-${related}-item`)) {
             if (id == item.getAttribute('data-id')) return
         }
 
+        $(`#search-select-${related}`).show()
         $(`#search-select-${related}`).append(`
             <li
                 id="search-list-option-${related}-${id}"
@@ -152,12 +171,4 @@ $('body').on('click', '.input-option', function(event) {
 
 $('body').on('click', '.multiple-select-item', function(event) {
     this.parentNode.removeChild(this)
-})
-
-
-$('.final-input').on('click', function() {
-    const related = this.getAttribute('data-related')
-
-    $(`#search-${related}`).focus()
-    $(`#${related}-button`).trigger('click')
 })
