@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('books', function (Blueprint $table) {
-            $table->dropColumn('group_id');
+        Schema::table('students', function (Blueprint $table) {
+            $table->foreignId('classroom_id')->nullable()->change();
+            $table->string('cpf', 14)->nullable()->change();
         });
     }
 
@@ -21,8 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('books', function (Blueprint $table) {
-            $table->foreignId('group_id')->change();
+        Schema::table('students', function (Blueprint $table) {
+            $table->foreignId('classroom_id')->change();
+            $table->string('cpf', 14)->change();
         });
     }
 };
